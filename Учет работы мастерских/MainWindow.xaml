@@ -49,7 +49,7 @@
                 <Button Style="{StaticResource menuButtonActive}" Click="Button_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                        <TextBlock Text="Какая-то мудя" Style="{StaticResource menuButtonText}"></TextBlock>
+                        <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
 
                 </Button>
@@ -57,7 +57,7 @@
                 <Button Style="{StaticResource menuButton}" x:Name="Button2" Click="Button2_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="FileSignature" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                        <TextBlock Text="Какая-то мудя" Style="{StaticResource menuButtonText}"></TextBlock>
+                        <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
 
                 </Button>
@@ -65,7 +65,7 @@
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="EnvelopeOpenText" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                        <TextBlock Text="Какая-то мудя" Style="{StaticResource menuButtonText}"></TextBlock>
+                        <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
 
                 </Button>
@@ -73,7 +73,7 @@
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                        <TextBlock Text="Какая-то мудя" Style="{StaticResource menuButtonText}"></TextBlock>
+                        <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
 
                 </Button>
@@ -99,8 +99,15 @@
                 <!--Верх меню-->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin ="0 0 30 20">
                     <Button Content="Сегодня" Style="{StaticResource topMenuButton}"></Button>
+                    <Button Content="Сегодня" Style="{StaticResource topMenuButton}"></Button>
+                    <Button Content="Сегодня" Style="{StaticResource topMenuButton}"></Button>
+                    <Button Content="Сегодня" Style="{StaticResource topMenuButton}"></Button>
+                    <Button Content="Сегодня" Style="{StaticResource topMenuButton}"></Button>
+                     
                     
                 </StackPanel>
+                <!--Заголовок-->
+                <TextBlock Text="Хорошего дня, Переменная" FontSize="26" Foreground="White" HorizontalAlignment="Left" Margin="50 35 0 20"></TextBlock>
 
             </Grid>
 
