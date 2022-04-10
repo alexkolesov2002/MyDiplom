@@ -51,15 +51,11 @@
                 </Grid>
             </Border>
         </materialDesign:DialogHost>-->
-        <ComboBox
-                Name="LocaleCombo"
-                    Width="50" Margin="518,103,232,322" >
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-        </ComboBox>
+        <materialDesign:Clock
+                                Width="auto"
+                                DisplayAutomation="CycleWithSeconds"
+                                Is24Hours="True"
+                                 Style="{StaticResource MaterialDesignClock}" />
         <DatePicker Name="LocaleDatePicker"  Width="120" materialDesign:HintAssist.Hint="Locale Date"  Language="ru-Ru"  />
     </Grid>
 </Page>

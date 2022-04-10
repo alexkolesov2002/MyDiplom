@@ -39,8 +39,8 @@
                     </Border>
                     <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding NameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
-                        <TextBlock Text="{Binding SurNameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                            <TextBlock Text="{Binding NameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                            <TextBlock Text="{Binding SurNameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
                         </StackPanel>
                         <TextBlock Text="{Binding RoleUs}" FontSize="13" Margin="0 0 0 5" Foreground="Black"></TextBlock>
                     </StackPanel>
@@ -79,10 +79,175 @@
                         <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                         <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
-
                 </Button>
+                <Border x:Name="Forma" BorderThickness="10"  CornerRadius="325" Padding="5,5,5,5" Background="White" Height="250" RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-359.887"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
 
+
+                    <Grid x:Name="ClockFace">
+
+
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="30"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 2 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="60"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 3 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+
+                        </Border>
+                        <!-- Цифра 4 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="120"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 5 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="150"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 6 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 7 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="210"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 8 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="240"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Цифра 9 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="270"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Число 10 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="300"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Число 11 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="330"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Число 12 -->
+                        <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="360"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                        </Border>
+                        <!-- Часовая стрелка -->
+                        <Border x:Name="HourArrow" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="10" Padding="0,85,0,0">
+                            <Border BorderBrush="#FF706F6F" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF302E2E" Height="60"/>
+                        </Border>
+                        <!-- Минутная стрелка -->
+                        <Border x:Name="MinuteArrow" HorizontalAlignment="Center" 
+                        RenderTransformOrigin="0.5,0.5" Width="8" Padding="0,30,0,0">
+                            <Border BorderThickness="0,0,0,0" BorderBrush="#FF706F6F" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                            Background="#FF302E2E" Height="100"/>
+                        </Border>
+
+
+
+                        <!-- Болтик -->
+                        <Border Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="15,15,15,15" BorderThickness="4,4,4,4" BorderBrush="#FF1F1F1F" Background="#FFF9F6F6"/>
+                    </Grid>
+
+                </Border>
+                <TextBlock ></TextBlock>
             </StackPanel>
+
         </Border>
 
         <!--Главный экран-->
