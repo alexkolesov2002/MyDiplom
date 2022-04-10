@@ -119,6 +119,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PgTakeWorkShop.xaml.cs">
+      <DependentUpon>PgTakeWorkShop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
     <Compile Include="workshops.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="PgTakeWorkShop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XamlRes\MainWinRes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

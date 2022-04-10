@@ -23,6 +23,7 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public PgTakeWorkShop shop; 
         public event PropertyChangedEventHandler PropertyChanged;
         public string NameUs  { get; }
         public string SurNameUs { get; }
@@ -30,12 +31,18 @@ namespace Учет_работы_мастерских
         public MainWindow(users CurrentUser)
         {
               InitializeComponent();
-            NameUs = CurrentUser.name + " "; 
+            NameUs = CurrentUser.name +" "; 
             PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
             SurNameUs = CurrentUser.surname; 
             PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
             RoleUs = CurrentUser.roles.role_title;
             PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
+            shop = new PgTakeWorkShop();
+            MainFrame.Navigate(shop);
+            LoadPages.SwitchPages = MainFrame;
+          
+            
+
         }
 
        
@@ -80,6 +87,8 @@ namespace Учет_работы_мастерских
             Button2.Style = (Style)this.Resources["menuButton"];
             Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
+         
+            LoadPages.SwitchPages.Navigate(shop);
         }
     }
 }
