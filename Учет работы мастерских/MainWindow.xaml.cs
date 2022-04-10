@@ -229,7 +229,7 @@ namespace Учет_работы_мастерских
             this.Hide();
 
             var timer = new DispatcherTimer();
-          Почти
+          
             timer.Tick += Timer_Tick;
             timer.Start();
         }
