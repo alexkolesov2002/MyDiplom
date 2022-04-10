@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
+
+namespace Учет_работы_мастерских
+{
+    /// <summary>
+    /// Логика взаимодействия для WinAutorise.xaml
+    /// </summary>
+    public partial class WinAutorise : Window
+    {
+        public WinAutorise()
+        {
+            InitializeComponent();
+            BaseModel.BaseConnect = new Entities();
+        }
+
+        private void BtnAutorise_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                users user = BaseModel.BaseConnect.users.FirstOrDefault(x => x.login == TxtLogin.Text && x.password == TxtPass.Password);
+                if (user != null)
+                {
+                    MessageBox.Show("Успешная авторизация", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
+                else
+                {
+                    MessageBox.Show("Такого пользователя не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Отсутсвует соединение с интернетом, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+    }
+}

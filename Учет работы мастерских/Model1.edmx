@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище P_DiplomProject_MasterskieModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="equipments">
+          <Key>
+            <PropertyRef Name="id_equipment" />
+          </Key>
+          <Property Name="id_equipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_equipment" Type="int" Nullable="false" />
+          <Property Name="title_equipment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipments_In_Workshop">
+          <Key>
+            <PropertyRef Name="id_equipment_in_workshop" />
+          </Key>
+          <Property Name="id_equipment_in_workshop" Type="int" Nullable="false" />
+          <Property Name="id_workshop" Type="int" Nullable="false" />
+          <Property Name="id_equipment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_title" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="types_equipment">
+          <Key>
+            <PropertyRef Name="id_type_equipment" />
+          </Key>
+          <Property Name="id_type_equipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title_type_equipment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="workshops">
+          <Key>
+            <PropertyRef Name="id_workshop" />
+          </Key>
+          <Property Name="id_workshop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="title_workshop" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Equipments_In_Workshop_equipments">
+          <End Role="equipments" Type="Self.equipments" Multiplicity="1" />
+          <End Role="Equipments_In_Workshop" Type="Self.Equipments_In_Workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipments">
+              <PropertyRef Name="id_equipment" />
+            </Principal>
+            <Dependent Role="Equipments_In_Workshop">
+              <PropertyRef Name="id_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipments_In_Workshop_workshops">
+          <End Role="workshops" Type="Self.workshops" Multiplicity="1" />
+          <End Role="Equipments_In_Workshop" Type="Self.Equipments_In_Workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshops">
+              <PropertyRef Name="id_workshop" />
+            </Principal>
+            <Dependent Role="Equipments_In_Workshop">
+              <PropertyRef Name="id_workshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipments_types_equipment">
+          <End Role="types_equipment" Type="Self.types_equipment" Multiplicity="1" />
+          <End Role="equipments" Type="Self.equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_equipment">
+              <PropertyRef Name="id_type_equipment" />
+            </Principal>
+            <Dependent Role="equipments">
+              <PropertyRef Name="id_type_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_workshops_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="workshops" Type="Self.workshops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="workshops">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище P_DiplomProject_MasterskieModelContainer">
+          <EntitySet Name="equipments" EntityType="Self.equipments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipments_In_Workshop" EntityType="Self.Equipments_In_Workshop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="types_equipment" EntityType="Self.types_equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="workshops" EntityType="Self.workshops" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="Self.FK_Equipments_In_Workshop_equipments">
+            <End Role="equipments" EntitySet="equipments" />
+            <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipments_In_Workshop_workshops" Association="Self.FK_Equipments_In_Workshop_workshops">
+            <End Role="workshops" EntitySet="workshops" />
+            <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipments_types_equipment" Association="Self.FK_equipments_types_equipment">
+            <End Role="types_equipment" EntitySet="types_equipment" />
+            <End Role="equipments" EntitySet="equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_workshops_users" Association="Self.FK_workshops_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="workshops" EntitySet="workshops" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="P_DiplomProject_MasterskieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="equipments">
+          <Key>
+            <PropertyRef Name="id_equipment" />
+          </Key>
+          <Property Name="id_equipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_equipment" Type="Int32" Nullable="false" />
+          <Property Name="title_equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipments_In_Workshop" Relationship="Self.FK_Equipments_In_Workshop_equipments" FromRole="equipments" ToRole="Equipments_In_Workshop" />
+          <NavigationProperty Name="types_equipment" Relationship="Self.FK_equipments_types_equipment" FromRole="equipments" ToRole="types_equipment" />
+        </EntityType>
+        <EntityType Name="Equipments_In_Workshop">
+          <Key>
+            <PropertyRef Name="id_equipment_in_workshop" />
+          </Key>
+          <Property Name="id_equipment_in_workshop" Type="Int32" Nullable="false" />
+          <Property Name="id_workshop" Type="Int32" Nullable="false" />
+          <Property Name="id_equipment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="equipments" Relationship="Self.FK_Equipments_In_Workshop_equipments" FromRole="Equipments_In_Workshop" ToRole="equipments" />
+          <NavigationProperty Name="workshops" Relationship="Self.FK_Equipments_In_Workshop_workshops" FromRole="Equipments_In_Workshop" ToRole="workshops" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_title" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_roles" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="types_equipment">
+          <Key>
+            <PropertyRef Name="id_type_equipment" />
+          </Key>
+          <Property Name="id_type_equipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title_type_equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="equipments" Relationship="Self.FK_equipments_types_equipment" FromRole="types_equipment" ToRole="equipments" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="roles" Relationship="Self.FK_users_roles" FromRole="users" ToRole="roles" />
+          <NavigationProperty Name="workshops" Relationship="Self.FK_workshops_users" FromRole="users" ToRole="workshops" />
+        </EntityType>
+        <EntityType Name="workshops">
+          <Key>
+            <PropertyRef Name="id_workshop" />
+          </Key>
+          <Property Name="id_workshop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="title_workshop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipments_In_Workshop" Relationship="Self.FK_Equipments_In_Workshop_workshops" FromRole="workshops" ToRole="Equipments_In_Workshop" />
+          <NavigationProperty Name="users" Relationship="Self.FK_workshops_users" FromRole="workshops" ToRole="users" />
+        </EntityType>
+        <Association Name="FK_Equipments_In_Workshop_equipments">
+          <End Role="equipments" Type="Self.equipments" Multiplicity="1" />
+          <End Role="Equipments_In_Workshop" Type="Self.Equipments_In_Workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipments">
+              <PropertyRef Name="id_equipment" />
+            </Principal>
+            <Dependent Role="Equipments_In_Workshop">
+              <PropertyRef Name="id_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipments_types_equipment">
+          <End Role="types_equipment" Type="Self.types_equipment" Multiplicity="1" />
+          <End Role="equipments" Type="Self.equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_equipment">
+              <PropertyRef Name="id_type_equipment" />
+            </Principal>
+            <Dependent Role="equipments">
+              <PropertyRef Name="id_type_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipments_In_Workshop_workshops">
+          <End Role="workshops" Type="Self.workshops" Multiplicity="1" />
+          <End Role="Equipments_In_Workshop" Type="Self.Equipments_In_Workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workshops">
+              <PropertyRef Name="id_workshop" />
+            </Principal>
+            <Dependent Role="Equipments_In_Workshop">
+              <PropertyRef Name="id_workshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_workshops_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="workshops" Type="Self.workshops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="workshops">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="equipments" EntityType="Self.equipments" />
+          <EntitySet Name="Equipments_In_Workshop" EntityType="Self.Equipments_In_Workshop" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="types_equipment" EntityType="Self.types_equipment" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="workshops" EntityType="Self.workshops" />
+          <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="Self.FK_Equipments_In_Workshop_equipments">
+            <End Role="equipments" EntitySet="equipments" />
+            <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipments_types_equipment" Association="Self.FK_equipments_types_equipment">
+            <End Role="types_equipment" EntitySet="types_equipment" />
+            <End Role="equipments" EntitySet="equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipments_In_Workshop_workshops" Association="Self.FK_Equipments_In_Workshop_workshops">
+            <End Role="workshops" EntitySet="workshops" />
+            <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_workshops_users" Association="Self.FK_workshops_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="workshops" EntitySet="workshops" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище P_DiplomProject_MasterskieModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="equipments">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.equipments">
+              <MappingFragment StoreEntitySet="equipments">
+                <ScalarProperty Name="id_equipment" ColumnName="id_equipment" />
+                <ScalarProperty Name="id_type_equipment" ColumnName="id_type_equipment" />
+                <ScalarProperty Name="title_equipment" ColumnName="title_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments_In_Workshop">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.Equipments_In_Workshop">
+              <MappingFragment StoreEntitySet="Equipments_In_Workshop">
+                <ScalarProperty Name="id_equipment_in_workshop" ColumnName="id_equipment_in_workshop" />
+                <ScalarProperty Name="id_workshop" ColumnName="id_workshop" />
+                <ScalarProperty Name="id_equipment" ColumnName="id_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="role_title" ColumnName="role_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="types_equipment">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.types_equipment">
+              <MappingFragment StoreEntitySet="types_equipment">
+                <ScalarProperty Name="id_type_equipment" ColumnName="id_type_equipment" />
+                <ScalarProperty Name="title_type_equipment" ColumnName="title_type_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workshops">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.workshops">
+              <MappingFragment StoreEntitySet="workshops">
+                <ScalarProperty Name="id_workshop" ColumnName="id_workshop" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="title_workshop" ColumnName="title_workshop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

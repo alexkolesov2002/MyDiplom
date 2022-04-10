@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using MaterialDesignColors;
+using MaterialDesignThemes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -22,7 +24,11 @@ namespace Учет_работы_мастерских
     {
         public MainWindow()
         {
-            InitializeComponent();
+              InitializeComponent();
+          //  MainFrame.Navigate( new PgAutorise());
+           // LoadPages.SwitchPages = MainFrame;
+            LeftBorder.Visibility = Visibility.Collapsed;
+            MainScreen.CornerRadius =  new CornerRadius(10);
         }
 
         private void MainScreen_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,7 +41,7 @@ namespace Учет_работы_мастерских
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            Button2.Style = (Style)App.Current.Resources["menuButtonActive"];
+            Button2.Style = (Style)this.Resources["menuButtonActive"];   
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

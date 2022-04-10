@@ -3,151 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Учет_работы_мастерских"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             StartupUri="MainWindow.xaml">
+             StartupUri="WinAutorise.xaml">
     <Application.Resources>
-
-
-        <Style TargetType="TextBlock">
-           
-        </Style>
-        
-        <Style x:Key="menuButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="Foreground" Value="#4c4c4c"></Setter>
-            <Setter Property="Margin" Value="0 0 0 5"></Setter>
-            <Setter Property="Height" Value ="45"></Setter>
-            <Setter Property="FocusVisualStyle" Value ="{x:Null}"></Setter>
-            <Setter Property="Height" Value ="45"></Setter>
-            <Setter Property="Tag" Value="#6673b7"></Setter>
-            <Setter Property="Template">
-
-                <Setter.Value>
-
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Transparent">
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"></ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#bccaf1"></Setter>
-                    <Setter Property="Tag" Value="#7071f0"></Setter>
-                    <Setter Property="Background">
-
-                        <Setter.Value>
-                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                <GradientStop Color="Green" Offset="0"></GradientStop>
-                                <GradientStop Color="Yellow" Offset="3"></GradientStop>
-                            </LinearGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Template">
-
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Black">
-                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"></ContentPresenter>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
-        <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
-            <Setter Property="Width" Value="23"></Setter>
-            <Setter Property="Height" Value="23"></Setter>
-            <Setter Property="Margin" Value="35 0 20 0"></Setter>
-            <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></Setter>
-
-
-        </Style>
-
-        <Style x:Key="menuButtonText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"></Setter>
-            <Setter Property="FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></Setter>
-            <Setter Property="FontFamily" Value="Montserrat"></Setter>
-        </Style>
-
-
-        <Style x:Key="menuButtonActive" TargetType="Button">
-            <Setter Property="Background">
-
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                        <GradientStop Color="Green" Offset="0"></GradientStop>
-                        <GradientStop Color="Yellow" Offset="3"></GradientStop>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="#bccaf1"></Setter>
-            <Setter Property="Margin" Value="0 0 0 5"></Setter>
-            <Setter Property="Height" Value ="45"></Setter>
-            <Setter Property="FocusVisualStyle" Value ="{x:Null}"></Setter>
-            <Setter Property="Height" Value ="45"></Setter>
-            <Setter Property="Tag" Value="#7071f0"></Setter>
-           
-            <Setter Property="Template">
-
-                <Setter.Value>
-
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="#a5a1f5">
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"></ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-
-            </Setter>
-       
-        </Style>
-
-        <Style x:Key="topMenuButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="Foreground" Value="#9eabe2"></Setter>
-            <Setter Property="Margin" Value=" 5 0 0 0 "></Setter>
-            <Setter Property="Height" Value ="30"></Setter>
-            <Setter Property="Width" Value ="80"></Setter>
-            <Setter Property="FocusVisualStyle" Value ="{x:Null}"></Setter>
-            <Setter Property="FontFamily" Value="Montserrat"></Setter>
-
-            <Setter Property="Template">
-
-                <Setter.Value>
-
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="17" BorderBrush="Black" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Green"></Setter>
-                    <Setter Property="Background" Value="White"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
-
-
-
-
-
-
-
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>

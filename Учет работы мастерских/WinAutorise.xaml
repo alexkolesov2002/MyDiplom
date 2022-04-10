@@ -1,0 +1,32 @@
+﻿<Window x:Class="Учет_работы_мастерских.WinAutorise"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Учет_работы_мастерских"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="700" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" >
+
+    <Grid>
+        <Border CornerRadius="10,10,10,10" Background="White" MouseDown="Border_MouseDown">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Margin="0 30 0 0">
+                <StackPanel Orientation="Horizontal" Width="300" >
+                    <materialDesign:PackIcon Kind="Account" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10"/>
+                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" x:Name="TxtLogin" materialDesign:HintAssist.Hint="Ваш логин" Width="300"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="300" >
+                    <materialDesign:PackIcon Kind="KeyVariant" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
+                    <PasswordBox    Margin="10 10 10 10" FontSize="20" x:Name="TxtPass" materialDesign:HintAssist.Hint="Ваш пароль" materialDesign:TextFieldAssist.HasClearButton="True" Height="40" VerticalAlignment="Top" Width="300"/>
+                </StackPanel>
+                <Button x:Name="BtnAutorise" HorizontalAlignment="Center"  Click="BtnAutorise_Click" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Content="Авторизироваться" Height="50" materialDesign:ButtonAssist.CornerRadius="25" Width="170"   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
