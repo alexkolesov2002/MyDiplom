@@ -29,7 +29,8 @@ namespace Учет_работы_мастерских
         public string NameUs  { get; }
         public string SurNameUs { get; }
         public string RoleUs { get; }
-        public string MyProperty { get; set; }
+        public string MyDate { get; set; }
+        public string MyTime { get; set; }
         public MainWindow(users CurrentUser)
         {
               InitializeComponent();
@@ -43,7 +44,7 @@ namespace Учет_работы_мастерских
             shop = new PgTakeWorkShop();
             MainFrame.Navigate(shop);
             LoadPages.SwitchPages = MainFrame;
-            
+
             StartClock();
             ShowMarksClockFace();
 
@@ -119,6 +120,10 @@ namespace Учет_работы_мастерских
             int sec = DateTime.Now.Second;
             int min = DateTime.Now.Minute;
             int hour = DateTime.Now.Hour;
+            MyDate = DateTime.Now.ToLongDateString();
+            PropertyChanged(this, new PropertyChangedEventArgs("MyDate"));
+            MyTime = DateTime.Now.ToShortTimeString();
+            PropertyChanged(this, new PropertyChangedEventArgs("MyTime"));
 
 
 
@@ -224,7 +229,7 @@ namespace Учет_работы_мастерских
             this.Hide();
 
             var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
+          Почти
             timer.Tick += Timer_Tick;
             timer.Start();
         }

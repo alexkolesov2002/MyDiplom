@@ -245,7 +245,8 @@
                     </Grid>
 
                 </Border>
-                <TextBlock ></TextBlock>
+                <TextBlock Text="{Binding MyDate}" />
+                <TextBlock Text="{Binding MyTime}" />
             </StackPanel>
 
         </Border>
