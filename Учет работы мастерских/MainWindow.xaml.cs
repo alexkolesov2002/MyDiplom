@@ -25,10 +25,9 @@ namespace Учет_работы_мастерских
         public MainWindow()
         {
               InitializeComponent();
-          //  MainFrame.Navigate( new PgAutorise());
-           // LoadPages.SwitchPages = MainFrame;
-            LeftBorder.Visibility = Visibility.Collapsed;
-            MainScreen.CornerRadius =  new CornerRadius(10);
+            //MainFrame.Navigate( new PgAutorise());
+            //LoadPages.SwitchPages = MainFrame;
+           
         }
 
         private void MainScreen_MouseDown(object sender, MouseButtonEventArgs e)
@@ -41,12 +40,36 @@ namespace Учет_работы_мастерских
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            Button2.Style = (Style)this.Resources["menuButtonActive"];   
+            Button2.Style = (Style)this.Resources["menuButtonActive"];
+            Button1.Style = (Style)this.Resources["menuButton"];
+            Button3.Style = (Style)this.Resources["menuButton"];
+            Button4.Style = (Style)this.Resources["menuButton"];
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+       
 
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            Button4.Style = (Style)this.Resources["menuButtonActive"];
+            Button2.Style = (Style)this.Resources["menuButton"];
+            Button3.Style = (Style)this.Resources["menuButton"];
+            Button1.Style = (Style)this.Resources["menuButton"];
+        }
+
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            Button3.Style = (Style)this.Resources["menuButtonActive"];
+            Button1.Style = (Style)this.Resources["menuButton"];
+            Button2.Style = (Style)this.Resources["menuButton"];
+            Button4.Style = (Style)this.Resources["menuButton"];
+        }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            Button1.Style = (Style)this.Resources["menuButtonActive"];
+            Button2.Style = (Style)this.Resources["menuButton"];
+            Button3.Style = (Style)this.Resources["menuButton"];
+            Button4.Style = (Style)this.Resources["menuButton"];
         }
     }
 }

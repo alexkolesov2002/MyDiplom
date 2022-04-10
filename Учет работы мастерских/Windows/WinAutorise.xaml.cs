@@ -24,7 +24,7 @@ namespace Учет_работы_мастерских
         public WinAutorise()
         {
             InitializeComponent();
-            BaseModel.BaseConnect = new Entities();
+           // BaseModel.BaseConnect = new Entities();
         }
 
         private void BtnAutorise_Click(object sender, RoutedEventArgs e)
@@ -35,6 +35,10 @@ namespace Учет_работы_мастерских
                 if (user != null)
                 {
                     MessageBox.Show("Успешная авторизация", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    
+                    new MainWindow().Show();
+                    this.Close();
+
                 }
                 else
                 {
@@ -50,7 +54,12 @@ namespace Учет_работы_мастерских
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+           
+                if (e.ChangedButton == MouseButton.Left)
+                {
+                    this.DragMove();
+                }
+            
         }
     }
 }
