@@ -14,21 +14,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace Учет_работы_мастерских
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public MainWindow()
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string NameUs  { get; }
+        public string SurNameUs { get; }
+        public string RoleUs { get; }
+        public MainWindow(users CurrentUser)
         {
               InitializeComponent();
-            //MainFrame.Navigate( new PgAutorise());
-            //LoadPages.SwitchPages = MainFrame;
-           
+            NameUs = CurrentUser.name + " "; 
+            PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
+            SurNameUs = CurrentUser.surname; 
+            PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
+            RoleUs = CurrentUser.roles.role_title;
+            PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
         }
+
+       
 
         private void MainScreen_MouseDown(object sender, MouseButtonEventArgs e)
         {

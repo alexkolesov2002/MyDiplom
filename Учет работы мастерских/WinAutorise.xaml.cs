@@ -36,7 +36,7 @@ namespace Учет_работы_мастерских
                 {
                     MessageBox.Show("Успешная авторизация", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                     
-                    new MainWindow().Show();
+                    new MainWindow(user).Show();
                     this.Close();
 
                 }

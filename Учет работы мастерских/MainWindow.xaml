@@ -11,7 +11,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="740" Width="1280" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Icon="Res/Logo_masterskie.ico">
+        Icon="Res/Logo_masterskie.ico"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Resources>
         <ResourceDictionary Source="XamlRes/MainWinRes.xaml" />
     </Window.Resources>
@@ -33,19 +34,15 @@
                 <!--Пользователь-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 0 0">
                     <Border CornerRadius="10" Width="40" Height="40">
-                        <Border.Background >
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                                <GradientStop Color="White" Offset="0"></GradientStop>
-                                <GradientStop Color="Gray" Offset="1"></GradientStop>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="JP" Foreground="White" FontSize="22" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center"
-                               Margin=" 3 0 0 2"></TextBlock>
+                        <materialDesign:PackIcon Kind="AccountCog"  Width="40" Height="40"  Foreground="White"/>
 
                     </Border>
                     <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Text="Алексей Колесов" FontSize="15" Margin="0 0 0 5" Foreground="White"></TextBlock>
-                        <TextBlock Text="Алексей Колесов" FontSize="11" Margin="0 0 0 5" Foreground="Black"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding NameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                        <TextBlock Text="{Binding SurNameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                        </StackPanel>
+                        <TextBlock Text="{Binding RoleUs}" FontSize="13" Margin="0 0 0 5" Foreground="Black"></TextBlock>
                     </StackPanel>
                 </StackPanel>
 
