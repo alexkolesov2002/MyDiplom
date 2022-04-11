@@ -18,13 +18,13 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock Text="Добавить ново оборудование." />
-                        <ListView x:Name="ListEquip">
+                        <ListView x:Name="ListEquip" >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Включить">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox ></CheckBox>
+                                                <CheckBox  Uid="{Binding id_equipment}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" ></CheckBox>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -54,16 +54,29 @@
             </materialDesign:DialogHost.DialogContent>
             <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" MinHeight="256" ClipToBounds="True">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="*" />
-                        <RowDefinition  Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <ListBox x:Name="FruitListBox">
-                        <ListBoxItem Content="Ноутбук" />
-                        <ListBoxItem Content="Доска" />
-                        <ListBoxItem Content="Планшет" />
-                    </ListBox>
-                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="*" />
+                            <RowDefinition  Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListView x:Name="ListPickedEquip" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Элемент">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_equipment}" x:Name="BtnDelete" Click="BtnDelete_Click">
+                                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"   />
+                                    <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                         <TextBlock Margin="16" Text="Добавить используемое оборудование" />
                     </materialDesign:ColorZone>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" />

@@ -8,6 +8,6 @@ namespace Учет_работы_мастерских
 {
     partial class PartEquipment
     {
-        public string TitleType  { get; set; }
+     
     }
 }
