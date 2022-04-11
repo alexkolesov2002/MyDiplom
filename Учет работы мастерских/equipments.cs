@@ -18,6 +18,7 @@ namespace Учет_работы_мастерских
         public equipments()
         {
             this.Equipments_In_Workshop = new HashSet<Equipments_In_Workshop>();
+            this.journal_use_workshop = new HashSet<journal_use_workshop>();
         }
     
         public int id_equipment { get; set; }
@@ -27,5 +28,7 @@ namespace Учет_работы_мастерских
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipments_In_Workshop> Equipments_In_Workshop { get; set; }
         public virtual types_equipment types_equipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<journal_use_workshop> journal_use_workshop { get; set; }
     }
 }

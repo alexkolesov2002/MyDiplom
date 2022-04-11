@@ -123,5 +123,13 @@ namespace Учет_работы_мастерских
         {
           
         }
+
+        private void BtnRemoveAll_Click(object sender, RoutedEventArgs e)
+        {
+            ListEqForDelite.Clear();
+            EquipmentsBufList.Clear();
+            ListPickedEquip.ItemsSource = EquipmentsBufList;
+            ListPickedEquip.Items.Refresh();
+        }
     }
 }

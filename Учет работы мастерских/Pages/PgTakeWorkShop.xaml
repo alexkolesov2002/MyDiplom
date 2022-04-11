@@ -11,7 +11,7 @@
       Title="PgTakeWorkShop">
 
     <Grid>
-        <Border CornerRadius="10"  VerticalAlignment="Center">
+        <Border CornerRadius="10"  VerticalAlignment="Bottom"  Padding="0,0,2,2">
            
 
             <materialDesign:DialogHost  DialogTheme="Inherit" >
@@ -58,9 +58,10 @@
                             <RowDefinition  Height="*" />
                             <RowDefinition  Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListView x:Name="ListPickedEquip" >
+                        <ListView x:Name="ListPickedEquip">
                             <ListView.View>
-                                <GridView>
+                                <GridView >
+                                    <GridViewColumn  DisplayMemberBinding="{Binding }" Header="Номер" />
                                     <GridViewColumn Header="Элемент">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -72,15 +73,18 @@
                                     </GridViewColumn>
                                     <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"   />
                                     <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
-
                                 </GridView>
                             </ListView.View>
                         </ListView>
+                    
                         <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                         <TextBlock Margin="16" Text="Добавить используемое оборудование" />
                     </materialDesign:ColorZone>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click"/>
-                </Grid>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click" Foreground="Black"/>
+                        <materialDesign:Badged Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" >
+                            <Button Content="Удалить все" Background="#FFAEEA00" BorderBrush="#FFAEEA00" Foreground="Black" x:Name="BtnRemoveAll" Click="BtnRemoveAll_Click"   />
+                        </materialDesign:Badged>
+                    </Grid>
             </Border>
         </materialDesign:DialogHost>
         </Border>

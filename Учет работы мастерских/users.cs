@@ -17,6 +17,7 @@ namespace Учет_работы_мастерских
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public users()
         {
+            this.journal_use_workshop = new HashSet<journal_use_workshop>();
             this.workshops = new HashSet<workshops>();
         }
     
@@ -27,6 +28,8 @@ namespace Учет_работы_мастерских
         public string login { get; set; }
         public string password { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<journal_use_workshop> journal_use_workshop { get; set; }
         public virtual roles roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<workshops> workshops { get; set; }
