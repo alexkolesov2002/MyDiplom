@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Учет_работы_мастерских
 {
-    partial class PartEquipment
+    partial class equipments
     {
-     
+        public int IndexRow { get; set; } = 0;
+
+
     }
 }
