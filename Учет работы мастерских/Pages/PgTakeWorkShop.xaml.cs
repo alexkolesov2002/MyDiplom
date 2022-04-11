@@ -19,64 +19,98 @@ namespace Учет_работы_мастерских
     /// Логика взаимодействия для PgTakeWorkShop.xaml
     /// </summary>
     public partial class PgTakeWorkShop : Page
-    {
-        List<equipments> equipmentdel;
-        List<equipments> equipments;
-        equipments equipmentsbuf;
+    { 
+        List<equipments> ListEqForDelite;
+        List<equipments> ListMainEq;
+        equipments BufClassObjectEq;
         List<equipments> EquipmentsBufList = new List<equipments>();
         public PgTakeWorkShop()
         {
-            equipments = new List<equipments>();
-            InitializeComponent();
-
-            List<Equipments_In_Workshop> firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
-         
-            foreach (Equipments_In_Workshop q in firswork)
+            try
             {
-                equipments.Add(q.equipments);
-            }    
+                ListMainEq = new List<equipments>();
+                InitializeComponent();
 
-            ListEquip.ItemsSource = equipments;
-            ListPickedEquip.DisplayMemberPath = "title_equipment";
+                List<Equipments_In_Workshop> firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
+
+                foreach (Equipments_In_Workshop q in firswork)
+                {
+                    ListMainEq.Add(q.equipments);
+                }
+
+                ListEquip.ItemsSource = ListMainEq;
+                ListPickedEquip.DisplayMemberPath = "title_equipment";
+            }
+            catch
+            {
+
+            }
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            equipmentdel = new List<equipments>();
-            equipmentdel = EquipmentsBufList;
-            ListPickedEquip.ItemsSource = EquipmentsBufList;
-            ListPickedEquip.Items.Refresh();
+            try
+            {
+                ListEqForDelite = new List<equipments>();
+                ListEqForDelite = EquipmentsBufList;
+                ListPickedEquip.ItemsSource = EquipmentsBufList;
+                ListPickedEquip.Items.Refresh();
+            }
+            catch
+            {
+
+            }
 
 
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = (CheckBox)sender;
-            int id = Convert.ToInt32(checkBox.Uid);
-            equipmentsbuf = equipments.FirstOrDefault(x => x.id_equipment == id);
-            EquipmentsBufList.Add(equipmentsbuf);
+            try
+            {
+                CheckBox checkBox = (CheckBox)sender;
+                int id = Convert.ToInt32(checkBox.Uid);
+                BufClassObjectEq = ListMainEq.FirstOrDefault(x => x.id_equipment == id);
+                EquipmentsBufList.Add(BufClassObjectEq);
+            }
+            catch
+            {
+
+            }
 
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = (CheckBox)sender;
-            int id = Convert.ToInt32(checkBox.Uid);
-            equipmentsbuf = equipments.FirstOrDefault(x => x.id_equipment == id);
-            EquipmentsBufList.Remove(equipmentsbuf);    
+            try
+            {
+                CheckBox checkBox = (CheckBox)sender;
+                int id = Convert.ToInt32(checkBox.Uid);
+                BufClassObjectEq = ListMainEq.FirstOrDefault(x => x.id_equipment == id);
+                EquipmentsBufList.Remove(BufClassObjectEq);
+            }
+            catch
+            {
+
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Button checkBox = (Button)sender;
-            int id = Convert.ToInt32(checkBox.Uid);
-            equipments equipments = new equipments();
-            //List<equipments> equipmentdel = ListPickedEquip.Items;
-            equipments = equipmentdel.FirstOrDefault(x => x.id_equipment == id);
-            equipmentdel.Remove(equipments);
-            ListPickedEquip.ItemsSource = equipmentdel;
-            ListPickedEquip.Items.Refresh();
+            try
+            {
+                Button checkBox = (Button)sender;
+                int id = Convert.ToInt32(checkBox.Uid);
+                equipments equipments = new equipments();
+                equipments = ListEqForDelite.FirstOrDefault(x => x.id_equipment == id);
+                ListEqForDelite.Remove(equipments);
+                ListPickedEquip.ItemsSource = ListEqForDelite;
+                ListPickedEquip.Items.Refresh();
+            }
+            catch
+            {
+
+            }
 
         }
 
