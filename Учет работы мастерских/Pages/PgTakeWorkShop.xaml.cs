@@ -20,6 +20,7 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class PgTakeWorkShop : Page
     {
+        List<equipments> equipmentdel;
         List<equipments> equipments;
         equipments equipmentsbuf;
         List<equipments> EquipmentsBufList = new List<equipments>();
@@ -41,9 +42,12 @@ namespace Учет_работы_мастерских
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-           
+            equipmentdel = new List<equipments>();
+            equipmentdel = EquipmentsBufList;
             ListPickedEquip.ItemsSource = EquipmentsBufList;
-            
+            ListPickedEquip.Items.Refresh();
+
+
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -67,12 +71,23 @@ namespace Учет_работы_мастерских
         {
             Button checkBox = (Button)sender;
             int id = Convert.ToInt32(checkBox.Uid);
-            List<equipments> equipmentdel = ListPickedEquip.Items;
-            equipmentsbuf = equipments.FirstOrDefault(x => x.id_equipment == id);
-            equipmentdel.Remove(equipmentsbuf);
+            equipments equipments = new equipments();
+            //List<equipments> equipmentdel = ListPickedEquip.Items;
+            equipments = equipmentdel.FirstOrDefault(x => x.id_equipment == id);
+            equipmentdel.Remove(equipments);
             ListPickedEquip.ItemsSource = equipmentdel;
             ListPickedEquip.Items.Refresh();
 
+        }
+
+        private void ListEquip_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListEquip.Items.Refresh();
+        }
+
+        private void BtnAddEq_Click(object sender, RoutedEventArgs e)
+        {
+          
         }
     }
 }
