@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +20,17 @@ namespace Учет_работы_мастерских
     /// <summary>
     /// Логика взаимодействия для PgTakeWorkShop.xaml
     /// </summary>
-    public partial class PgTakeWorkShop : Page, INotifyPropertyChanged
+    public partial class PgTakeWorkShop : Page
     {
         #region глобальные переменные
         List<equipments> ListEqForDelite;
         List<equipments> ListMainEq;
-        List<equipments> ListMainEq1;
+       
         equipments BufClassObjectEq;
         List<equipments> EquipmentsBufList = new List<equipments>();
         
         
-        public event PropertyChangedEventHandler PropertyChanged;
+       
 
         public int IndexRow { get; set; } = 0;
         #endregion
@@ -62,12 +63,8 @@ namespace Учет_работы_мастерских
             {
                 ListEqForDelite = new List<equipments>();
                 ListEqForDelite = EquipmentsBufList;
-                int j = 1;
-                foreach (equipments i in EquipmentsBufList)
-                {
-                    i.IndexRow = j;
-                    j++;
-                }
+                
+              
                 //PropertyChanged(this, new PropertyChangedEventArgs("IndexRow"));
 
 
@@ -127,12 +124,7 @@ namespace Учет_работы_мастерских
                 equipments equipments = new equipments();
                 equipments = ListEqForDelite.FirstOrDefault(x => x.id_equipment == id);
                 ListEqForDelite.Remove(equipments);
-                int j = 1;
-            foreach (equipments i in EquipmentsBufList)
-                {
-                    i.IndexRow = j;
-                    j++;
-                }
+             
                 ListPickedEquip.ItemsSource = ListEqForDelite;
               
                 ListPickedEquip.Items.Refresh();
@@ -161,5 +153,7 @@ namespace Учет_работы_мастерских
             ListPickedEquip.ItemsSource = EquipmentsBufList;
             ListPickedEquip.Items.Refresh();
         }
+
+        
     }
 }

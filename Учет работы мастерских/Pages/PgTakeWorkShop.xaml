@@ -10,7 +10,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PgTakeWorkShop"
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-
+    <Page.Resources>
+        <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
+    </Page.Resources>
     <Grid>
         <Border CornerRadius="10"  VerticalAlignment="Bottom"  Padding="0,0,2,2">
            
@@ -60,10 +62,15 @@
                             <RowDefinition  Height="Auto" />
                         </Grid.RowDefinitions>
                         <ListView x:Name="ListPickedEquip">
+                            <ListView.Resources>
+                                <DataTemplate x:Key="ColumnDataTemplate">
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource ResourceKey=PositionConverter}}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </ListView.Resources>
                             <ListView.View>
                                 <GridView >
-                                    <GridViewColumn  DisplayMemberBinding="{Binding IndexRow}" Header="Номер" />
-                                    <GridViewColumn Header="Элемент">
+                                    <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
+                                    <GridViewColumn Header="Поле для удаления" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_equipment}" x:Name="BtnDelete" Click="BtnDelete_Click">

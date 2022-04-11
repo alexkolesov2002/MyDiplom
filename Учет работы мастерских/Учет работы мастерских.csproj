@@ -121,6 +121,7 @@
     <Compile Include="Equipments_In_Workshop.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemPositionToIndexConverter.cs" />
     <Compile Include="journal_use_workshop.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
