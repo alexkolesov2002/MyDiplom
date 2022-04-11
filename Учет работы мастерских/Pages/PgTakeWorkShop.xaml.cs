@@ -22,10 +22,27 @@ namespace Учет_работы_мастерских
     {
         public PgTakeWorkShop()
         {
+            List<equipments> equipments = new List<equipments>();
             InitializeComponent();
+
+            List<Equipments_In_Workshop> firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
+         
+            foreach (Equipments_In_Workshop q in firswork)
+            {
+                equipments.Add(q.equipments);
+            }    
+
+           
+          
+            ListEquip.ItemsSource = equipments;
         }
 
-       
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
         //private void Accept_Click(object sender, RoutedEventArgs e)
         //{

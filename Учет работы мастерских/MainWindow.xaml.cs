@@ -24,20 +24,28 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public PgTakeWorkShop shop; 
+        #region Переменные
+        public PgTakeWorkShop shop;
         public event PropertyChangedEventHandler PropertyChanged;
-        public string NameUs  { get; }
+        public string NameUs { get; }
         public string SurNameUs { get; }
         public string RoleUs { get; }
         public string MyDate { get; set; }
         public string MyTime { get; set; }
+        const double NumberSystem = 60;
+        const double baseAngleNumberSystem = 360 / NumberSystem;
+        const double baseAngleHour = 30;
+        #endregion 
+      
+        
+        
         public MainWindow(users CurrentUser)
         {
-              InitializeComponent();
-            
-            NameUs = CurrentUser.name +" "; 
+            InitializeComponent();
+
+            NameUs = CurrentUser.name + " ";
             PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
-            SurNameUs = CurrentUser.surname; 
+            SurNameUs = CurrentUser.surname;
             PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
             RoleUs = CurrentUser.roles.role_title;
             PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
@@ -46,18 +54,15 @@ namespace Учет_работы_мастерских
             LoadPages.SwitchPages = MainFrame;
 
             StartClock();
-            ShowMarksClockFace();
-
-
-
+            // ShowMarksClockFace();
 
         }
 
-       
+
 
         private void MainScreen_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 this.DragMove();
             }
@@ -71,7 +76,7 @@ namespace Учет_работы_мастерских
             Button4.Style = (Style)this.Resources["menuButton"];
         }
 
-       
+
 
         private void Button4_Click(object sender, RoutedEventArgs e)
         {
@@ -95,17 +100,10 @@ namespace Учет_работы_мастерских
             Button2.Style = (Style)this.Resources["menuButton"];
             Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
-         
+
             LoadPages.SwitchPages.Navigate(shop);
         }
-        const double NumberSystem = 60;
-
-        // Количество градусов на единицу системы исчисления.
-        // Базовый угол для минут и секунд.
-        const double baseAngleNumberSystem = 360 / NumberSystem;
-
-        // Базовый угол для часов.
-        const double baseAngleHour = 30;
+     
 
         #region Вычисление текущего времени
 
@@ -229,7 +227,7 @@ namespace Учет_работы_мастерских
             this.Hide();
 
             var timer = new DispatcherTimer();
-          
+
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -244,7 +242,7 @@ namespace Учет_работы_мастерских
         }
 
 
-        
+
 
 
 
@@ -302,4 +300,4 @@ namespace Учет_работы_мастерских
 
     }
 }
- 
+

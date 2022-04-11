@@ -80,7 +80,10 @@
                         <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Border x:Name="Forma" BorderThickness="10"  CornerRadius="325" Padding="5,5,5,5" Background="White" Height="250" RenderTransformOrigin="0.5,0.5">
+                <Border x:Name="Forma" BorderThickness="25"  CornerRadius="325" Padding="5,5,5,5"  Height="250" RenderTransformOrigin="0.5,0.5" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="Res/Logo_masterskie_clock.png" ></ImageBrush>
+                    </Border.Background>
                     <Border.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -95,6 +98,7 @@
 
 
                         <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                           
                             <Border.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -227,21 +231,20 @@
                             </Border.RenderTransform>
                         </Border>
                         <!-- Часовая стрелка -->
-                        <Border x:Name="HourArrow" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="10" Padding="0,85,0,0">
-                            <Border BorderBrush="#FF706F6F" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF302E2E" Height="60"/>
+                        <Border x:Name="HourArrow" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="5" Padding="0,85,0,0">
+                            <Border BorderBrush="#FF706F6F" VerticalAlignment="Top" Background="#FF302E2E" Height="80" Margin="0,-50,0,0"/>
                         </Border>
                         <!-- Минутная стрелка -->
                         <Border x:Name="MinuteArrow" HorizontalAlignment="Center" 
-                        RenderTransformOrigin="0.5,0.5" Width="8" Padding="0,30,0,0">
-                            <Border BorderThickness="0,0,0,0" BorderBrush="#FF706F6F" 
-                            HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                            Background="#FF302E2E" Height="100"/>
+                        RenderTransformOrigin="0.5,0.5" Width="4" Padding="0,30,0,0">
+                            <Border BorderThickness="0,0,0,0" BorderBrush="#FF706F6F" VerticalAlignment="Top" 
+                            Background="#FF302E2E" Height="93" Margin="0,-9,0,0"/>
                         </Border>
 
 
 
                         <!-- Болтик -->
-                        <Border Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="15,15,15,15" BorderThickness="4,4,4,4" BorderBrush="#FF1F1F1F" Background="#FFF9F6F6"/>
+                        <Border Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="15,15,15,15" BorderThickness="1" BorderBrush="#FF1F1F1F" Background="#FFF9F6F6"/>
                     </Grid>
 
                 </Border>

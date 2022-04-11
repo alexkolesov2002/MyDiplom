@@ -5,25 +5,44 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Учет_работы_мастерских"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"  
+      Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PgTakeWorkShop">
 
     <Grid>
-        <!--<materialDesign:DialogHost  DialogTheme="Inherit" Margin="548,0,0,184">
+        <Border CornerRadius="10"  VerticalAlignment="Center">
+           
+
+            <materialDesign:DialogHost  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <TextBlock Text="Add a new fruit." />
-                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Content="ACCEPT"  x:Name="Accept" Click="Accept_Click"  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                    <TextBlock Text="Добавить ново оборудование." />
+                        <ListView x:Name="ListEquip">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Включить">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox ></CheckBox>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"  />
+                                    <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Content="Добавить"  x:Name="Accept" Click="Accept_Click"     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                             <Button.CommandParameter>
                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                     True
                                 </system:Boolean>
                             </Button.CommandParameter>
                         </Button>
-                        <Button  Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Content="CANCEL" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button  Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Content="Назад" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                             <Button.CommandParameter>
                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                     False
@@ -40,22 +59,23 @@
                         <RowDefinition  Height="Auto" />
                     </Grid.RowDefinitions>
                     <ListBox x:Name="FruitListBox">
-                        <ListBoxItem Content="Apple" />
-                        <ListBoxItem Content="Banana" />
-                        <ListBoxItem Content="Pear" />
+                        <ListBoxItem Content="Ноутбук" />
+                        <ListBoxItem Content="Доска" />
+                        <ListBoxItem Content="Планшет" />
                     </ListBox>
                     <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                        <TextBlock Margin="16" Text="Fruit Bowl" />
+                        <TextBlock Margin="16" Text="Добавить используемое оборудование" />
                     </materialDesign:ColorZone>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" />
                 </Grid>
             </Border>
-        </materialDesign:DialogHost>-->
-        <materialDesign:Clock
+        </materialDesign:DialogHost>
+        </Border>
+        <!--<materialDesign:Clock
                                 Width="auto"
                                 DisplayAutomation="CycleWithSeconds"
                                 Is24Hours="True"
                                  Style="{StaticResource MaterialDesignClock}" />
-        <DatePicker Name="LocaleDatePicker"  Width="120" materialDesign:HintAssist.Hint="Locale Date"  Language="ru-Ru"  />
+        <DatePicker Name="LocaleDatePicker"  Width="120" materialDesign:HintAssist.Hint="Locale Date"  Language="ru-Ru"  />-->
     </Grid>
 </Page>
