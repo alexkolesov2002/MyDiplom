@@ -133,7 +133,7 @@
     <Compile Include="Pages\PgTakeWorkShop.xaml.cs">
       <DependentUpon>PgTakeWorkShop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartEquipment.cs" />
+    <Compile Include="PartEquiptent.cs" />
     <Compile Include="roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

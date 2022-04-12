@@ -25,11 +25,10 @@ namespace Учет_работы_мастерских
         #region глобальные переменные
         List<equipments> ListEqForDelite;
         List<equipments> ListMainEq;
-       
+        List<Equipments_In_Workshop> firswork;
         equipments BufClassObjectEq;
         List<equipments> EquipmentsBufList = new List<equipments>();
-        
-        
+
        
 
         public int IndexRow { get; set; } = 0;
@@ -41,15 +40,15 @@ namespace Учет_работы_мастерских
                 ListMainEq = new List<equipments>();
                 InitializeComponent();
 
-                List<Equipments_In_Workshop> firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
-               
+                firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
+
                 foreach (Equipments_In_Workshop q in firswork)
-                {  
+                {
                     ListMainEq.Add(q.equipments);
                 }
-               
-                    ListEquip.ItemsSource = ListMainEq;
-                ListPickedEquip.DisplayMemberPath = "title_equipment";
+
+                ListEquip.ItemsSource = ListMainEq;
+               // ListPickedEquip.DisplayMemberPath = "title_equipment";
             }
             catch
             {
@@ -63,18 +62,14 @@ namespace Учет_работы_мастерских
             {
                 ListEqForDelite = new List<equipments>();
                 ListEqForDelite = EquipmentsBufList;
-                
-              
-                //PropertyChanged(this, new PropertyChangedEventArgs("IndexRow"));
-
-
                 ListPickedEquip.ItemsSource = EquipmentsBufList;
+                foreach (equipments equipments in EquipmentsBufList)
+                {
+                    ListMainEq.Remove(equipments);
+                }
+                ListEquip.ItemsSource = ListMainEq;
                 ListPickedEquip.Items.Refresh();
-                
 
-               
-                
-                
             }
             catch
             {
@@ -124,9 +119,9 @@ namespace Учет_работы_мастерских
                 equipments equipments = new equipments();
                 equipments = ListEqForDelite.FirstOrDefault(x => x.id_equipment == id);
                 ListEqForDelite.Remove(equipments);
-             
+                ListMainEq.Add(equipments);
+                ListEquip.Items.Refresh();
                 ListPickedEquip.ItemsSource = ListEqForDelite;
-              
                 ListPickedEquip.Items.Refresh();
             }
             catch
@@ -143,17 +138,96 @@ namespace Учет_работы_мастерских
 
         private void BtnAddEq_Click(object sender, RoutedEventArgs e)
         {
-          
+
         }
 
         private void BtnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
-            ListEqForDelite.Clear();
-            EquipmentsBufList.Clear();
-            ListPickedEquip.ItemsSource = EquipmentsBufList;
+            try
+            { if (ListEqForDelite != null)
+                {
+                    ListEqForDelite.Clear();
+                }
+                EquipmentsBufList.Clear();
+                ListMainEq.Clear();
+                ListPickedEquip.ItemsSource = EquipmentsBufList;
+                foreach (Equipments_In_Workshop q in firswork)
+                {
+                    ListMainEq.Add(q.equipments);
+                }
+
+                ListEquip.ItemsSource = ListMainEq;
+                ListPickedEquip.Items.Refresh();
+                ListEquip.Items.Refresh();
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void BtnPlussCount_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            List<equipments> ListFinalEq = new List<equipments>();
+            ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
+            equipments equipments = ListFinalEq.FirstOrDefault(x=>x.id_equipment ==id);
+            equipments.Count += 1;
+            if(equipments.Count > 6)
+            {
+                button.IsEnabled = false;
+            }
+            else button.IsEnabled = true;
             ListPickedEquip.Items.Refresh();
         }
 
-        
+        private void BtnMinuceCount_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            List<equipments> ListFinalEq = new List<equipments>();
+            ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
+            equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
+            equipments.Count -= 1;
+            if (equipments.Count < 1)
+            {
+                button.IsEnabled = false;
+            }
+            else button.IsEnabled = true;
+
+           ListPickedEquip.Items.Refresh();
+        }
+
+        private void BtnMinuceCount_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            List<equipments> ListFinalEq = new List<equipments>();
+            ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
+            equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
+           
+            if (equipments.Count<= 1)
+            {
+                button.IsEnabled = false;
+            }
+            else button.IsEnabled = true;
+        }
+
+        private void BtnPlussCount_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            List<equipments> ListFinalEq = new List<equipments>();
+            ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
+            equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
+         
+            if (equipments.Count >= 6)
+            {
+                button.IsEnabled = false;
+            }
+            else button.IsEnabled = true;
+        }
     }
 }

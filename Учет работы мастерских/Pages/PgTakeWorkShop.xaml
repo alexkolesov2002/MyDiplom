@@ -81,6 +81,18 @@
                                     </GridViewColumn>
                                     <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"   />
                                     <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
+                                    <GridViewColumn Header="Количество" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"   VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0"  Content="{materialDesign:PackIcon Kind=WindowMinimize, Size=13}" x:Name="BtnMinuceCount"  Click="BtnMinuceCount_Click" Foreground="Black" Uid="{Binding id_equipment}" IsEnabled="False" Loaded="BtnMinuceCount_Loaded"/>
+                                                    <TextBlock Text="{Binding Count}"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="10" />
+                                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"   VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0"  Content="{materialDesign:PackIcon Kind=Plus, Size=16}" x:Name="BtnPlussCount" Click="BtnPlussCount_Click" Foreground="Black" Uid="{Binding id_equipment}" IsEnabled="False" Loaded="BtnPlussCount_Loaded"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                   
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -89,7 +101,7 @@
                         <TextBlock Margin="16" Text="Добавить используемое оборудование" />
                     </materialDesign:ColorZone>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click" Foreground="Black"/>
-                        <materialDesign:Badged Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" >
+                        <materialDesign:Badged Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" BadgeColorZoneMode="PrimaryLight" >
                             <Button Content="Удалить все" Background="#FFAEEA00" BorderBrush="#FFAEEA00" Foreground="Black" x:Name="BtnRemoveAll" Click="BtnRemoveAll_Click"   />
                         </materialDesign:Badged>
                     </Grid>
