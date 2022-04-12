@@ -12,6 +12,13 @@
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
         <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
+        <!--<Style TargetType="materialDesign:Badged" x:Key="Bdg">
+            <Style.Triggers>
+                <Trigger Property="Ba">
+                    <Setter Property="FontSize" Value="500" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
     </Page.Resources>
     <Grid>
         <Border CornerRadius="10"  VerticalAlignment="Bottom"  Padding="0,0,2,2">
@@ -24,7 +31,8 @@
                         <ListView x:Name="ListEquip" Loaded="ListEquip_Loaded">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Включить">
+                                    
+                                    <GridViewColumn Header="Включить" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <CheckBox  Uid="{Binding id_equipment}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" ></CheckBox>
@@ -33,7 +41,8 @@
                                     </GridViewColumn>
                                     <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"  />
                                     <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
-
+                                    
+                            
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -101,7 +110,9 @@
                         <TextBlock Margin="16" Text="Добавить используемое оборудование" />
                     </materialDesign:ColorZone>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click" Foreground="Black"/>
-                        <materialDesign:Badged Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" BadgeColorZoneMode="PrimaryLight" >
+                    
+                        <materialDesign:Badged  Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" BadgeColorZoneMode="PrimaryLight" >
+                            
                             <Button Content="Удалить все" Background="#FFAEEA00" BorderBrush="#FFAEEA00" Foreground="Black" x:Name="BtnRemoveAll" Click="BtnRemoveAll_Click"   />
                         </materialDesign:Badged>
                     </Grid>
