@@ -33,14 +33,14 @@ namespace Учет_работы_мастерских
 
         public int IndexRow { get; set; } = 0;
         #endregion
-        public PgTakeWorkShop()
+        public PgTakeWorkShop(workshops TakedWorkShop)
         {
             try
             {
-                ListMainEq = new List<equipments>();
+                
                 InitializeComponent();
-
-                firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == 1).ToList();
+                ListMainEq = new List<equipments>();
+                firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == TakedWorkShop.id_workshop).ToList();
 
                 foreach (Equipments_In_Workshop q in firswork)
                 {
@@ -144,7 +144,8 @@ namespace Учет_работы_мастерских
         private void BtnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
             try
-            { if (ListEqForDelite != null)
+            { 
+                if (ListEqForDelite != null)
                 {
                     ListEqForDelite.Clear();
                 }

@@ -49,8 +49,8 @@ namespace Учет_работы_мастерских
             PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
             RoleUs = CurrentUser.roles.role_title;
             PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
-            shop = new PgTakeWorkShop();
-            MainFrame.Navigate(shop);
+           // shop = new PgTakeWorkShop();
+            MainFrame.Navigate(new PgSelectWork());
             LoadPages.SwitchPages = MainFrame;
 
             StartClock();
@@ -101,7 +101,7 @@ namespace Учет_работы_мастерских
             Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
 
-            LoadPages.SwitchPages.Navigate(shop);
+            LoadPages.SwitchPages.Navigate(new PgSelectWork());
         }
      
 

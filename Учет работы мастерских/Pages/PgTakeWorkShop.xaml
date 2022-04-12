@@ -12,26 +12,26 @@
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
         <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
-        <!--<Style TargetType="materialDesign:Badged" x:Key="Bdg">
+        <!--<Style TargetType="materialDesign:Badged">
             <Style.Triggers>
-                <Trigger Property="Ba">
-                    <Setter Property="FontSize" Value="500" />
-                </Trigger>
+                <DataTrigger Binding="{Binding ElementName=Badg, Path=Badge}" Value="True">
+                    <Setter Property="Margin" Value="-200,0,0,0"></Setter>
+                </DataTrigger>
             </Style.Triggers>
         </Style>-->
     </Page.Resources>
     <Grid>
-        <Border CornerRadius="10"  VerticalAlignment="Bottom"  Padding="0,0,2,2">
-           
+        <Border CornerRadius="10"  VerticalAlignment="Top"  >
+
 
             <materialDesign:DialogHost  DialogTheme="Inherit" >
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Margin="16" >
-                    <TextBlock Text="Добавить ново оборудование." />
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16" >
+                        <TextBlock Text="Добавить ново оборудование." />
                         <ListView x:Name="ListEquip" Loaded="ListEquip_Loaded">
                             <ListView.View>
                                 <GridView>
-                                    
+
                                     <GridViewColumn Header="Включить" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -41,36 +41,36 @@
                                     </GridViewColumn>
                                     <GridViewColumn DisplayMemberBinding="{Binding title_equipment}" Header="Оборудование"  />
                                     <GridViewColumn DisplayMemberBinding="{Binding types_equipment.title_type_equipment}"  Header="Тип оборудования" />
-                                    
-                            
+
+
                                 </GridView>
                             </ListView.View>
                         </ListView>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Content="Добавить"  x:Name="Accept" Click="Accept_Click"     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                            <Button.CommandParameter>
-                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                    True
-                                </system:Boolean>
-                            </Button.CommandParameter>
-                        </Button>
-                        <Button  Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Content="Назад" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                            <Button.CommandParameter>
-                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                    False
-                                </system:Boolean>
-                            </Button.CommandParameter>
-                        </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Content="Добавить"  x:Name="Accept" Click="Accept_Click"     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        True
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button  Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Content="Назад" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        False
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-            <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" MinHeight="256" ClipToBounds="True">
-                <Grid>
+                </materialDesign:DialogHost.DialogContent>
+                <Border BorderThickness="0" CornerRadius="10" BorderBrush="{DynamicResource PrimaryHueLightBrush}" MinHeight="256" ClipToBounds="True">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition  Height="*" />
                             <RowDefinition  Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListView x:Name="ListPickedEquip">
+                        <ListView x:Name="ListPickedEquip" MinHeight="400">
                             <ListView.Resources>
                                 <DataTemplate x:Key="ColumnDataTemplate">
                                     <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource ResourceKey=PositionConverter}}" HorizontalAlignment="Center" />
@@ -101,23 +101,76 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                   
+
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    
-                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                        <TextBlock Margin="16" Text="Добавить используемое оборудование" />
-                    </materialDesign:ColorZone>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click" Foreground="Black"/>
-                    
-                        <materialDesign:Badged  Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" BadgeColorZoneMode="PrimaryLight" >
-                            
-                            <Button Content="Удалить все" Background="#FFAEEA00" BorderBrush="#FFAEEA00" Foreground="Black" x:Name="BtnRemoveAll" Click="BtnRemoveAll_Click"   />
-                        </materialDesign:Badged>
+
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"  Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <TextBlock Margin="16" Text="Добавить используемое оборудование" />
+                        </materialDesign:ColorZone>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="BtnAddEq" Click="BtnAddEq_Click" Foreground="Black"/>
+
                     </Grid>
-            </Border>
-        </materialDesign:DialogHost>
+                </Border>
+            </materialDesign:DialogHost>
+        </Border>
+        <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" VerticalAlignment="Center" FontSize="24" />
+            <Button  Margin="8 0 0 0" Content="..." Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" materialDesign:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"  materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler">
+                <Button.CommandParameter >
+                    <Grid Margin="-1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Calendar x:Name="CombinedCalendar" Margin="-1 -4 -1 0" />
+                            <materialDesign:Clock x:Name="CombinedClock" DisplayAutomation="CycleWithSeconds" Is24Hours="True" />
+                        </StackPanel>
+                        <StackPanel  Grid.Row="1" Margin="8"  HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Content="CANCEL" />
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Content="OK" />
+                        </StackPanel>
+                    </Grid>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>-->
+        <Border VerticalAlignment="Bottom">
+            <materialDesign:DialogHost  DialogTheme="Inherit" >
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Grid Margin="-1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <Calendar x:Name="CombinedCalendar" Margin="-1 -4 -1 0" />
+                                    <materialDesign:Clock x:Name="CombinedClock" DisplayAutomation="CycleWithSeconds" Is24Hours="True" />
+                                </StackPanel>
+                                <StackPanel  Grid.Row="1" Margin="8"  HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Content="CANCEL" />
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Content="OK" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Border>
+                    <Grid>
+                        
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"  Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                        <TextBlock Margin="16" Text="Добавить используемое оборудование" />
+
+                    </materialDesign:ColorZone>
+                    <StackPanel>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="sda"  Foreground="Black"/>
+                    </StackPanel>
+                        </Grid>
+                </Border>
+            </materialDesign:DialogHost>
         </Border>
         <!--<materialDesign:Clock
                                 Width="auto"
