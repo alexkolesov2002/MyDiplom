@@ -18,6 +18,7 @@ namespace Учет_работы_мастерских
         public int id_user { get; set; }
         public int id_workshop { get; set; }
         public Nullable<int> id_equipment { get; set; }
+        public Nullable<int> count_equipment { get; set; }
         public System.DateTime date_use { get; set; }
         public Nullable<System.DateTime> date_end_use { get; set; }
     

@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0d8ce3e7853d4cb5bfb051cb2e6f2a63" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.equipments" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" Width="1.5" PointX="7.5" PointY="3.875" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" Width="1.5" PointX="10.5" PointY="3.5" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.roles" Width="1.5" PointX="0.75" PointY="4" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.types_equipment" Width="1.5" PointX="6" PointY="1.125" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.users" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.workshops" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.equipments" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" Width="1.5" PointX="7.5" PointY="9.875" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" Width="1.5" PointX="7.5" PointY="5.375" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.roles" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.types_equipment" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.users" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.workshops" Width="1.5" PointX="5.25" PointY="7.75" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_equipments" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_equipments_types_equipment" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_equipments" />

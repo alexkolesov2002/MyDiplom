@@ -29,6 +29,7 @@
           <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="id_workshop" Type="int" Nullable="false" />
           <Property Name="id_equipment" Type="int" />
+          <Property Name="count_equipment" Type="int" />
           <Property Name="date_use" Type="datetime" Nullable="false" />
           <Property Name="date_end_use" Type="datetime" />
         </EntityType>
@@ -276,6 +277,7 @@
           <Property Name="id_user" Type="Int32" Nullable="false" />
           <Property Name="id_workshop" Type="Int32" Nullable="false" />
           <Property Name="id_equipment" Type="Int32" />
+          <Property Name="count_equipment" Type="Int32" />
           <Property Name="date_use" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_end_use" Type="DateTime" Precision="3" />
           <NavigationProperty Name="equipments" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_equipments" FromRole="journal_use_workshop" ToRole="equipments" />
@@ -448,6 +450,7 @@
               <MappingFragment StoreEntitySet="journal_use_workshop">
                 <ScalarProperty Name="date_end_use" ColumnName="date_end_use" />
                 <ScalarProperty Name="date_use" ColumnName="date_use" />
+                <ScalarProperty Name="count_equipment" ColumnName="count_equipment" />
                 <ScalarProperty Name="id_equipment" ColumnName="id_equipment" />
                 <ScalarProperty Name="id_workshop" ColumnName="id_workshop" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
