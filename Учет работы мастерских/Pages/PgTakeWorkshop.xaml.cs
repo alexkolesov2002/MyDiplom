@@ -75,14 +75,21 @@ namespace Учет_работы_мастерских
            
          
             DateTime dateTime = Convert.ToDateTime(Date +" "+ Time);
-            foreach (equipments equipment in TakedEquipments)
+            if (TakedEquipments != null)
             {
-                journal_use_workshop use = new journal_use_workshop() { id_equipment = equipment.id_equipment, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop,date_use = dateTime };
-                journal_Use_Workshop.Add(use);
-            }
-            
+                foreach (equipments equipment in TakedEquipments)
+                {
+                    journal_use_workshop use = new journal_use_workshop() { id_equipment = equipment.id_equipment, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime };
+                    journal_Use_Workshop.Add(use);
+                }
                 BaseModel.BaseConnect.journal_use_workshop.AddRange(journal_Use_Workshop);
-            
+            }
+            else
+            {
+                journal_use_workshop use = new journal_use_workshop() { id_equipment = null, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime };
+                BaseModel.BaseConnect.journal_use_workshop.Add(use);
+            }
+ 
             BaseModel.BaseConnect.SaveChanges();
             BtnSaveData.IsEnabled = false;
             //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
@@ -93,6 +100,7 @@ namespace Учет_работы_мастерских
         private void ClockTime_Loaded(object sender, RoutedEventArgs e)
         {
             ClockTime.Time = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
+            CalendarDate.SelectedDate  = DateTime.Now;
         }
 
 
