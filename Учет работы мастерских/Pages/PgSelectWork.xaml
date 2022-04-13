@@ -13,17 +13,16 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
             
-            <ComboBox x:Name="ComboBoxWorkShops"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите необходимую мастерскую"   Width="300" >
+            <ComboBox x:Name="ComboBoxWorkShops"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите необходимую мастерскую"  HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
                 
             </ComboBox >
-            <Grid
-  Width="124">
+           
                 <!-- raised button with progress, useful to auto dismiss/accept something -->
-                <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" Click="BtnGoTakeWorkShop_Click" x:Name="BtnGoTakeWorkShop">
+            <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" Click="BtnGoTakeWorkShop_Click" x:Name="BtnGoTakeWorkShop" Cursor="Hand" Margin="20" IsEnabled="False">
                    
                 </Button>
   
-            </Grid>
+           
         </StackPanel>
     </Grid>
 </Page>

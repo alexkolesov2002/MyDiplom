@@ -20,16 +20,17 @@ namespace Учет_работы_мастерских
     /// <summary>
     /// Логика взаимодействия для PgTakeWorkShop.xaml
     /// </summary>
-    public partial class PgTakeEquip : Page
+    public partial class PgTakeEquip : Page, INotifyPropertyChanged
     {
         #region глобальные переменные
         List<equipments> ListEqForDelite;
         List<equipments> ListMainEq;
+        public int Loading { get; set; } = 0;
         List<Equipments_In_Workshop> firswork;
         equipments BufClassObjectEq;
         List<equipments> EquipmentsBufList = new List<equipments>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
-       
 
         public int IndexRow { get; set; } = 0;
         #endregion
@@ -233,12 +234,22 @@ namespace Учет_работы_мастерских
 
         private void GoPageTakeWorkshop_Click(object sender, RoutedEventArgs e)
         {
+            Zagruzka();
+        }
+        async void Zagruzka()
+        {
+            while (Loading != 100)
+            {
+                Loading += 4;
+                await Task.Delay(4);
+                PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+            }
+            await Task.Delay(15);
+            LoadPages.SwitchPages.Navigate(new PgTakeWorkshop());
+
 
         }
 
-        //private void ClockTime_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    ClockTime.Time = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
-        //}
+      
     }
 }

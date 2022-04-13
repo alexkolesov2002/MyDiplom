@@ -26,6 +26,7 @@ namespace Учет_работы_мастерских
     {
         #region Переменные
         public PgTakeEquip shop;
+
         public event PropertyChangedEventHandler PropertyChanged;
         public string NameUs { get; }
         public string SurNameUs { get; }

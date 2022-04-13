@@ -21,7 +21,7 @@
         </Style>-->
     </Page.Resources>
     <Grid>
-       
+
         <Border CornerRadius="10"   >
 
             <materialDesign:DialogHost  DialogTheme="Inherit" OverlayBackground="Transparent">
@@ -113,57 +113,13 @@
                         <materialDesign:Badged  Badge="{Binding ElementName=ListPickedEquip, Path=Items.Count}"  Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 100 -20" BadgeColorZoneMode="PrimaryLight" >
 
                             <Button Content="Удалить все" Background="#FFAEEA00" BorderBrush="#FFAEEA00" Foreground="Black" x:Name="BtnRemoveAll" Click="BtnRemoveAll_Click"   />
-                            
+
                         </materialDesign:Badged>
-                        <Button VerticalAlignment="Bottom" x:Name="GoPageTakeWorkshop" Click="GoPageTakeWorkshop_Click" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 250 -20" Style="{StaticResource MaterialDesignFloatingActionButton}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="{materialDesign:PackIcon ArrowRightBold,Size=38}"  Foreground="White" Cursor="Hand"/>
+                        <Button VerticalAlignment="Bottom" x:Name="GoPageTakeWorkshop" Click="GoPageTakeWorkshop_Click" HorizontalAlignment="Right"   Margin="0 0 250 -20" Style="{StaticResource MaterialDesignFloatingActionButton}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.Value="{Binding Loading}"  Content="{materialDesign:PackIcon ArrowRightBold,Size=38}"  Foreground="White" Cursor="Hand" />
                     </Grid>
                 </Border>
             </materialDesign:DialogHost>
         </Border>
-    
-        <!--<Border VerticalAlignment="Bottom" >
-            <materialDesign:DialogHost  DialogTheme="Inherit" >
-                <StackPanel Orientation="Vertical">
-                   
 
-                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"  Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Margin="16" Text="Добавить используемое оборудование" />
-
-                        </materialDesign:ColorZone>
-                        <StackPanel>
-                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 28 -20"  Content="{materialDesign:PackIcon Kind=Plus, Size=22}" x:Name="sda"  Foreground="Black"/>
-                        </StackPanel>
-                    
-                </StackPanel>
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Margin="0" >
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Grid Margin="-1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <Calendar x:Name="CombinedCalendar" Margin="-1 -3 -3 0" Language="ru-RU" />
-                                    <materialDesign:Clock DisplayAutomation="Cycle" Is24Hours="True" Loaded="ClockTime_Loaded" x:Name="ClockTime" />
-                                </StackPanel>
-                                <StackPanel  Grid.Row="1" Margin="8"  HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Content="Отмена" />
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Content="Выбрать время" />
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
-               
-            </materialDesign:DialogHost>
-        </Border>-->
-     
-        <!--<materialDesign:Clock
-                                Width="auto"
-                                DisplayAutomation="CycleWithSeconds"
-                                Is24Hours="True"
-                                 Style="{StaticResource MaterialDesignClock}" />
-        <DatePicker Name="LocaleDatePicker"  Width="120" materialDesign:HintAssist.Hint="Locale Date"  Language="ru-Ru"  />-->
     </Grid>
 </Page>

@@ -51,5 +51,10 @@ namespace Учет_работы_мастерских
         {
             Zagruzka(); 
         }
+
+        private void ComboBoxWorkShops_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BtnGoTakeWorkShop.IsEnabled = true;
+        }
     }
 }
