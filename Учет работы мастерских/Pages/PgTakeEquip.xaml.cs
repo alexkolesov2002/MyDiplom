@@ -20,7 +20,7 @@ namespace Учет_работы_мастерских
     /// <summary>
     /// Логика взаимодействия для PgTakeWorkShop.xaml
     /// </summary>
-    public partial class PgTakeWorkShop : Page
+    public partial class PgTakeEquip : Page
     {
         #region глобальные переменные
         List<equipments> ListEqForDelite;
@@ -33,7 +33,7 @@ namespace Учет_работы_мастерских
 
         public int IndexRow { get; set; } = 0;
         #endregion
-        public PgTakeWorkShop(workshops TakedWorkShop)
+        public PgTakeEquip(workshops TakedWorkShop)
         {
             try
             {
@@ -229,6 +229,11 @@ namespace Учет_работы_мастерских
                 button.IsEnabled = false;
             }
             else button.IsEnabled = true;
+        }
+
+        private void GoPageTakeWorkshop_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //private void ClockTime_Loaded(object sender, RoutedEventArgs e)

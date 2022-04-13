@@ -25,7 +25,7 @@ namespace Учет_работы_мастерских
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         #region Переменные
-        public PgTakeWorkShop shop;
+        public PgTakeEquip shop;
         public event PropertyChangedEventHandler PropertyChanged;
         public string NameUs { get; }
         public string SurNameUs { get; }

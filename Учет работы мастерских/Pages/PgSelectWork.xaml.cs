@@ -42,7 +42,7 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
             await Task.Delay(15);
-            LoadPages.SwitchPages.Navigate(new PgTakeWorkShop((workshops)ComboBoxWorkShops.SelectedItem));
+            LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
 
 
         }
