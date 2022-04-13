@@ -133,8 +133,8 @@
     <Compile Include="Pages\PgTakeWorkShop.xaml.cs">
       <DependentUpon>PgTakeWorkShop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartEquiptent.cs" />
-    <Compile Include="PgSelectWork.xaml.cs">
+    <Compile Include="Classes\PartEquiptent.cs" />
+    <Compile Include="Pages\PgSelectWork.xaml.cs">
       <DependentUpon>PgSelectWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="roles.cs">
@@ -156,7 +156,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PgSelectWork.xaml">
+    <Page Include="Pages\PgSelectWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

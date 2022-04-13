@@ -38,25 +38,14 @@ namespace Учет_работы_мастерских
             while (Loading != 100)
             {
                 Loading += 4;
-                await Task.Delay(1);
+                await Task.Delay(4);
                 PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
+            await Task.Delay(15);
             LoadPages.SwitchPages.Navigate(new PgTakeWorkShop((workshops)ComboBoxWorkShops.SelectedItem));
 
 
         }
-        //void Zagruzka()
-        //{
-        //    while (Loading != 100)
-        //    {
-        //        Loading += 4;
-        //        Thread.Sleep(100);
-        //        PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
-        //    }
-
-
-        //}
-
 
         private void BtnGoTakeWorkShop_Click(object sender, RoutedEventArgs e)
         {

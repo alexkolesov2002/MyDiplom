@@ -230,5 +230,10 @@ namespace Учет_работы_мастерских
             }
             else button.IsEnabled = true;
         }
+
+        //private void ClockTime_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    ClockTime.Time = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
+        //}
     }
 }
