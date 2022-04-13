@@ -115,13 +115,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\BaseModel.cs" />
+    <Compile Include="Classes\ItemPositionToIndexConverter.cs" />
     <Compile Include="equipments.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Equipments_In_Workshop.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classes\ItemPositionToIndexConverter.cs" />
     <Compile Include="journal_use_workshop.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

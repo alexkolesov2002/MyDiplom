@@ -25,10 +25,10 @@
           <Key>
             <PropertyRef Name="id_journal_use_workshop" />
           </Key>
-          <Property Name="id_journal_use_workshop" Type="int" Nullable="false" />
+          <Property Name="id_journal_use_workshop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="id_workshop" Type="int" Nullable="false" />
-          <Property Name="id_equipment" Type="int" Nullable="false" />
+          <Property Name="id_equipment" Type="int" />
           <Property Name="date_use" Type="datetime" Nullable="false" />
           <Property Name="date_end_use" Type="datetime" />
         </EntityType>
@@ -102,7 +102,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_journal_use_workshop_equipments">
-          <End Role="equipments" Type="Self.equipments" Multiplicity="1" />
+          <End Role="equipments" Type="Self.equipments" Multiplicity="0..1" />
           <End Role="journal_use_workshop" Type="Self.journal_use_workshop" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="equipments">
@@ -272,15 +272,15 @@
           <Key>
             <PropertyRef Name="id_journal_use_workshop" />
           </Key>
-          <Property Name="id_journal_use_workshop" Type="Int32" Nullable="false" />
+          <Property Name="id_journal_use_workshop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int32" Nullable="false" />
           <Property Name="id_workshop" Type="Int32" Nullable="false" />
-          <Property Name="id_equipment" Type="Int32" Nullable="false" />
+          <Property Name="id_equipment" Type="Int32" />
           <Property Name="date_use" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_end_use" Type="DateTime" Precision="3" />
           <NavigationProperty Name="equipments" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_equipments" FromRole="journal_use_workshop" ToRole="equipments" />
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_users" FromRole="journal_use_workshop" ToRole="users" />
           <NavigationProperty Name="workshops" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_workshops" FromRole="journal_use_workshop" ToRole="workshops" />
-          <Property Name="date_end_use" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="roles">
           <Key>
@@ -348,7 +348,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_journal_use_workshop_equipments">
-          <End Type="P_DiplomProject_MasterskieModel.equipments" Role="equipments" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.equipments" Role="equipments" Multiplicity="0..1" />
           <End Type="P_DiplomProject_MasterskieModel.journal_use_workshop" Role="journal_use_workshop" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="equipments">
@@ -419,7 +419,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

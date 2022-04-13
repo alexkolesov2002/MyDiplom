@@ -36,14 +36,15 @@ namespace Учет_работы_мастерских
         const double NumberSystem = 60;
         const double baseAngleNumberSystem = 360 / NumberSystem;
         const double baseAngleHour = 30;
-        #endregion 
-      
-        
-        
+        users CurrentUser;
+        #endregion
+
+
+
         public MainWindow(users CurrentUser)
         {
             InitializeComponent();
-
+            this.CurrentUser = CurrentUser;
             NameUs = CurrentUser.name + " ";
             PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
             SurNameUs = CurrentUser.surname;
@@ -51,7 +52,7 @@ namespace Учет_работы_мастерских
             RoleUs = CurrentUser.roles.role_title;
             PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
            // shop = new PgTakeWorkShop();
-            MainFrame.Navigate(new PgSelectWork());
+            MainFrame.Navigate(new PgSelectWork(CurrentUser));
             LoadPages.SwitchPages = MainFrame;
 
             StartClock();
@@ -102,7 +103,7 @@ namespace Учет_работы_мастерских
             Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
 
-            LoadPages.SwitchPages.Navigate(new PgSelectWork());
+            LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
         }
      
 

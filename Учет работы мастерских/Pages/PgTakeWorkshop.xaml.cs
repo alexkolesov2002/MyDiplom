@@ -27,20 +27,26 @@ namespace Учет_работы_мастерских
         public int Loading { get; set; } = 0;
         public bool IsSaveComplete { get; set; } = false;
         public bool SaveNotComplete { get; set; } = true;
-
+        workshops TakedWorkShop;
+        users CurrentUser;
+        List<equipments> TakedEquipments;
         public event PropertyChangedEventHandler PropertyChanged;
+        List<journal_use_workshop> journal_Use_Workshop = new List<journal_use_workshop>();
 
 
 
         #endregion
-        public PgTakeWorkshop()
+        public PgTakeWorkshop(workshops TakedWorkShop, users CurrentUser, List<equipments> TakedEquipments)
         {
             try
             {
 
                 InitializeComponent();
+                this.CurrentUser = CurrentUser;
+                this.TakedWorkShop = TakedWorkShop;
+                this.TakedEquipments = TakedEquipments;
 
-                // ListPickedEquip.DisplayMemberPath = "title_equipment";
+
             }
             catch
             {
@@ -63,6 +69,22 @@ namespace Учет_работы_мастерских
             PropertyChanged(this, new PropertyChangedEventArgs("SaveNotComplete"));
             IsSaveComplete = true;
             PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
+            
+            string Date = CalendarDate.SelectedDate.Value.ToShortDateString();
+            string Time = ClockTime.Time.ToLongTimeString();
+           
+         
+            DateTime dateTime = Convert.ToDateTime(Date +" "+ Time);
+            foreach (equipments equipment in TakedEquipments)
+            {
+                journal_use_workshop use = new journal_use_workshop() { id_equipment = equipment.id_equipment, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop,date_use = dateTime };
+                journal_Use_Workshop.Add(use);
+            }
+            
+                BaseModel.BaseConnect.journal_use_workshop.AddRange(journal_Use_Workshop);
+            
+            BaseModel.BaseConnect.SaveChanges();
+            BtnSaveData.IsEnabled = false;
             //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
 
 

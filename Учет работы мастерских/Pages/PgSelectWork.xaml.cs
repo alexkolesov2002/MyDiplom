@@ -22,9 +22,11 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class PgSelectWork : Page, INotifyPropertyChanged
     {
+        users CurrentUser;
         public int Loading { get; set; } = 0;
-        public PgSelectWork()
+        public PgSelectWork(users CurrentUser)
         {
+            this.CurrentUser = CurrentUser;  
             InitializeComponent();
             ComboBoxWorkShops.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
             ComboBoxWorkShops.DisplayMemberPath = "title_workshop";
@@ -42,7 +44,7 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
             await Task.Delay(15);
-            LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
+            LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem, CurrentUser));
 
 
         }

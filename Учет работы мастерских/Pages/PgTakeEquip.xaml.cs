@@ -30,16 +30,18 @@ namespace Учет_работы_мастерских
         equipments BufClassObjectEq;
         List<equipments> EquipmentsBufList = new List<equipments>();
         public event PropertyChangedEventHandler PropertyChanged;
-
-
+        users CurrentUser;
+        workshops TakedWorkShop;
         public int IndexRow { get; set; } = 0;
         #endregion
-        public PgTakeEquip(workshops TakedWorkShop)
+        public PgTakeEquip(workshops TakedWorkShop, users CurrentUser)
         {
             try
             {
                 
                 InitializeComponent();
+                this.CurrentUser = CurrentUser;
+                this.TakedWorkShop = TakedWorkShop;
                 ListMainEq = new List<equipments>();
                 firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == TakedWorkShop.id_workshop).ToList();
 
@@ -245,7 +247,8 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
             await Task.Delay(15);
-            LoadPages.SwitchPages.Navigate(new PgTakeWorkshop());
+
+            LoadPages.SwitchPages.Navigate(new PgTakeWorkshop(TakedWorkShop,CurrentUser, (List<equipments>)ListPickedEquip.ItemsSource));
 
 
         }
