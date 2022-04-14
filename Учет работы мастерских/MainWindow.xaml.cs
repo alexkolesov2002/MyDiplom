@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using MaterialDesignColors;
-using MaterialDesignThemes;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
 using System.Windows.Threading;
 
 namespace Учет_работы_мастерских
@@ -36,7 +25,7 @@ namespace Учет_работы_мастерских
         const double NumberSystem = 60;
         const double baseAngleNumberSystem = 360 / NumberSystem;
         const double baseAngleHour = 30;
-         users CurrentUser;
+        users CurrentUser;
         #endregion
 
 
@@ -51,7 +40,7 @@ namespace Учет_работы_мастерских
             PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
             RoleUs = CurrentUser.roles.role_title;
             PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
-           // shop = new PgTakeWorkShop();
+            // shop = new PgTakeWorkShop();
             MainFrame.Navigate(new PgSelectWork(CurrentUser));
             LoadPages.SwitchPages = MainFrame;
 
@@ -106,7 +95,7 @@ namespace Учет_работы_мастерских
 
             LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
         }
-     
+
 
         #region Вычисление текущего времени
 

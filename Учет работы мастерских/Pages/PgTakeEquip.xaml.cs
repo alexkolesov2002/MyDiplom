@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Учет_работы_мастерских
 {
@@ -38,7 +29,7 @@ namespace Учет_работы_мастерских
         {
             try
             {
-                
+
                 InitializeComponent();
                 this.CurrentUser = CurrentUser;
                 this.TakedWorkShop = TakedWorkShop;
@@ -51,7 +42,7 @@ namespace Учет_работы_мастерских
                 }
 
                 ListEquip.ItemsSource = ListMainEq;
-               // ListPickedEquip.DisplayMemberPath = "title_equipment";
+                // ListPickedEquip.DisplayMemberPath = "title_equipment";
             }
             catch
             {
@@ -147,7 +138,7 @@ namespace Учет_работы_мастерских
         private void BtnRemoveAll_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
+            {
                 if (ListEqForDelite != null)
                 {
                     ListEqForDelite.Clear();
@@ -177,9 +168,9 @@ namespace Учет_работы_мастерских
             int id = Convert.ToInt32(button.Uid);
             List<equipments> ListFinalEq = new List<equipments>();
             ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
-            equipments equipments = ListFinalEq.FirstOrDefault(x=>x.id_equipment ==id);
+            equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
             equipments.Count += 1;
-            if(equipments.Count > 6)
+            if (equipments.Count > 6)
             {
                 button.IsEnabled = false;
             }
@@ -201,7 +192,7 @@ namespace Учет_работы_мастерских
             }
             else button.IsEnabled = true;
 
-           ListPickedEquip.Items.Refresh();
+            ListPickedEquip.Items.Refresh();
         }
 
         private void BtnMinuceCount_Loaded(object sender, RoutedEventArgs e)
@@ -211,8 +202,8 @@ namespace Учет_работы_мастерских
             List<equipments> ListFinalEq = new List<equipments>();
             ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
             equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
-           
-            if (equipments.Count<= 1)
+
+            if (equipments.Count <= 1)
             {
                 button.IsEnabled = false;
             }
@@ -226,7 +217,7 @@ namespace Учет_работы_мастерских
             List<equipments> ListFinalEq = new List<equipments>();
             ListFinalEq = (List<equipments>)ListPickedEquip.ItemsSource;
             equipments equipments = ListFinalEq.FirstOrDefault(x => x.id_equipment == id);
-         
+
             if (equipments.Count >= 6)
             {
                 button.IsEnabled = false;
@@ -248,11 +239,11 @@ namespace Учет_работы_мастерских
             }
             await Task.Delay(15);
 
-            LoadPages.SwitchPages.Navigate(new PgTakeWorkshop(TakedWorkShop,CurrentUser, (List<equipments>)ListPickedEquip.ItemsSource));
+            LoadPages.SwitchPages.Navigate(new PgTakeWorkshop(TakedWorkShop, CurrentUser, (List<equipments>)ListPickedEquip.ItemsSource));
 
 
         }
 
-      
+
     }
 }

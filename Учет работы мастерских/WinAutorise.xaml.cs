@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Учет_работы_мастерских
@@ -24,7 +14,7 @@ namespace Учет_работы_мастерских
         public WinAutorise()
         {
             InitializeComponent();
-           // BaseModel.BaseConnect = new Entities();
+            // BaseModel.BaseConnect = new Entities();
         }
 
         private void BtnAutorise_Click(object sender, RoutedEventArgs e)
@@ -35,7 +25,7 @@ namespace Учет_работы_мастерских
                 if (user != null)
                 {
                     MessageBox.Show("Успешная авторизация", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    
+
                     new MainWindow(user).Show();
                     this.Close();
 
@@ -54,12 +44,12 @@ namespace Учет_работы_мастерских
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           
-                if (e.ChangedButton == MouseButton.Left)
-                {
-                    this.DragMove();
-                }
-            
+
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+
         }
     }
 }

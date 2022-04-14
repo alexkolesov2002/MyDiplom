@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Учет_работы_мастерских
 {
@@ -26,11 +15,11 @@ namespace Учет_работы_мастерских
         public int Loading { get; set; } = 0;
         public PgSelectWork(users CurrentUser)
         {
-            this.CurrentUser = CurrentUser;  
+            this.CurrentUser = CurrentUser;
             InitializeComponent();
             ComboBoxWorkShops.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
             ComboBoxWorkShops.DisplayMemberPath = "title_workshop";
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,7 +40,7 @@ namespace Учет_работы_мастерских
 
         private void BtnGoTakeWorkShop_Click(object sender, RoutedEventArgs e)
         {
-            Zagruzka(); 
+            Zagruzka();
         }
 
         private void ComboBoxWorkShops_SelectionChanged(object sender, SelectionChangedEventArgs e)
