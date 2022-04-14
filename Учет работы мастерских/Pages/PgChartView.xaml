@@ -10,12 +10,29 @@
              Background="#E9E9E9">
 
     <Grid>
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
+        <Button  Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20,150,0,0"  Panel.ZIndex="1" x:Name="BtnChartUpdate" Click="BtnChartUpdate_Click" Cursor="Hand">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" Opacity=".2" ShadowDepth="1"/>
+                        </Grid.Effect>
+                        <Ellipse Stroke="Black" StrokeThickness="0" Fill="#CD2156">
+
+                        </Ellipse>
+                        <Path Width="20" Height="20" Stretch="Fill" Fill="White" Data="F1 M 58,33.5001L 58,27L 49,19L 40,27.5001L 40,33.5001L 46,28.2097L 46,40.5C 46,46.299 41.299,51 35.5,51C 29.701,51 25,46.299 25,40.5C 25,34.8686 29.4332,30.2727 35,30.0117L 35,24.0074C 26.1186,24.2718 19,31.5546 19,40.5C 19,49.6127 26.3873,57 35.5,57C 44.6127,57 52,49.6127 52,40.5L 52,28.125L 58,33.5001 Z "/>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <lvc:CartesianChart x:Name="TestChart" Series="{Binding SeriesCollection}" LegendLocation="Left">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Salesman" Labels="{Binding Labels}"></lvc:Axis>
+                <lvc:Axis Title="ОБорудование" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                <lvc:Axis Title="Количество" LabelFormatter="{Binding Formatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>

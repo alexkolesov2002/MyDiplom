@@ -26,24 +26,30 @@ namespace Учет_работы_мастерских
     /// <summary>
     /// Логика взаимодействия для PgChartView.xaml
     /// </summary>
-    public partial class PgChartView : UserControl//, INotifyPropertyChanged
+    public partial class PgChartView : UserControl, INotifyPropertyChanged
 
     {
 
         #region Глобальные переменные
-        public SeriesCollection SeriesCollection { get; set; }
+        public SeriesCollection SeriesCollection { get; set ; }
         public string[] Labels { get; set; }
         public Func<int, string> Formatter { get; set; }
         #endregion
         public PgChartView()
         {
             InitializeComponent();
+            BuidlChart();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void BuidlChart()
+        {
+            BaseModel.BaseConnect = new Entities();
             List<journal_use_workshop> journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.ToList();
             var s = journal_Use_Workshops.GroupBy(x => new { x.id_equipment, x.id_workshop }).Select(a => new { Count = a.Sum(b => b.count_equipment), id_workshop = a.Key }).ToList();
 
-            SeriesCollection = new SeriesCollection
-            {
-            };
+            SeriesCollection = new SeriesCollection{};
 
             foreach (workshops workshops in BaseModel.BaseConnect.workshops.ToList())
             {
@@ -70,14 +76,22 @@ namespace Учет_работы_мастерских
             int i = 0;
             foreach (equipments equipments1 in BaseModel.BaseConnect.equipments.ToList())
             {
-                labels[i] = equipments1.types_equipment.title_type_equipment +" "+ equipments1.title_equipment;
+                labels[i] = equipments1.types_equipment.title_type_equipment + " " + equipments1.title_equipment;
                 i++;
             }
             Labels = labels;
             Formatter = value => value.ToString("N");
             DataContext = this;
+
         }
 
-    
+        private void BtnChartUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            BuidlChart();
+            PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
+            PropertyChanged(this, new PropertyChangedEventArgs("Labels"));
+            PropertyChanged(this, new PropertyChangedEventArgs("Formatter"));
+            TestChart.Update(true);
+        }
     }
 }
