@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Учет_работы_мастерских
 {
-    class BaseModel
+   public class BaseModel
     {
         public static Entities BaseConnect = new Entities();
     }
