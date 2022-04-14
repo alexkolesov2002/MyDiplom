@@ -36,7 +36,7 @@ namespace Учет_работы_мастерских
         const double NumberSystem = 60;
         const double baseAngleNumberSystem = 360 / NumberSystem;
         const double baseAngleHour = 30;
-        users CurrentUser;
+         users CurrentUser;
         #endregion
 
 

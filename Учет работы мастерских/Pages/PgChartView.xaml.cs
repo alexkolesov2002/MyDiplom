@@ -29,6 +29,12 @@ namespace Учет_работы_мастерских
     public partial class PgChartView : UserControl//, INotifyPropertyChanged
 
     {
+
+        #region Глобальные переменные
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<int, string> Formatter { get; set; }
+        #endregion
         public PgChartView()
         {
             InitializeComponent();
@@ -41,17 +47,17 @@ namespace Учет_работы_мастерских
 
             foreach (workshops workshops in BaseModel.BaseConnect.workshops.ToList())
             {
-                ChartValues<double> values = new ChartValues<double>();
+                ChartValues<int> values = new ChartValues<int>();
                 foreach (equipments equipments in BaseModel.BaseConnect.equipments.ToList())
                 {
                     var a = s.FirstOrDefault(x => x.id_workshop.id_workshop == workshops.id_workshop && x.id_workshop.id_equipment == equipments.id_equipment);
                     if (a != null)
                     {
-                        values.Add(Convert.ToDouble(a.Count));
+                        values.Add(Convert.ToInt32(a.Count));
                     }
                     else
                     {
-                        values.Add(Convert.ToDouble("0"));
+                        values.Add(Convert.ToInt32("0"));
                     }
                 }
                 SeriesCollection.Add(new ColumnSeries
@@ -64,7 +70,7 @@ namespace Учет_работы_мастерских
             int i = 0;
             foreach (equipments equipments1 in BaseModel.BaseConnect.equipments.ToList())
             {
-                labels[i] = equipments1.title_equipment;
+                labels[i] = equipments1.types_equipment.title_type_equipment +" "+ equipments1.title_equipment;
                 i++;
             }
             Labels = labels;
@@ -72,8 +78,6 @@ namespace Учет_работы_мастерских
             DataContext = this;
         }
 
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
+    
     }
 }
