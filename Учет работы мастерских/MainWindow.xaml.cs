@@ -84,6 +84,7 @@ namespace Учет_работы_мастерских
             Button1.Style = (Style)this.Resources["menuButton"];
             Button2.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
+            LoadPages.SwitchPages.Navigate(new PgTelegrammBot());
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)

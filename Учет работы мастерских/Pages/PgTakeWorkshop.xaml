@@ -38,7 +38,7 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Border MinWidth="256" MinHeight="256" ClipToBounds="True">
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="RUN" />
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" />
                 </Border>
             </materialDesign:DialogHost>
 
