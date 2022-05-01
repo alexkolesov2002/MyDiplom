@@ -24,7 +24,7 @@ namespace Учет_работы_мастерских
                 users user = BaseModel.BaseConnect.users.FirstOrDefault(x => x.login == TxtLogin.Text && x.password == TxtPass.Password);
                 if (user != null)
                 {
-                    MessageBox.Show("Успешная авторизация", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                  
 
                     new MainWindow(user).Show();
                     this.Close();

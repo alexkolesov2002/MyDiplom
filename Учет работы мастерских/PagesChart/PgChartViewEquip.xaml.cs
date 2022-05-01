@@ -13,7 +13,7 @@ namespace Учет_работы_мастерских
     /// <summary>
     /// Логика взаимодействия для PgChartView.xaml
     /// </summary>
-    public partial class PgChartView : UserControl, INotifyPropertyChanged
+    public partial class PgChartViewEquip : UserControl, INotifyPropertyChanged
 
     {
 
@@ -22,7 +22,7 @@ namespace Учет_работы_мастерских
         public string[] Labels { get; set; }
         public Func<int, string> Formatter { get; set; }
         #endregion
-        public PgChartView()
+        public PgChartViewEquip()
         {
             InitializeComponent();
             BuidlChart();

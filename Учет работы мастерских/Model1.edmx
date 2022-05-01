@@ -21,6 +21,16 @@
           <Property Name="id_workshop" Type="int" Nullable="false" />
           <Property Name="id_equipment" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="events">
+          <Key>
+            <PropertyRef Name="id_event" />
+          </Key>
+          <Property Name="id_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_event" Type="int" Nullable="false" />
+          <Property Name="title_event" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="topic_of_the_lesson" Type="nvarchar(max)" />
+          <Property Name="exercise" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="journal_use_workshop">
           <Key>
             <PropertyRef Name="id_journal_use_workshop" />
@@ -32,6 +42,7 @@
           <Property Name="count_equipment" Type="int" />
           <Property Name="date_use" Type="datetime" Nullable="false" />
           <Property Name="date_end_use" Type="datetime" />
+          <Property Name="id_event" Type="int" />
         </EntityType>
         <EntityType Name="roles">
           <Key>
@@ -40,12 +51,29 @@
           <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="role_title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="types_equipment">
           <Key>
             <PropertyRef Name="id_type_equipment" />
           </Key>
           <Property Name="id_type_equipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title_type_equipment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="types_event">
+          <Key>
+            <PropertyRef Name="id_type_event" />
+          </Key>
+          <Property Name="id_type_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title_type_event" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -102,6 +130,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_events_types_event">
+          <End Role="types_event" Type="Self.types_event" Multiplicity="1" />
+          <End Role="events" Type="Self.events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_event">
+              <PropertyRef Name="id_type_event" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="id_type_event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_journal_use_workshop_equipments">
           <End Role="equipments" Type="Self.equipments" Multiplicity="0..1" />
           <End Role="journal_use_workshop" Type="Self.journal_use_workshop" Multiplicity="*" />
@@ -111,6 +151,18 @@
             </Principal>
             <Dependent Role="journal_use_workshop">
               <PropertyRef Name="id_equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_journal_use_workshop_events">
+          <End Role="events" Type="Self.events" Multiplicity="0..1" />
+          <End Role="journal_use_workshop" Type="Self.journal_use_workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id_event" />
+            </Principal>
+            <Dependent Role="journal_use_workshop">
+              <PropertyRef Name="id_event" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -165,9 +217,12 @@
         <EntityContainer Name="Хранилище P_DiplomProject_MasterskieModelContainer">
           <EntitySet Name="equipments" EntityType="Self.equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="Self.Equipments_In_Workshop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="journal_use_workshop" EntityType="Self.journal_use_workshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="types_equipment" EntityType="Self.types_equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="types_event" EntityType="Self.types_event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workshops" EntityType="Self.workshops" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="Self.FK_Equipments_In_Workshop_equipments">
@@ -182,8 +237,16 @@
             <End Role="types_equipment" EntitySet="types_equipment" />
             <End Role="equipments" EntitySet="equipments" />
           </AssociationSet>
+          <AssociationSet Name="FK_events_types_event" Association="Self.FK_events_types_event">
+            <End Role="types_event" EntitySet="types_event" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
           <AssociationSet Name="FK_journal_use_workshop_equipments" Association="Self.FK_journal_use_workshop_equipments">
             <End Role="equipments" EntitySet="equipments" />
+            <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_journal_use_workshop_events" Association="Self.FK_journal_use_workshop_events">
+            <End Role="events" EntitySet="events" />
             <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
           </AssociationSet>
           <AssociationSet Name="FK_journal_use_workshop_users" Association="Self.FK_journal_use_workshop_users">
@@ -210,9 +273,12 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="equipments" EntityType="P_DiplomProject_MasterskieModel.equipments" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" />
+          <EntitySet Name="events" EntityType="P_DiplomProject_MasterskieModel.events" />
           <EntitySet Name="journal_use_workshop" EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" />
           <EntitySet Name="roles" EntityType="P_DiplomProject_MasterskieModel.roles" />
+          <EntitySet Name="sysdiagrams" EntityType="P_DiplomProject_MasterskieModel.sysdiagrams" />
           <EntitySet Name="types_equipment" EntityType="P_DiplomProject_MasterskieModel.types_equipment" />
+          <EntitySet Name="types_event" EntityType="P_DiplomProject_MasterskieModel.types_event" />
           <EntitySet Name="users" EntityType="P_DiplomProject_MasterskieModel.users" />
           <EntitySet Name="workshops" EntityType="P_DiplomProject_MasterskieModel.workshops" />
           <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_equipments">
@@ -230,6 +296,14 @@
           <AssociationSet Name="FK_Equipments_In_Workshop_workshops" Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_workshops">
             <End Role="workshops" EntitySet="workshops" />
             <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_events_types_event" Association="P_DiplomProject_MasterskieModel.FK_events_types_event">
+            <End Role="types_event" EntitySet="types_event" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_journal_use_workshop_events" Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events">
+            <End Role="events" EntitySet="events" />
+            <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
           </AssociationSet>
           <AssociationSet Name="FK_journal_use_workshop_users" Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_users">
             <End Role="users" EntitySet="users" />
@@ -269,6 +343,18 @@
           <NavigationProperty Name="equipments" Relationship="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_equipments" FromRole="Equipments_In_Workshop" ToRole="equipments" />
           <NavigationProperty Name="workshops" Relationship="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_workshops" FromRole="Equipments_In_Workshop" ToRole="workshops" />
         </EntityType>
+        <EntityType Name="events">
+          <Key>
+            <PropertyRef Name="id_event" />
+          </Key>
+          <Property Name="id_event" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_event" Type="Int32" Nullable="false" />
+          <Property Name="title_event" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="topic_of_the_lesson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="exercise" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="types_event" Relationship="P_DiplomProject_MasterskieModel.FK_events_types_event" FromRole="events" ToRole="types_event" />
+          <NavigationProperty Name="journal_use_workshop" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events" FromRole="events" ToRole="journal_use_workshop" />
+        </EntityType>
         <EntityType Name="journal_use_workshop">
           <Key>
             <PropertyRef Name="id_journal_use_workshop" />
@@ -280,7 +366,9 @@
           <Property Name="count_equipment" Type="Int32" />
           <Property Name="date_use" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_end_use" Type="DateTime" Precision="3" />
+          <Property Name="id_event" Type="Int32" />
           <NavigationProperty Name="equipments" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_equipments" FromRole="journal_use_workshop" ToRole="equipments" />
+          <NavigationProperty Name="events" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events" FromRole="journal_use_workshop" ToRole="events" />
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_users" FromRole="journal_use_workshop" ToRole="users" />
           <NavigationProperty Name="workshops" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_workshops" FromRole="journal_use_workshop" ToRole="workshops" />
         </EntityType>
@@ -292,6 +380,16 @@
           <Property Name="role_title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_users_roles" FromRole="roles" ToRole="users" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="types_equipment">
           <Key>
             <PropertyRef Name="id_type_equipment" />
@@ -299,6 +397,14 @@
           <Property Name="id_type_equipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="title_type_equipment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="equipments" Relationship="P_DiplomProject_MasterskieModel.FK_equipments_types_equipment" FromRole="types_equipment" ToRole="equipments" />
+        </EntityType>
+        <EntityType Name="types_event">
+          <Key>
+            <PropertyRef Name="id_type_event" />
+          </Key>
+          <Property Name="id_type_event" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title_type_event" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="events" Relationship="P_DiplomProject_MasterskieModel.FK_events_types_event" FromRole="types_event" ToRole="events" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -370,6 +476,30 @@
             </Principal>
             <Dependent Role="Equipments_In_Workshop">
               <PropertyRef Name="id_workshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_events_types_event">
+          <End Type="P_DiplomProject_MasterskieModel.types_event" Role="types_event" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.events" Role="events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_event">
+              <PropertyRef Name="id_type_event" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="id_type_event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_journal_use_workshop_events">
+          <End Type="P_DiplomProject_MasterskieModel.events" Role="events" Multiplicity="0..1" />
+          <End Type="P_DiplomProject_MasterskieModel.journal_use_workshop" Role="journal_use_workshop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id_event" />
+            </Principal>
+            <Dependent Role="journal_use_workshop">
+              <PropertyRef Name="id_event" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -445,9 +575,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="events">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.events">
+              <MappingFragment StoreEntitySet="events">
+                <ScalarProperty Name="exercise" ColumnName="exercise" />
+                <ScalarProperty Name="topic_of_the_lesson" ColumnName="topic_of_the_lesson" />
+                <ScalarProperty Name="title_event" ColumnName="title_event" />
+                <ScalarProperty Name="id_type_event" ColumnName="id_type_event" />
+                <ScalarProperty Name="id_event" ColumnName="id_event" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="journal_use_workshop">
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.journal_use_workshop">
               <MappingFragment StoreEntitySet="journal_use_workshop">
+                <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="date_end_use" ColumnName="date_end_use" />
                 <ScalarProperty Name="date_use" ColumnName="date_use" />
                 <ScalarProperty Name="count_equipment" ColumnName="count_equipment" />
@@ -466,11 +608,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="types_equipment">
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.types_equipment">
               <MappingFragment StoreEntitySet="types_equipment">
                 <ScalarProperty Name="title_type_equipment" ColumnName="title_type_equipment" />
                 <ScalarProperty Name="id_type_equipment" ColumnName="id_type_equipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="types_event">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.types_event">
+              <MappingFragment StoreEntitySet="types_event">
+                <ScalarProperty Name="title_type_event" ColumnName="title_type_event" />
+                <ScalarProperty Name="id_type_event" ColumnName="id_type_event" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

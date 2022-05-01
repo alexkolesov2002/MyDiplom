@@ -4,18 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d8ce3e7853d4cb5bfb051cb2e6f2a63" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.equipments" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" Width="1.5" PointX="7.5" PointY="9.875" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" Width="1.5" PointX="7.5" PointY="5.375" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.roles" Width="1.5" PointX="0.75" PointY="4.375" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.types_equipment" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.users" Width="1.5" PointX="3" PointY="3.75" />
-        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.workshops" Width="1.5" PointX="5.25" PointY="7.75" />
+      <Diagram DiagramId="0d8ce3e7853d4cb5bfb051cb2e6f2a63" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.equipments" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.events" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.roles" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.types_equipment" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.types_event" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.users" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="P_DiplomProject_MasterskieModel.workshops" Width="1.5" PointX="3" PointY="8.5" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_equipments" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_equipments_types_equipment" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_equipments" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_workshops" />
+        <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_events_types_event" />
+        <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_users" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_workshops" />
         <AssociationConnector Association="P_DiplomProject_MasterskieModel.FK_users_roles" />

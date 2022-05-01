@@ -11,10 +11,43 @@
       Title="PgTakeWorkShop"
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
-        
+
     </Page.Resources>
     <Grid>
-        <StackPanel VerticalAlignment="Top">
+
+        <StackPanel Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
+
+            </ComboBox >
+            <TextBlock Text="Введите тему занятия"></TextBlock>
+            <TextBox Width="360" x:Name="TxtTopic"></TextBox>
+            <TextBlock Text="Введите задание"></TextBlock>
+            <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Multiline text" Height="80" Text=""/>
+            <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+                <!-- simple example of toggling/animating pack icon with a data trigger-->
+                <materialDesign:PackIcon Height="24" Width="24">
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="{x:Type materialDesign:PackIcon}">
+                            <Setter Property="Kind" Value="CloudSync" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <Setter Property="Kind" Value="Check" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+                </materialDesign:PackIcon>
+            </Button>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">
 
             <materialDesign:DialogHost Placement="Mouse" VerticalAlignment="Center" IsOpen="{Binding IsSample4DialogOpen}" CloseOnClickAway="True" OverlayBackground="Transparent" DialogTheme="Inherit">
                 <materialDesign:DialogHost.DialogContent>
@@ -38,33 +71,10 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Border MinWidth="256" MinHeight="256" ClipToBounds="True">
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" />
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" />
                 </Border>
             </materialDesign:DialogHost>
 
         </StackPanel>
-     
-        <Button   x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Margin="8 0 0 0"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand"  >
-            <!-- simple example of toggling/animating pack icon with a data trigger-->
-            <materialDesign:PackIcon Height="24" Width="24">
-                <materialDesign:PackIcon.Style>
-                    <Style TargetType="materialDesign:PackIcon">
-                        <Setter Property="Kind" Value="CloudSync" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
-                                <Setter Property="Kind" Value="Check" />
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.EnterActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </materialDesign:PackIcon.Style>
-            </materialDesign:PackIcon>
-        </Button>
     </Grid>
 </Page>

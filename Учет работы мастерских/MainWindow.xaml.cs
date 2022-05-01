@@ -65,7 +65,7 @@ namespace Учет_работы_мастерских
             Button1.Style = (Style)this.Resources["menuButton"];
             Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
-            LoadPages.SwitchPages.Navigate(new PgChartView());
+            LoadPages.SwitchPages.Navigate(new PgSelectChart());
         }
 
 
