@@ -2,6 +2,6 @@
 {
     public class BaseModel
     {
-        public static Entities BaseConnect = new Entities();
+        public static Entities BaseConnect;
     }
 }

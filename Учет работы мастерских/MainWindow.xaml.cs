@@ -76,6 +76,7 @@ namespace Учет_работы_мастерских
             Button2.Style = (Style)this.Resources["menuButton"];
             Button3.Style = (Style)this.Resources["menuButton"];
             Button1.Style = (Style)this.Resources["menuButton"];
+            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop());
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)

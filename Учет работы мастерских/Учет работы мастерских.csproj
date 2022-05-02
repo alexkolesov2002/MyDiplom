@@ -177,6 +177,9 @@
     <Compile Include="PagesChart\PgSelectChart.xaml.cs">
       <DependentUpon>PgSelectChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PgListUseWorkshop.xaml.cs">
+      <DependentUpon>PgListUseWorkshop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -192,6 +195,7 @@
     <Compile Include="users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="VievModelJournalUseWorkshop.cs" />
     <Compile Include="WinAutorise.xaml.cs">
       <DependentUpon>WinAutorise.xaml</DependentUpon>
     </Compile>
@@ -223,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PagesChart\PgSelectChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PgListUseWorkshop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

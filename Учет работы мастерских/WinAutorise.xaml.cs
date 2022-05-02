@@ -14,7 +14,7 @@ namespace Учет_работы_мастерских
         public WinAutorise()
         {
             InitializeComponent();
-            // BaseModel.BaseConnect = new Entities();
+             BaseModel.BaseConnect = new Entities();
         }
 
         private void BtnAutorise_Click(object sender, RoutedEventArgs e)
