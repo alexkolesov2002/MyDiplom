@@ -22,8 +22,6 @@ namespace Учет_работы_мастерских
                 {
                     journal.equipments.CountInEvent = (int)journal.count_equipment;
                     equipments.Add(journal.equipments);
-                    
-                   
                 }
                 foreach (journal_use_workshop journal in ItemGroup)
                 {
