@@ -13,30 +13,32 @@
 
         <DataTemplate x:Key="EquipTemplate">
             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>Оборудование:</TextBlock>
-                            <TextBlock Text="{Binding equipments.title_equipment}"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal"> </StackPanel>
+                    <TextBlock Text="Тип оборудования "></TextBlock>
+                    <TextBlock Text="{Binding types_equipment.title_type_equipment }"></TextBlock>
+                    <TextBlock Text="Оборудование"></TextBlock>
+                    <TextBlock Text="{Binding title_equipment}"></TextBlock>
+                    <TextBlock Text="Используемое количество"></TextBlock>
+                    <TextBlock Text="{Binding CountInEvent}"></TextBlock>
                 </StackPanel>
             </Border>
         </DataTemplate>
-        
-        
+
+
+
+
         <DataTemplate x:Key="ListUse">
             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                        <TextBlock>Преподаватель: </TextBlock>
+                            <TextBlock>Преподаватель:</TextBlock>
                             <TextBlock Text=" "></TextBlock>
                             <TextBlock Text="{Binding users.name}"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                             <TextBlock Text="{Binding users.surname}"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                           
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Мероприятие:</TextBlock>
@@ -58,11 +60,8 @@
                             <TextBlock Text="{Binding date_use, StringFormat='HH:mm',  ConverterCulture='ru-RU'}"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>Используемое оборудование:</TextBlock>
-                            <ListView ItemsSource="{Binding MyProperty}" ItemTemplate="{StaticResource EquipTemplate}">
-                            </ListView>
-                        </StackPanel>
+                    
+                        <ListView ItemTemplate="{StaticResource EquipTemplate}" ItemsSource="{Binding listEquipmentsInEvents}" ></ListView>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -70,9 +69,11 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="182*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="181*"/>
         </Grid.RowDefinitions>
-        <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop"  Grid.Row="1"></ListView>
+
+        <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop" Grid.Row ="1" ></ListView>
+
     </Grid>
 </Page>
