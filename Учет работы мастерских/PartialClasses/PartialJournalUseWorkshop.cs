@@ -8,8 +8,8 @@ namespace Учет_работы_мастерских
 {
     public partial class journal_use_workshop
     {
-        
-        public List<equipments> listEquipmentsInEvents {get;set;} = new List<equipments>();
+
+        public List<equipments> listEquipmentsInEvents { get; set; } = new List<equipments>();
 
         public static dynamic getlistEquipments()
         {
@@ -17,11 +17,14 @@ namespace Учет_работы_мастерских
             var GroupJournal = from journal in journal_Use_Workshops group journal by journal.id_event;
             foreach (var ItemGroup in GroupJournal)
             {
-                List<equipments> equipments = new List<equipments>();   
+                List<equipments> equipments = new List<equipments>();
                 foreach (journal_use_workshop journal in ItemGroup)
                 {
-                    journal.equipments.CountInEvent = (int)journal.count_equipment;
-                    equipments.Add(journal.equipments);
+                    if (journal.equipments != null)
+                    {
+                        journal.equipments.CountInEvent = (int)journal.count_equipment;
+                        equipments.Add(journal.equipments);
+                    }
                 }
                 foreach (journal_use_workshop journal in ItemGroup)
                 {

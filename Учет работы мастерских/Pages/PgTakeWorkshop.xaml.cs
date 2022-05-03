@@ -23,6 +23,7 @@ namespace Учет_работы_мастерских
         List<equipments> TakedEquipments;
         public event PropertyChangedEventHandler PropertyChanged;
         List<journal_use_workshop> journal_Use_Workshop = new List<journal_use_workshop>();
+        List<Criterion> CriterionTextList = new List<Criterion>();
 
 
 
@@ -39,7 +40,7 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.ItemsSource = BaseModel.BaseConnect.types_event.ToList();
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
-
+                ListAddStudent.ItemsSource = BaseModel.BaseConnect..ToList();
 
             }
             catch
@@ -93,7 +94,7 @@ namespace Учет_работы_мастерских
                 }
 
                 BaseModel.BaseConnect.SaveChanges();
-                BtnSaveData.IsEnabled = false;
+                //BtnSaveData.IsEnabled = false;
                 //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
             }
             catch (Exception ex)
@@ -117,6 +118,35 @@ namespace Учет_работы_мастерских
         }
 
         private void ComboBoxWorkShops_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddCriterion_Click(object sender, RoutedEventArgs e)
+        {
+            Criterion criterion = new Criterion() { title_criterion = TxtCriterion.Text, id_Criterion = ListCriterion.Items.Count};
+            CriterionTextList.Add(criterion);
+            ListCriterion.ItemsSource = CriterionTextList;       
+            ListCriterion.Items.Refresh();
+        }
+
+        private void BtnDeleteFromList_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                    Button button = (Button)sender;
+                    int id = Convert.ToInt32(button.Uid);
+                    CriterionTextList.Remove(CriterionTextList.FirstOrDefault(x=>x.id_Criterion==id));
+                    ListCriterion.Items.Refresh();
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
 
         }

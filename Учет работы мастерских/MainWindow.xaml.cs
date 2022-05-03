@@ -43,7 +43,6 @@ namespace Учет_работы_мастерских
             // shop = new PgTakeWorkShop();
             MainFrame.Navigate(new PgSelectWork(CurrentUser));
             LoadPages.SwitchPages = MainFrame;
-
             StartClock();
             // ShowMarksClockFace();
 
@@ -283,15 +282,24 @@ namespace Учет_работы_мастерских
 
 
 
+
+
+
+
+
+
+
         #endregion
 
+        private void BtnPowerOff_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-
-
-
-
-
-
+        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            new WinSettings().ShowDialog();
+        }
     }
 }
 

@@ -11,11 +11,29 @@
       Title="PgTakeWorkShop"
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
+        <DataTemplate x:Key="ListCriterion">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding id_Criterion}"></TextBlock>
+                <Button Content="Удалить"  Name="BtnDeleteFromList" Click="BtnDeleteFromList_Click" Uid="{Binding id_Criterion}"></Button>
+            </StackPanel>
+        </DataTemplate>
 
+
+        <DataTemplate x:Key="ListAddStudent">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding surname}"></TextBlock>
+                <TextBlock Text=" "></TextBlock>
+                <TextBlock Text="{Binding name}"></TextBlock>
+                <TextBlock Text=" "></TextBlock>
+                <TextBlock Text="{Binding patronymic}"></TextBlock>
+                <TextBlock Text="        "></TextBlock>
+                <Button Content="Добавить студента" Name="BtnAddStudent" Click="BtnAddStudent_Click" Uid="{Binding id_student}"></Button>
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
     <Grid>
 
-        <StackPanel Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel   HorizontalAlignment="Center">
             <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
 
             </ComboBox >
@@ -23,8 +41,20 @@
             <TextBox Width="360" x:Name="TxtTopic"></TextBox>
             <TextBlock Text="Введите задание"></TextBlock>
             <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Multiline text" Height="80" Text=""/>
-            <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
-                <!-- simple example of toggling/animating pack icon with a data trigger-->
+            <TextBlock Text="Введите критерий"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="360" x:Name="TxtCriterion"></TextBox>
+                <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click">Добавить критерий</Button>
+            </StackPanel>
+            <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
+            <TextBlock Text="Добавить студента"></TextBlock>
+            <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="80" Text=""/>
+            <ListBox x:Name="ListAddStudent"></ListBox>
+
+            <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+                -->
+            <!-- simple example of toggling/animating pack icon with a data trigger-->
+            <!--
                 <materialDesign:PackIcon Height="24" Width="24">
                     <materialDesign:PackIcon.Style>
                         <Style TargetType="{x:Type materialDesign:PackIcon}">
@@ -44,7 +74,7 @@
                         </Style>
                     </materialDesign:PackIcon.Style>
                 </materialDesign:PackIcon>
-            </Button>
+            </Button>-->
         </StackPanel>
 
         <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">

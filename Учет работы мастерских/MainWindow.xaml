@@ -9,7 +9,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="740" Width="1280" WindowStartupLocation="CenterScreen"
+        Title="Учет работы мастерских" Height="740" Width="1280" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Icon="Res/Logo_masterskie.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
@@ -17,13 +17,17 @@
         <ResourceDictionary Source="XamlRes/MainWinRes.xaml" />
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="172*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--Левое меню-->
-        <Border CornerRadius="10 0 0 10" x:Name="LeftBorder">
+        <Border CornerRadius="10 0 0 10" x:Name="LeftBorder" Grid.RowSpan="2">
             <Border.Background >
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,3.5">
                     <GradientStop Color="#956cff" Offset="0"></GradientStop>
@@ -80,8 +84,8 @@
                         <TextBlock Text="Какая-то вкладка" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
                 </Button>
-                
-                
+
+
                 <Border x:Name="Forma" BorderThickness="25"  CornerRadius="325" Padding="5,5,5,5"  Height="250" RenderTransformOrigin="0.5,0.5" >
                     <Border.Background>
                         <ImageBrush ImageSource="Res/Logo_masterskie_clock.png" ></ImageBrush>
@@ -100,7 +104,7 @@
 
 
                         <Border HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                           
+
                             <Border.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -252,14 +256,34 @@
                 </Border>
                 <TextBlock Text="{Binding MyDate}" Foreground="White"   HorizontalAlignment="Center" FontSize="30"/>
                 <TextBlock Text="{Binding MyTime}"  Foreground="White"   HorizontalAlignment="Center" FontSize="30" />
+                <StackPanel Orientation="Horizontal">
+
+                    <Button Style="{StaticResource menuButtonStatic}"  Click="BtnPowerOff_Click" Width="66">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock  Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button Style="{StaticResource menuButtonStatic}" Width="66" x:Name="BtnSettings" Click="BtnSettings_Click">
+                        <StackPanel Orientation="Horizontal" >
+                            <fa:IconImage HorizontalAlignment="Center" Icon="cog" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock  Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </Button>
+
+
+                </StackPanel>
             </StackPanel>
 
         </Border>
 
         <!--Главный экран-->
-        <Border CornerRadius="0 10 10 0" Grid.Column="1" x:Name="MainScreen" MouseDown="MainScreen_MouseDown" Background="White" >
+        <Border CornerRadius="0 10 10 0" Grid.Column="1" x:Name="MainScreen" MouseDown="MainScreen_MouseDown" Background="White" Grid.RowSpan="2" >
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
         </Border>
+
 
 
     </Grid>
