@@ -12,25 +12,18 @@ namespace Учет_работы_мастерских
     using System;
     using System.Collections.Generic;
     
-    public partial class events
+    public partial class criteria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public events()
+        public criteria()
         {
             this.criteria_in_event = new HashSet<criteria_in_event>();
-            this.journal_use_workshop = new HashSet<journal_use_workshop>();
         }
     
-        public int id_event { get; set; }
-        public int id_type_event { get; set; }
-        public string title_event { get; set; }
-        public string topic_of_the_lesson { get; set; }
-        public string exercise { get; set; }
+        public int id_criterion { get; set; }
+        public string title_criterion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<criteria_in_event> criteria_in_event { get; set; }
-        public virtual types_event types_event { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<journal_use_workshop> journal_use_workshop { get; set; }
     }
 }

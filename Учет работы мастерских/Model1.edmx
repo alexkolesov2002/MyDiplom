@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище P_DiplomProject_MasterskieModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="criteria">
+          <Key>
+            <PropertyRef Name="id_criterion" />
+          </Key>
+          <Property Name="id_criterion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title_criterion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="criteria_in_event">
+          <Key>
+            <PropertyRef Name="id_criteria_in_event" />
+          </Key>
+          <Property Name="id_criterion" Type="int" Nullable="false" />
+          <Property Name="id_event" Type="int" Nullable="false" />
+          <Property Name="id_student" Type="int" Nullable="false" />
+          <Property Name="id_criteria_in_event" Type="int" Nullable="false" />
+          <Property Name="rating" Type="int" />
+        </EntityType>
         <EntityType Name="equipments">
           <Key>
             <PropertyRef Name="id_equipment" />
@@ -51,15 +68,14 @@
           <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="role_title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="students">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="id_student" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="id_student" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="types_equipment">
           <Key>
@@ -94,6 +110,42 @@
           <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="title_workshop" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_criteria_in_event_criteria">
+          <End Role="criteria" Type="Self.criteria" Multiplicity="1" />
+          <End Role="criteria_in_event" Type="Self.criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="criteria">
+              <PropertyRef Name="id_criterion" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_criterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_criteria_in_event_events">
+          <End Role="events" Type="Self.events" Multiplicity="1" />
+          <End Role="criteria_in_event" Type="Self.criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id_event" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_criteria_in_event_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="criteria_in_event" Type="Self.criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id_student" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Equipments_In_Workshop_equipments">
           <End Role="equipments" Type="Self.equipments" Multiplicity="1" />
           <End Role="Equipments_In_Workshop" Type="Self.Equipments_In_Workshop" Multiplicity="*" />
@@ -215,16 +267,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище P_DiplomProject_MasterskieModelContainer">
+          <EntitySet Name="criteria" EntityType="Self.criteria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="criteria_in_event" EntityType="Self.criteria_in_event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="equipments" EntityType="Self.equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="Self.Equipments_In_Workshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="journal_use_workshop" EntityType="Self.journal_use_workshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="types_equipment" EntityType="Self.types_equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="types_event" EntityType="Self.types_event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workshops" EntityType="Self.workshops" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_criteria_in_event_criteria" Association="Self.FK_criteria_in_event_criteria">
+            <End Role="criteria" EntitySet="criteria" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_criteria_in_event_events" Association="Self.FK_criteria_in_event_events">
+            <End Role="events" EntitySet="events" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_criteria_in_event_students" Association="Self.FK_criteria_in_event_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="Self.FK_Equipments_In_Workshop_equipments">
             <End Role="equipments" EntitySet="equipments" />
             <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
@@ -271,16 +337,30 @@
     <edmx:ConceptualModels>
       <Schema Namespace="P_DiplomProject_MasterskieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="criteria" EntityType="P_DiplomProject_MasterskieModel.criteria" />
+          <EntitySet Name="criteria_in_event" EntityType="P_DiplomProject_MasterskieModel.criteria_in_event" />
           <EntitySet Name="equipments" EntityType="P_DiplomProject_MasterskieModel.equipments" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" />
           <EntitySet Name="events" EntityType="P_DiplomProject_MasterskieModel.events" />
           <EntitySet Name="journal_use_workshop" EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" />
           <EntitySet Name="roles" EntityType="P_DiplomProject_MasterskieModel.roles" />
-          <EntitySet Name="sysdiagrams" EntityType="P_DiplomProject_MasterskieModel.sysdiagrams" />
+          <EntitySet Name="students" EntityType="P_DiplomProject_MasterskieModel.students" />
           <EntitySet Name="types_equipment" EntityType="P_DiplomProject_MasterskieModel.types_equipment" />
           <EntitySet Name="types_event" EntityType="P_DiplomProject_MasterskieModel.types_event" />
           <EntitySet Name="users" EntityType="P_DiplomProject_MasterskieModel.users" />
           <EntitySet Name="workshops" EntityType="P_DiplomProject_MasterskieModel.workshops" />
+          <AssociationSet Name="FK_criteria_in_event_criteria" Association="P_DiplomProject_MasterskieModel.FK_criteria_in_event_criteria">
+            <End Role="criteria" EntitySet="criteria" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_criteria_in_event_events" Association="P_DiplomProject_MasterskieModel.FK_criteria_in_event_events">
+            <End Role="events" EntitySet="events" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_criteria_in_event_students" Association="P_DiplomProject_MasterskieModel.FK_criteria_in_event_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="criteria_in_event" EntitySet="criteria_in_event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Equipments_In_Workshop_equipments" Association="P_DiplomProject_MasterskieModel.FK_Equipments_In_Workshop_equipments">
             <End Role="equipments" EntitySet="equipments" />
             <End Role="Equipments_In_Workshop" EntitySet="Equipments_In_Workshop" />
@@ -322,6 +402,27 @@
             <End Role="workshops" EntitySet="workshops" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="criteria">
+          <Key>
+            <PropertyRef Name="id_criterion" />
+          </Key>
+          <Property Name="id_criterion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title_criterion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="criteria_in_event" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_criteria" FromRole="criteria" ToRole="criteria_in_event" />
+        </EntityType>
+        <EntityType Name="criteria_in_event">
+          <Key>
+            <PropertyRef Name="id_criteria_in_event" />
+          </Key>
+          <Property Name="id_criterion" Type="Int32" Nullable="false" />
+          <Property Name="id_event" Type="Int32" Nullable="false" />
+          <Property Name="id_student" Type="Int32" Nullable="false" />
+          <Property Name="id_criteria_in_event" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Int32" />
+          <NavigationProperty Name="criteria" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_criteria" FromRole="criteria_in_event" ToRole="criteria" />
+          <NavigationProperty Name="events" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_events" FromRole="criteria_in_event" ToRole="events" />
+          <NavigationProperty Name="students" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_students" FromRole="criteria_in_event" ToRole="students" />
+        </EntityType>
         <EntityType Name="equipments">
           <Key>
             <PropertyRef Name="id_equipment" />
@@ -352,6 +453,7 @@
           <Property Name="title_event" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="topic_of_the_lesson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="exercise" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="criteria_in_event" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_events" FromRole="events" ToRole="criteria_in_event" />
           <NavigationProperty Name="types_event" Relationship="P_DiplomProject_MasterskieModel.FK_events_types_event" FromRole="events" ToRole="types_event" />
           <NavigationProperty Name="journal_use_workshop" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events" FromRole="events" ToRole="journal_use_workshop" />
         </EntityType>
@@ -380,15 +482,15 @@
           <Property Name="role_title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_users_roles" FromRole="roles" ToRole="users" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="students">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="id_student" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="id_student" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="patronymic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="criteria_in_event" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_students" FromRole="students" ToRole="criteria_in_event" />
         </EntityType>
         <EntityType Name="types_equipment">
           <Key>
@@ -431,6 +533,42 @@
           <NavigationProperty Name="journal_use_workshop" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_workshops" FromRole="workshops" ToRole="journal_use_workshop" />
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_workshops_users" FromRole="workshops" ToRole="users" />
         </EntityType>
+        <Association Name="FK_criteria_in_event_criteria">
+          <End Type="P_DiplomProject_MasterskieModel.criteria" Role="criteria" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.criteria_in_event" Role="criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="criteria">
+              <PropertyRef Name="id_criterion" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_criterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_criteria_in_event_events">
+          <End Type="P_DiplomProject_MasterskieModel.events" Role="events" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.criteria_in_event" Role="criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id_event" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_criteria_in_event_students">
+          <End Type="P_DiplomProject_MasterskieModel.students" Role="students" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.criteria_in_event" Role="criteria_in_event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id_student" />
+            </Principal>
+            <Dependent Role="criteria_in_event">
+              <PropertyRef Name="id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Equipments_In_Workshop_equipments">
           <End Type="P_DiplomProject_MasterskieModel.equipments" Role="equipments" Multiplicity="1" />
           <End Type="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" Role="Equipments_In_Workshop" Multiplicity="*" />
@@ -557,6 +695,25 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище P_DiplomProject_MasterskieModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="criteria">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.criteria">
+              <MappingFragment StoreEntitySet="criteria">
+                <ScalarProperty Name="title_criterion" ColumnName="title_criterion" />
+                <ScalarProperty Name="id_criterion" ColumnName="id_criterion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="criteria_in_event">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.criteria_in_event">
+              <MappingFragment StoreEntitySet="criteria_in_event">
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="id_criteria_in_event" ColumnName="id_criteria_in_event" />
+                <ScalarProperty Name="id_student" ColumnName="id_student" />
+                <ScalarProperty Name="id_event" ColumnName="id_event" />
+                <ScalarProperty Name="id_criterion" ColumnName="id_criterion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="equipments">
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.equipments">
               <MappingFragment StoreEntitySet="equipments">
@@ -608,14 +765,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.students">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_student" ColumnName="id_student" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

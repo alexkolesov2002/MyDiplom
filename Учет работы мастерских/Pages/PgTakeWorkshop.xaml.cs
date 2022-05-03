@@ -40,7 +40,7 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.ItemsSource = BaseModel.BaseConnect.types_event.ToList();
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
-                ListAddStudent.ItemsSource = BaseModel.BaseConnect..ToList();
+                ListAddStudent.ItemsSource = BaseModel.BaseConnect.students.ToList();
 
             }
             catch

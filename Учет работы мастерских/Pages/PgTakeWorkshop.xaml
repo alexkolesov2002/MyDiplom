@@ -49,7 +49,7 @@
             <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
             <TextBlock Text="Добавить студента"></TextBlock>
             <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="80" Text=""/>
-            <ListBox x:Name="ListAddStudent"></ListBox>
+            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}"></ListBox>
 
             <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
                 -->

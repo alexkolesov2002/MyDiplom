@@ -12,12 +12,20 @@ namespace Учет_работы_мастерских
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class students
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public students()
+        {
+            this.criteria_in_event = new HashSet<criteria_in_event>();
+        }
+    
+        public int id_student { get; set; }
         public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string surname { get; set; }
+        public string patronymic { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<criteria_in_event> criteria_in_event { get; set; }
     }
 }

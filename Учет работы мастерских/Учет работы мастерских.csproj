@@ -137,6 +137,12 @@
     </ApplicationDefinition>
     <Compile Include="Classes\BaseModel.cs" />
     <Compile Include="Classes\ItemPositionToIndexConverter.cs" />
+    <Compile Include="criteria.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="criteria_in_event.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PartialClasses\PartialJournalUseWorkshop.cs" />
     <Compile Include="Classes\Criterion.cs" />
     <Compile Include="equipments.cs">
@@ -186,7 +192,7 @@
     <Compile Include="roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="students.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="types_equipment.cs">

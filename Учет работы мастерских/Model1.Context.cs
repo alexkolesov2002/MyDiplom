@@ -25,12 +25,14 @@ namespace Учет_работы_мастерских
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<criteria> criteria { get; set; }
+        public virtual DbSet<criteria_in_event> criteria_in_event { get; set; }
         public virtual DbSet<equipments> equipments { get; set; }
         public virtual DbSet<Equipments_In_Workshop> Equipments_In_Workshop { get; set; }
         public virtual DbSet<events> events { get; set; }
         public virtual DbSet<journal_use_workshop> journal_use_workshop { get; set; }
         public virtual DbSet<roles> roles { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<students> students { get; set; }
         public virtual DbSet<types_equipment> types_equipment { get; set; }
         public virtual DbSet<types_event> types_event { get; set; }
         public virtual DbSet<users> users { get; set; }
