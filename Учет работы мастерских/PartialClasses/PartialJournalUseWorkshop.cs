@@ -11,6 +11,8 @@ namespace Учет_работы_мастерских
 
         public List<equipments> listEquipmentsInEvents { get; set; } = new List<equipments>();
 
+
+
         public static dynamic getlistEquipments()
         {
             List<journal_use_workshop> journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.ToList();
@@ -22,8 +24,8 @@ namespace Учет_работы_мастерских
                 {
                     if (journal.equipments != null)
                     {
-                       
-                        journal. equipments.CountInEvent = (int)journal.count_equipment;
+
+                        journal.equipments.CountInEvent = (int)journal.count_equipment;
                         equipments.Add(journal.equipments);
                     }
                 }
@@ -35,5 +37,7 @@ namespace Учет_работы_мастерских
 
             return GroupJournal;
         }
+
+
     }
 }

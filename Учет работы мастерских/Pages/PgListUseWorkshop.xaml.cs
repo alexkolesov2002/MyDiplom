@@ -35,8 +35,9 @@ namespace Учет_работы_мастерских
 
         private void BtnAddRating_Click(object sender, RoutedEventArgs e)
         {
-            List <criteria_in_event> FullListCriteria= BaseModel.BaseConnect.criteria_in_event.ToList();
-            var GroupJournal = from Event in FullListCriteria group Event by Event.id_event;
+           
+
+            LoadPages.SwitchPages.Navigate(new PgRating(criteria_in_event.getlistCriteria()));
         }
     }
 }
