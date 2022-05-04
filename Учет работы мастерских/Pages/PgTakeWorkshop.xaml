@@ -13,7 +13,7 @@
     <Page.Resources>
         <DataTemplate x:Key="ListCriterion">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding id_Criterion}"></TextBlock>
+                <TextBlock Text="{Binding title_criterion}"></TextBlock>
                 <Button Content="Удалить"  Name="BtnDeleteFromList" Click="BtnDeleteFromList_Click" Uid="{Binding id_Criterion}"></Button>
             </StackPanel>
         </DataTemplate>
@@ -22,7 +22,7 @@
         <DataTemplate x:Key="ListAddStudent">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding FullName}"></TextBlock>
-                
+
                 <TextBlock Text="        "></TextBlock>
                 <Button Content="Добавить студента" Name="BtnAddStudent" Click="BtnAddStudent_Click" Uid="{Binding id_student}"></Button>
             </StackPanel>
@@ -32,98 +32,96 @@
     <Grid>
         <ScrollViewer>
             <StackPanel>
-        <StackPanel   HorizontalAlignment="Center">
-            <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
+                <StackPanel   HorizontalAlignment="Center">
+                    <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
 
-            </ComboBox >
-            <TextBlock Text="Введите тему занятия"></TextBlock>
-            <TextBox Width="360" x:Name="TxtTopic"></TextBox>
-            <TextBlock Text="Введите задание"></TextBlock>
-            <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Multiline text" Height="80" Text=""/>
-            <TextBlock Text="Введите критерий"></TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Width="360" x:Name="TxtCriterion"></TextBox>
-                <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click">Добавить критерий</Button>
-            </StackPanel>
-            <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
-            <TextBlock Text="Добавить студента"></TextBlock>
-            <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
-            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"></ListBox>
-            <ListView x:Name="ListPickedStudent"  Height="231">
-                <ListView.Resources>
-                    <DataTemplate x:Key="ColumnDataTemplate">
-                        <TextBlock Text="{Binding Converter={StaticResource ResourceKey=PositionConverter}, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}, Mode=FindAncestor}}" HorizontalAlignment="Center" />
-                    </DataTemplate>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView >
-                        <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
-                        <GridViewColumn Header="Поле для удаления" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_student}" x:Name="BtnDelete"  Click="BtnDelete_Click">
-                                        <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
-                                    </Button>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Студент"   />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
-                -->
-            <!-- simple example of toggling/animating pack icon with a data trigger-->
-            <!--
-                <materialDesign:PackIcon Height="24" Width="24">
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="{x:Type materialDesign:PackIcon}">
-                            <Setter Property="Kind" Value="CloudSync" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                    <Setter Property="Kind" Value="Check" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                </materialDesign:PackIcon>
-            </Button>-->
-        </StackPanel>
-
-        <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">
-
-            <materialDesign:DialogHost Placement="Mouse" VerticalAlignment="Center" IsOpen="{Binding IsSample4DialogOpen}" CloseOnClickAway="True" OverlayBackground="Transparent" DialogTheme="Inherit">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Margin="0" >
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Grid Margin="-1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <Calendar x:Name="CalendarDate" Margin="-1 -3 -3 0" Language="ru-RU" />
-                                    <materialDesign:Clock DisplayAutomation="Cycle" Is24Hours="True" Loaded="ClockTime_Loaded"  x:Name="ClockTime" />
-                                </StackPanel>
-                                <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Content="Отмена" />
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Content="Выбрать время" />
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
+                    </ComboBox >
+                    <TextBlock Text="Введите тему занятия"></TextBlock>
+                    <TextBox Width="360" x:Name="TxtTopic"></TextBox>
+                    <TextBlock Text="Введите задание"></TextBlock>
+                    <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Multiline text" Height="80" Text=""/>
+                    <TextBlock Text="Введите критерий"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="360" x:Name="TxtCriterion"></TextBox>
+                        <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click">Добавить критерий</Button>
                     </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
-                <Border MinWidth="256" MinHeight="256" ClipToBounds="True" Height="154">
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" />
-                </Border>
-            </materialDesign:DialogHost>
+                    <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
+                    <TextBlock Text="Добавить студента"></TextBlock>
+                    <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
+                    <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"></ListBox>
+                    <ListView x:Name="ListPickedStudent"  Height="231">
+                        <ListView.Resources>
+                            <DataTemplate x:Key="ColumnDataTemplate">
+                                <TextBlock Text="{Binding Converter={StaticResource ResourceKey=PositionConverter}, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}, Mode=FindAncestor}}" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
+                                <GridViewColumn Header="Поле для удаления" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_student}" x:Name="BtnDelete"  Click="BtnDelete_Click">
+                                                <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Студент"   />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+
+                        <materialDesign:PackIcon Height="24" Width="24">
+                            <materialDesign:PackIcon.Style>
+                                <Style TargetType="{x:Type materialDesign:PackIcon}">
+                                    <Setter Property="Kind" Value="CloudSync" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                            <Setter Property="Kind" Value="Check" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </materialDesign:PackIcon.Style>
+                        </materialDesign:PackIcon>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">
+
+                    <materialDesign:DialogHost Placement="Mouse" VerticalAlignment="Center" IsOpen="{Binding IsSample4DialogOpen}" CloseOnClickAway="True" OverlayBackground="Transparent" DialogTheme="Inherit">
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel Margin="0" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Grid Margin="-1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <Calendar x:Name="CalendarDate" Margin="-1 -3 -3 0" Language="ru-RU" />
+                                            <materialDesign:Clock DisplayAutomation="Cycle" Is24Hours="True" Loaded="ClockTime_Loaded"  x:Name="ClockTime" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Content="Отмена" />
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Content="Выбрать время" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </materialDesign:DialogHost.DialogContent>
+                        <Border MinWidth="256" MinHeight="256" ClipToBounds="True" Height="154">
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" />
+                        </Border>
+                    </materialDesign:DialogHost>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
