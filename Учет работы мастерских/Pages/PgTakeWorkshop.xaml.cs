@@ -24,6 +24,9 @@ namespace Учет_работы_мастерских
         public event PropertyChangedEventHandler PropertyChanged;
         List<journal_use_workshop> journal_Use_Workshop = new List<journal_use_workshop>();
         List<Criterion> CriterionTextList = new List<Criterion>();
+        List<students> students = BaseModel.BaseConnect.students.ToList();
+        List<students> studentsBufForAdd = new List<students>();
+        List<students> studentsBufForResiult = new List<students>();
 
 
 
@@ -40,7 +43,9 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.ItemsSource = BaseModel.BaseConnect.types_event.ToList();
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
-                ListAddStudent.ItemsSource = BaseModel.BaseConnect.students.ToList();
+                studentsBufForAdd = students;
+               
+                //ListPickedStudent.ItemsSource = studentsBufForResiult;
 
             }
             catch
@@ -99,7 +104,7 @@ namespace Учет_работы_мастерских
             }
             catch (Exception ex)
             {
-                
+
             }
 
 
@@ -124,9 +129,9 @@ namespace Учет_работы_мастерских
 
         private void BtnAddCriterion_Click(object sender, RoutedEventArgs e)
         {
-            Criterion criterion = new Criterion() { title_criterion = TxtCriterion.Text, id_Criterion = ListCriterion.Items.Count};
+            Criterion criterion = new Criterion() { title_criterion = TxtCriterion.Text, id_Criterion = ListCriterion.Items.Count };
             CriterionTextList.Add(criterion);
-            ListCriterion.ItemsSource = CriterionTextList;       
+            ListCriterion.ItemsSource = CriterionTextList;
             ListCriterion.Items.Refresh();
         }
 
@@ -134,10 +139,10 @@ namespace Учет_работы_мастерских
         {
             try
             {
-                    Button button = (Button)sender;
-                    int id = Convert.ToInt32(button.Uid);
-                    CriterionTextList.Remove(CriterionTextList.FirstOrDefault(x=>x.id_Criterion==id));
-                    ListCriterion.Items.Refresh();
+                Button button = (Button)sender;
+                int id = Convert.ToInt32(button.Uid);
+                CriterionTextList.Remove(CriterionTextList.FirstOrDefault(x => x.id_Criterion == id));
+                ListCriterion.Items.Refresh();
 
             }
             catch
@@ -148,7 +153,44 @@ namespace Учет_работы_мастерских
 
         private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
+            Button button =(Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            studentsBufForResiult.Add(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
+            ListPickedStudent.ItemsSource = studentsBufForResiult;
+            ListPickedStudent.Items.Refresh();
+        }
 
+        async void FindStudent()
+        {
+            studentsBufForAdd = students;
+            if (TxtFindStudent.Text != "")
+            {
+                studentsBufForAdd = studentsBufForAdd.FindAll(x => x.FullName.Contains(TxtFindStudent.Text)).ToList();
+                ListAddStudent.ItemsSource = studentsBufForAdd;
+                ListAddStudent.Items.Refresh();
+                ListAddStudent.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                ListAddStudent.Visibility = Visibility.Collapsed;
+            }
+
+
+        }
+        private void TxtFindStudent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FindStudent();
+
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
+            studentsBufForResiult.Remove(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
+            ListPickedStudent.ItemsSource = studentsBufForResiult;
+            ListPickedStudent.Items.Refresh();
         }
     }
 }

@@ -21,18 +21,17 @@
 
         <DataTemplate x:Key="ListAddStudent">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding surname}"></TextBlock>
-                <TextBlock Text=" "></TextBlock>
-                <TextBlock Text="{Binding name}"></TextBlock>
-                <TextBlock Text=" "></TextBlock>
-                <TextBlock Text="{Binding patronymic}"></TextBlock>
+                <TextBlock Text="{Binding FullName}"></TextBlock>
+                
                 <TextBlock Text="        "></TextBlock>
                 <Button Content="Добавить студента" Name="BtnAddStudent" Click="BtnAddStudent_Click" Uid="{Binding id_student}"></Button>
             </StackPanel>
         </DataTemplate>
+        <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
     </Page.Resources>
     <Grid>
-
+        <ScrollViewer>
+            <StackPanel>
         <StackPanel   HorizontalAlignment="Center">
             <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
 
@@ -48,9 +47,30 @@
             </StackPanel>
             <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
             <TextBlock Text="Добавить студента"></TextBlock>
-            <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="80" Text=""/>
-            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}"></ListBox>
-
+            <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
+            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"></ListBox>
+            <ListView x:Name="ListPickedStudent"  Height="231">
+                <ListView.Resources>
+                    <DataTemplate x:Key="ColumnDataTemplate">
+                        <TextBlock Text="{Binding Converter={StaticResource ResourceKey=PositionConverter}, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}, Mode=FindAncestor}}" HorizontalAlignment="Center" />
+                    </DataTemplate>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
+                        <GridViewColumn Header="Поле для удаления" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_student}" x:Name="BtnDelete"  Click="BtnDelete_Click">
+                                        <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Студент"   />
+                    </GridView>
+                </ListView.View>
+            </ListView>
             <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
                 -->
             <!-- simple example of toggling/animating pack icon with a data trigger-->
@@ -100,11 +120,12 @@
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
-                <Border MinWidth="256" MinHeight="256" ClipToBounds="True">
+                <Border MinWidth="256" MinHeight="256" ClipToBounds="True" Height="154">
                     <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" />
                 </Border>
             </materialDesign:DialogHost>
-
-        </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

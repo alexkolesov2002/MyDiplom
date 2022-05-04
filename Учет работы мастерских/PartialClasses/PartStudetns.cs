@@ -12,7 +12,7 @@ namespace Учет_работы_мастерских
 
         public string FullName
         {
-            get { return fullName; }
+            get { return surname + " " + name + " " + patronymic; }
             set { fullName = value; }
         }
 
