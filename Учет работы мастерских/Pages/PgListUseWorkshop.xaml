@@ -26,6 +26,7 @@
                         <TextBlock Text="Используемое количество"></TextBlock>
                         <TextBlock Text="{Binding CountInEvent}"></TextBlock>
                     </StackPanel>
+                    
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -63,7 +64,8 @@
                             <TextBlock Text="{Binding date_use, StringFormat='dd MMMM yyyy',  ConverterCulture='ru-RU'}"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                             <TextBlock Text="{Binding date_use, StringFormat='HH:mm',  ConverterCulture='ru-RU'}"></TextBlock>
-                            <TextBlock Text=" "></TextBlock>
+                            <TextBlock Text=" "></TextBlock> 
+                            <Button x:Name="BtnAddRating" Uid="{Binding id_event}" Click="BtnAddRating_Click" Content="Выставить оценки"></Button>
                         </StackPanel>
 
                         <ListView ItemTemplate="{StaticResource EquipTemplate}" ItemsSource="{Binding listEquipmentsInEvents}" ></ListView>

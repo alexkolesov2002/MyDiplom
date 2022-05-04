@@ -22,7 +22,8 @@ namespace Учет_работы_мастерских
                 {
                     if (journal.equipments != null)
                     {
-                        journal.equipments.CountInEvent = (int)journal.count_equipment;
+                       
+                        journal. equipments.CountInEvent = (int)journal.count_equipment;
                         equipments.Add(journal.equipments);
                     }
                 }
