@@ -16,10 +16,10 @@
           <Key>
             <PropertyRef Name="id_criteria_in_event" />
           </Key>
+          <Property Name="id_criteria_in_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_criterion" Type="int" Nullable="false" />
           <Property Name="id_event" Type="int" Nullable="false" />
           <Property Name="id_student" Type="int" Nullable="false" />
-          <Property Name="id_criteria_in_event" Type="int" Nullable="false" />
           <Property Name="rating" Type="int" />
         </EntityType>
         <EntityType Name="equipments">
@@ -414,10 +414,10 @@
           <Key>
             <PropertyRef Name="id_criteria_in_event" />
           </Key>
+          <Property Name="id_criteria_in_event" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_criterion" Type="Int32" Nullable="false" />
           <Property Name="id_event" Type="Int32" Nullable="false" />
           <Property Name="id_student" Type="Int32" Nullable="false" />
-          <Property Name="id_criteria_in_event" Type="Int32" Nullable="false" />
           <Property Name="rating" Type="Int32" />
           <NavigationProperty Name="criteria" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_criteria" FromRole="criteria_in_event" ToRole="criteria" />
           <NavigationProperty Name="events" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_events" FromRole="criteria_in_event" ToRole="events" />
@@ -707,10 +707,10 @@
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.criteria_in_event">
               <MappingFragment StoreEntitySet="criteria_in_event">
                 <ScalarProperty Name="rating" ColumnName="rating" />
-                <ScalarProperty Name="id_criteria_in_event" ColumnName="id_criteria_in_event" />
                 <ScalarProperty Name="id_student" ColumnName="id_student" />
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="id_criterion" ColumnName="id_criterion" />
+                <ScalarProperty Name="id_criteria_in_event" ColumnName="id_criteria_in_event" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

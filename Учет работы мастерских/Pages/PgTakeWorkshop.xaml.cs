@@ -80,18 +80,20 @@ namespace Учет_работы_мастерских
                 events events = new events() { exercise = TxtExercise.Text, title_event = TxtExercise.Text, id_type_event = (int)ComboBoxCompetisionSelect.SelectedValue, topic_of_the_lesson = TxtTopic.Text };
                 BaseModel.BaseConnect.events.Add(events);
                 BaseModel.BaseConnect.SaveChanges();
-                events NewEvent = BaseModel.BaseConnect.events.SingleOrDefault(x => x.exercise == TxtExercise.Text && x.topic_of_the_lesson == TxtTopic.Text && x.id_type_event == (int)ComboBoxCompetisionSelect.SelectedValue);
-                
-                 await Task.Delay(15);
+                events NewEvent = BaseModel.BaseConnect.events.FirstOrDefault(x => x.id_event == events.id_event);
+
+                await Task.Delay(15);
 
                 foreach (students students in (List<students>)ListPickedStudent.ItemsSource)
                 {
                     foreach (criteria criteria in CriterionList)
                     {
-                        criteria_in_event criterion = new criteria_in_event() { id_criterion = criteria.id_criterion, id_event = NewEvent.id_event, };
+                        criteria_in_event criterion = new criteria_in_event() { id_criterion = criteria.id_criterion, id_event = NewEvent.id_event, id_student = students.id_student };
                         criteria_In_Events.Add(criterion);
                     }
                 }
+                BaseModel.BaseConnect.criteria_in_event.AddRange(criteria_In_Events);
+                BaseModel.BaseConnect.SaveChanges();
                 string Date = CalendarDate.SelectedDate.Value.ToShortDateString();
                 string Time = ClockTime.Time.ToLongTimeString();
 
@@ -120,10 +122,12 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
                 //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
             }
-            catch (Exception ex)
+            catch
             {
 
             }
+
+
 
 
         }
