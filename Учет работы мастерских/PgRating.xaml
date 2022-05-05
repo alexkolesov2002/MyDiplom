@@ -15,7 +15,7 @@
         <DataTemplate x:Key="listCriteria">
 
             <StackPanel >
-                <TextBlock Text="{Binding criteria.title_criterion}"></TextBlock>
+             
                 <TextBox Text="{Binding rating}"></TextBox>
 
             </StackPanel>
@@ -25,30 +25,37 @@
             <StackPanel Orientation="Horizontal">
 
                 <TextBlock Text="{Binding FullName}" x:Name="TxtName" ></TextBlock>
-
                 <ListBox  ItemTemplate="{StaticResource listCriteria}"  x:Name="Lenin" Uid="{Binding id_student}" Loaded="Lenin_Loaded"   >
-                    <!--<ListBox.ItemsPanel>
+                    <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>-->
+                    </ListBox.ItemsPanel>
                 </ListBox>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="Griddd">
         <Grid.RowDefinitions>
             <RowDefinition Height="196*"/>
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}" Grid.RowSpan="2">
+        <StackPanel>
+        <ListBox x:Name="ListCriterionName"  Margin="20">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}"  >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-
-        <Button x:Name="BtnSaveRating" Click="BtnSaveRating_Click" Grid.Row="1"></Button>
+        </StackPanel>
+        <Button x:Name="BtnSaveRating" Click="BtnSaveRating_Click" Grid.Row="1" Margin="0,13,0,13"></Button>
     </Grid>
 </Page>
