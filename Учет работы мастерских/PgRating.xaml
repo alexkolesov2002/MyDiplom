@@ -7,25 +7,42 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PgRating">
+
     <Page.Resources>
-        <DataTemplate x:Key="TemplateListRating">
+        <ItemsPanelTemplate x:Key="KKK">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="listCriteria">
+           
+            <StackPanel >
+            <TextBlock Text="{Binding title_criterion}"></TextBlock>
+                <TextBlock Text="{Binding Rating}"></TextBlock>
+                
+            </StackPanel>
+        </DataTemplate>
+        
+    <DataTemplate x:Key="listStudentNew">
             <StackPanel>
-                <TextBox Text="{Binding title_criterion}"></TextBox>
+                
+            <TextBlock Text="{Binding students.FullName}"></TextBlock>
+                <ListBox  ItemTemplate="{StaticResource listCriteria}" ItemsSource="{Binding listCriterial}"   >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </StackPanel>
-        </DataTemplate>
-
-        <DataTemplate x:Key="ListRating">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding students.FullName}"></TextBlock>
-                <ListBox ItemTemplate="{StaticResource TemplateListRating}" ItemsSource="{Binding listCriterial}"></ListBox>
-            </StackPanel>
-        </DataTemplate>
-
-        <DataTemplate x:Key="listStudentNew">
-            <ListBox  ItemsSource="{Binding listStudent}" ItemTemplate="{StaticResource ListRating}"></ListBox>
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}"></ListBox>
+        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        
     </Grid>
 </Page>

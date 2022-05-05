@@ -35,9 +35,10 @@ namespace Учет_работы_мастерских
 
         private void BtnAddRating_Click(object sender, RoutedEventArgs e)
         {
-           
+           Button button = (Button)sender;
+            int id = Convert.ToInt32(button.Uid);
 
-            LoadPages.SwitchPages.Navigate(new PgRating(criteria_in_event.getlistCriteria()));
+            LoadPages.SwitchPages.Navigate(new PgRating(criteria_in_event.getlistCriteria(id)));
         }
     }
 }

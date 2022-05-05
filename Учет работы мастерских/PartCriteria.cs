@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Учет_работы_мастерских
 {
-    public class Criterion
+    partial class criteria
     {
-        public int id_Criterion { get; set; }
-        public string title_criterion { get; set; }
+        private int rating;
 
+        public int Rating
+        {
+            get { return rating; }
+            set { rating = value; }
+        }
+
+       
     }
 }
