@@ -49,7 +49,7 @@ namespace Учет_работы_мастерских
                 {
                     if (criteria_In_Event.students != null)
                     {
-                        criteria_In_Event.criteria.Rating = (int)criteria_In_Event.rating;
+                        criteria_In_Event.criteria.ratingList.Add((int)criteria_In_Event.rating) ;
                         equipments.Add(criteria_In_Event.criteria);
                     }
                   

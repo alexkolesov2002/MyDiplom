@@ -16,15 +16,16 @@
            
             <StackPanel >
             <TextBlock Text="{Binding title_criterion}"></TextBlock>
-                <TextBlock Text="{Binding Rating}"></TextBlock>
-                
+                <ListBox ItemsSource="{Binding ratingList}"></ListBox>
+
             </StackPanel>
         </DataTemplate>
         
     <DataTemplate x:Key="listStudentNew">
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Text="{Binding students.FullName}"></TextBlock>
                 
-            <TextBlock Text="{Binding students.FullName}"></TextBlock>
                 <ListBox  ItemTemplate="{StaticResource listCriteria}" ItemsSource="{Binding listCriterial}"   >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

@@ -15,7 +15,9 @@ namespace Учет_работы_мастерских
             get { return rating; }
             set { rating = value; }
         }
-
+        public List<int> ratingList { get; set; } = new List<int>();
        
+      
+
     }
 }
