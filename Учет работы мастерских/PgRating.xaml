@@ -13,37 +13,42 @@
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="listCriteria">
-           
+
             <StackPanel >
-            <TextBlock Text="{Binding title_criterion}"></TextBlock>
-                <ListBox ItemsSource="{Binding ratingList}"></ListBox>
+                <TextBlock Text="{Binding criteria.title_criterion}"></TextBlock>
+                <TextBox Text="{Binding rating}"></TextBox>
 
             </StackPanel>
         </DataTemplate>
-        
-    <DataTemplate x:Key="listStudentNew">
+
+        <DataTemplate x:Key="listStudentNew">
             <StackPanel Orientation="Horizontal">
 
-                <TextBlock Text="{Binding students.FullName}"></TextBlock>
-                
-                <ListBox  ItemTemplate="{StaticResource listCriteria}" ItemsSource="{Binding listCriterial}"   >
-                    <ListBox.ItemsPanel>
+                <TextBlock Text="{Binding FullName}" x:Name="TxtName" ></TextBlock>
+
+                <ListBox  ItemTemplate="{StaticResource listCriteria}"  x:Name="Lenin" Uid="{Binding id_student}" Loaded="Lenin_Loaded"   >
+                    <!--<ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
+                    </ListBox.ItemsPanel>-->
                 </ListBox>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="196*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}" Grid.RowSpan="2">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        
+
+        <Button x:Name="BtnSaveRating" Click="BtnSaveRating_Click" Grid.Row="1"></Button>
     </Grid>
 </Page>

@@ -20,11 +20,39 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class PgRating : Page
     {
-        public PgRating(dynamic List)
+        List<students> students = new List<students>();
+        List<criteria_in_event> criteria_in_events;
+        int index;
+        public PgRating(int index)
+        {
+            this.index = index;
+            InitializeComponent();
+            criteria_in_events = BaseModel.BaseConnect.criteria_in_event.Where(x => x.id_event == index).ToList();
+            foreach (criteria_in_event student in criteria_in_events)
+            {
+                students studentsS = BaseModel.BaseConnect.students.FirstOrDefault(x=>x.id_student == student.id_student);
+                students.Add(studentsS);
+            }
+            ListRating.ItemsSource = students.Distinct();
+
+        }
+
+        private void TxtName_Loaded(object sender, RoutedEventArgs e)
         {
             
-            InitializeComponent();
-            ListRating.ItemsSource = List;
+            
+        }
+
+        private void Lenin_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListBox textBlock = (ListBox)sender;
+            int id = Convert.ToInt32(textBlock.Uid);
+            textBlock.ItemsSource = criteria_in_event.getlistCriteria(index, id);
+        }
+
+        private void BtnSaveRating_Click(object sender, RoutedEventArgs e)
+        {
+            BaseModel.BaseConnect.SaveChanges();
         }
     }
 }

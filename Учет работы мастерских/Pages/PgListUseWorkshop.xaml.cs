@@ -38,7 +38,7 @@ namespace Учет_работы_мастерских
            Button button = (Button)sender;
             int id = Convert.ToInt32(button.Uid);
 
-            LoadPages.SwitchPages.Navigate(new PgRating(criteria_in_event.getlistCriteria(id)));
+            LoadPages.SwitchPages.Navigate(new PgRating(id));
         }
     }
 }
