@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.Win32;
 using System;
 
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -53,7 +55,7 @@ namespace Учет_работы_мастерских
 
         private void Lenin_Loaded(object sender, RoutedEventArgs e)
         {
-            ListBox textBlock = (ListBox)sender;
+            System.Windows.Controls.ListBox textBlock = (System.Windows.Controls.ListBox)sender;
             int id = Convert.ToInt32(textBlock.Uid);
             textBlock.ItemsSource = criteria_in_eventsNew.Where(x => x.id_event == index && x.id_student == id).ToList();
         }
@@ -66,30 +68,20 @@ namespace Учет_работы_мастерских
             renderTargetBitmap.Render(Griddd);
             PngBitmapEncoder pngImage = new PngBitmapEncoder();
             pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            System.Windows.Forms.FolderBrowserDialog saveFileDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = saveFileDialog1.SelectedPath;
+            // сохраняем текст в файл  
+            System.Windows.MessageBox.Show(filename);
             byte[] myBytes;
             using (var memoryStream = new System.IO.MemoryStream())
             {
-                pngImage.Save(memoryStream); // Line ARGH
-
-                // mission accomplished if myBytes is populated
+                pngImage.Save(memoryStream); 
                 myBytes = memoryStream.ToArray();
             }
-            
-            //BitmapImage bitmapImage = new BitmapImage();
-            //using (var stream = new MemoryStream())
-            //{
-            //    pngImage.Save(stream);
-            //    stream.Seek(0, SeekOrigin.Begin);
-
-            //    bitmapImage.BeginInit();
-            //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            //    bitmapImage.StreamSource = stream;
-            //    bitmapImage.EndInit();
-            //}
-            //System.Windows.Forms.Clipboard.SetImage((Image)bitmapImage);
-
-
-            PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\allad\Desktop\123" + @"\Document.pdf", System.IO.FileMode.Create));
+            PdfWriter.GetInstance(doc, new FileStream(filename + @"\Document.pdf", System.IO.FileMode.Create));
             doc.Open();
             iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(myBytes); 
             jpg.Alignment = Element.ALIGN_CENTER;
@@ -97,12 +89,6 @@ namespace Учет_работы_мастерских
             doc.Close();
         }
 
-        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            DataGrid textBlock = (DataGrid)sender;
-            int id = Convert.ToInt32(textBlock.Uid);
-            
-            textBlock.ItemsSource = criteria_in_eventsNew.Where(x => x.id_event == index && x.id_student == id).ToList();
-        }
+       
     }
 }
