@@ -14,7 +14,7 @@ namespace Учет_работы_мастерских
         public WinAutorise()
         {
             InitializeComponent();
-             BaseModel.BaseConnect = new Entities();
+            BaseModel.BaseConnect = new Entities();
         }
 
         private void BtnAutorise_Click(object sender, RoutedEventArgs e)
@@ -24,7 +24,7 @@ namespace Учет_работы_мастерских
                 users user = BaseModel.BaseConnect.users.FirstOrDefault(x => x.login == TxtLogin.Text && x.password == TxtPass.Password);
                 if (user != null)
                 {
-                  
+
 
                     new MainWindow(user).Show();
                     this.Close();

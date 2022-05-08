@@ -82,7 +82,7 @@ namespace Учет_работы_мастерских
             LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
         }
 
-       
+
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
@@ -306,7 +306,7 @@ namespace Учет_работы_мастерских
             new WinSettings().ShowDialog();
         }
 
-      
+
     }
 }
 

@@ -19,7 +19,7 @@ namespace Учет_работы_мастерских
     {
 
         #region Глобальные переменные
-        public SeriesCollection SeriesCollection { get; set; } 
+        public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<int, string> Formatter { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,13 +32,13 @@ namespace Учет_работы_мастерских
             ComboBoxDate.SelectedIndex = 0;
             if (CheckComboBox == false)
             {
-                
+
             }
             else
             {
                 BuildChart();
             }
-            
+
 
 
         }
@@ -61,7 +61,7 @@ namespace Учет_работы_мастерских
                         BuildChart();
                         Chart.Update(true, true);
                     }
-                   
+
                     break;
                 case 1:
                     var dateTimeLastMonth = DateTime.Now.AddMonths(-1);
@@ -159,7 +159,7 @@ namespace Учет_работы_мастерских
             });
         }
 
-      
+
 
         private void RestartOnClick(object sender, RoutedEventArgs e)
         {

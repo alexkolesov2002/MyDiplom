@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Учет_работы_мастерских
 {
@@ -16,8 +12,8 @@ namespace Учет_работы_мастерских
             set { rating = value; }
         }
         public List<int> ratingList { get; set; } = new List<int>();
-       
-      
+
+
 
     }
 }

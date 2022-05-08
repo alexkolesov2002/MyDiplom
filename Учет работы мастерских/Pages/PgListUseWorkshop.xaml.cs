@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Учет_работы_мастерских
 {
@@ -64,8 +55,8 @@ namespace Учет_работы_мастерских
 
 
 
-            }
-            private void BtnAddRating_Click(object sender, RoutedEventArgs e)
+        }
+        private void BtnAddRating_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             int id = Convert.ToInt32(button.Uid);
@@ -92,12 +83,12 @@ namespace Учет_работы_мастерских
             }
             else
             {
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null )
+                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
                 {
                     ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
                     ListUseWorkShop.Items.Refresh();
                 }
-                
+
             }
         }
 
@@ -125,7 +116,7 @@ namespace Учет_работы_мастерских
                     ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
                     ListUseWorkShop.Items.Refresh();
                 }
-              
+
             }
         }
 

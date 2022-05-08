@@ -1,23 +1,15 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Microsoft.Win32;
 using System;
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Учет_работы_мастерских
 {
@@ -38,19 +30,19 @@ namespace Учет_работы_мастерских
             criteria_in_events = BaseModel.BaseConnect.criteria_in_event.Where(x => x.id_event == index).ToList();
             foreach (criteria_in_event student in criteria_in_events)
             {
-                students studentsS = BaseModel.BaseConnect.students.FirstOrDefault(x=>x.id_student == student.id_student);
+                students studentsS = BaseModel.BaseConnect.students.FirstOrDefault(x => x.id_student == student.id_student);
                 students.Add(studentsS);
                 criteria_name.Add(student.criteria.title_criterion);
             }
             ListRating.ItemsSource = students.Distinct();
-           ListCriterionName.ItemsSource = criteria_name.Distinct();
+            ListCriterionName.ItemsSource = criteria_name.Distinct();
 
         }
 
         private void TxtName_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
         }
 
         private void Lenin_Loaded(object sender, RoutedEventArgs e)
@@ -64,7 +56,7 @@ namespace Учет_работы_мастерских
         {
             BaseModel.BaseConnect.SaveChanges();
             var doc = new Document();
-            RenderTargetBitmap renderTargetBitmap =new RenderTargetBitmap(300, 300, 0, 0, PixelFormats.Pbgra32);
+            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(300, 300, 0, 0, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(Griddd);
             PngBitmapEncoder pngImage = new PngBitmapEncoder();
             pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
@@ -78,18 +70,18 @@ namespace Учет_работы_мастерских
             byte[] myBytes;
             using (var memoryStream = new System.IO.MemoryStream())
             {
-                pngImage.Save(memoryStream); 
+                pngImage.Save(memoryStream);
                 myBytes = memoryStream.ToArray();
             }
             PdfWriter.GetInstance(doc, new FileStream(filename + @"\Document.pdf", System.IO.FileMode.Create));
 
             doc.Open();
-            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(myBytes); 
+            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(myBytes);
             jpg.Alignment = Element.ALIGN_CENTER;
             doc.Add(jpg);
             doc.Close();
         }
 
-       
+
     }
 }

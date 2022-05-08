@@ -1,23 +1,10 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Учет_работы_мастерских
 {
@@ -32,12 +19,12 @@ namespace Учет_работы_мастерских
         public string StringTimePo { get; set; }
         public string WorkShop { get; set; }
         public int MyCount { get; set; }
-        public WinOtchet(DateTime s , DateTime po, string workshop, int Count)
+        public WinOtchet(DateTime s, DateTime po, string workshop, int Count)
         {
             InitializeComponent();
             StringTimeS = s.ToShortDateString();
             StringTimePo = po.ToShortDateString();
-            WorkShop =  "\"" + workshop + "\""  ;
+            WorkShop = "\"" + workshop + "\"";
             MyCount = Count;
             PropertyChanged(this, new PropertyChangedEventArgs("StringTimeS"));
             PropertyChanged(this, new PropertyChangedEventArgs("StringTimePo"));
@@ -63,11 +50,11 @@ namespace Учет_работы_мастерских
         {
             string FilePath = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
-           if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
             {
-                 FilePath = openFileDialog.FileName;
+                FilePath = openFileDialog.FileName;
             };
-            
+
             MailAddress mailAddress = new MailAddress("prof-probi-prog@ngknn.ru", "Мася");
             MailAddress toAdress = new MailAddress("boldin_0202@mail.ru", "Try");
             MailMessage message = new MailMessage(mailAddress, toAdress);
