@@ -79,7 +79,18 @@
             <RowDefinition Height="44*"/>
             <RowDefinition Height="181*"/>
         </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Выберите временной период " HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <DatePicker  materialDesign:HintAssist.Hint="С такого то числа " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU"  Margin="20" x:Name="CalendarS" SelectedDateChanged="CalendarS_SelectedDateChanged" />
+            <DatePicker  materialDesign:HintAssist.Hint="По такое-то число " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU" Margin="20" x:Name="CalendarPO"  SelectedDateChanged="CalendarPO_SelectedDateChanged"/>
+            <ComboBox  SelectionChanged="ComboSelectWork_SelectionChanged"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите Мастерскую" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" x:Name="ComboSelectWork" Visibility="Collapsed">
+               
+            </ComboBox >
+            <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  x:Name="BtnBuildResult" Cursor="Hand" Margin="20" Visibility="Collapsed" >
 
+            </Button>
+        </StackPanel>
+       
         <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop" Grid.Row ="1" ></ListView>
 
     </Grid>

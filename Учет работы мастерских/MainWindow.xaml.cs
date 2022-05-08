@@ -62,7 +62,7 @@ namespace Учет_работы_мастерских
         {
             Button2.Style = (Style)this.Resources["menuButtonActive"];
             Button1.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
+          
             Button4.Style = (Style)this.Resources["menuButton"];
             LoadPages.SwitchPages.Navigate(new PgSelectChart());
         }
@@ -73,25 +73,18 @@ namespace Учет_работы_мастерских
         {
             Button4.Style = (Style)this.Resources["menuButtonActive"];
             Button2.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
+         
             Button1.Style = (Style)this.Resources["menuButton"];
-            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop());
+            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
         }
 
-        private void Button3_Click(object sender, RoutedEventArgs e)
-        {
-            Button3.Style = (Style)this.Resources["menuButtonActive"];
-            Button1.Style = (Style)this.Resources["menuButton"];
-            Button2.Style = (Style)this.Resources["menuButton"];
-            Button4.Style = (Style)this.Resources["menuButton"];
-            LoadPages.SwitchPages.Navigate(new PgTelegrammBot());
-        }
+       
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             Button1.Style = (Style)this.Resources["menuButtonActive"];
             Button2.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
+           
             Button4.Style = (Style)this.Resources["menuButton"];
 
             LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));

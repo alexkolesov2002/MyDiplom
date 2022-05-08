@@ -174,9 +174,6 @@
     <Compile Include="PagesChart\PgChartViewCountTaked.xaml.cs">
       <DependentUpon>PgChartViewCountTaked.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PgTelegrammBot.xaml.cs">
-      <DependentUpon>PgTelegrammBot.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\PgTakeEquip.xaml.cs">
       <DependentUpon>PgTakeEquip.xaml</DependentUpon>
     </Compile>
@@ -227,10 +224,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Page Include="PagesChart\PgChartViewCountTaked.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\PgTelegrammBot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -64,7 +64,7 @@ namespace Учет_работы_мастерских
         {
             BaseModel.BaseConnect.SaveChanges();
             var doc = new Document();
-            RenderTargetBitmap renderTargetBitmap =new RenderTargetBitmap(300, 300, 100, 100, PixelFormats.Pbgra32);
+            RenderTargetBitmap renderTargetBitmap =new RenderTargetBitmap(300, 300, 0, 0, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(Griddd);
             PngBitmapEncoder pngImage = new PngBitmapEncoder();
             pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
@@ -82,6 +82,7 @@ namespace Учет_работы_мастерских
                 myBytes = memoryStream.ToArray();
             }
             PdfWriter.GetInstance(doc, new FileStream(filename + @"\Document.pdf", System.IO.FileMode.Create));
+
             doc.Open();
             iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(myBytes); 
             jpg.Alignment = Element.ALIGN_CENTER;
