@@ -86,9 +86,14 @@
             <ComboBox  SelectionChanged="ComboSelectWork_SelectionChanged"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите Мастерскую" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" x:Name="ComboSelectWork" Visibility="Collapsed">
                
             </ComboBox >
-            <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  x:Name="BtnBuildResult" Cursor="Hand" Margin="20" Visibility="Collapsed" >
+            <StackPanel Orientation="Vertical"> 
+            <Button Content="Составить отчет" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnBuildResult_Click" x:Name="BtnBuildResult" Cursor="Hand" Margin="30" Visibility="Collapsed" >
 
             </Button>
+            <Button Content="Сбросить фильтры" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center"  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnClear_Click" x:Name="BtnClear" Cursor="Hand" Margin="5" Visibility="Visible" >
+
+            </Button>
+            </StackPanel>
         </StackPanel>
        
         <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop" Grid.Row ="1" ></ListView>

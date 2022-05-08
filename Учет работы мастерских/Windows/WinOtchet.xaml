@@ -1,0 +1,89 @@
+﻿<Window x:Class="Учет_работы_мастерских.WinOtchet"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Учет_работы_мастерских"
+        mc:Ignorable="d"
+         Title="Итоговый отчет"  Height="27cm" Width="21cm" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+          DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="64"/>
+            <Setter Property="Height" Value="64" />
+            <Setter Property="Margin" Value="30,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="zagolov" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="1, 1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="Flag" TargetType="Button">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="Transparent"
+                                CornerRadius="20">
+                            <Image Source="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="Print">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="689*"/>
+            <ColumnDefinition Width="105*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="213*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="620*"/>
+            <RowDefinition Height="103*"/>
+        </Grid.RowDefinitions>
+        <Image Source="Res\Logo_masterskie.png" Grid.Row="0" Margin="10" Grid.ColumnSpan="2"/>
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,129,0,93" Grid.RowSpan="5" Grid.ColumnSpan="5">
+            <StackPanel Orientation="Horizontal"  Margin="70,0,30,10">
+                <TextBlock Text="Всего за переод с "></TextBlock>
+                <TextBlock Text="{Binding StringTimeS}"></TextBlock>
+                <TextBlock Text="по "></TextBlock>
+                <TextBlock Text="{Binding StringTimePo}"></TextBlock>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,0,30,10">
+                <TextBlock Text="мастерская"></TextBlock>
+                <TextBlock Text="{Binding WorkShop}"></TextBlock>
+                <TextBlock Text=" была использована "></TextBlock>
+                <TextBlock Text="{Binding MyCount}"></TextBlock>
+                <TextBlock Text="раз(-а)"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock Text="Отчет" Grid.Row="2"  FontSize="50" FontFamily="Arial" Margin="328,10,0,10" Width="137" HorizontalAlignment="Left"></TextBlock>
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBlock  Text="{Binding StringDate}"></TextBlock>
+            <TextBlock  Text="{Binding StringTime}"></TextBlock>
+        </StackPanel>
+        <Grid Margin="651,545,-19,0" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="Hid">
+            <Button  Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionSecondaryLightButton}" ToolTip="MaterialDesignFloatingActionLightButton" Margin="20,22,55,41" Click="Button_Click">
+                <materialDesign:PackIcon Kind="TextBoxOutline" Height="20" Width="20" />
+            </Button>
+            <Button  Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionSecondaryLightButton}" ToolTip="MaterialDesignFloatingActionLightButton" Margin="65,57,10,6" Click="Button_Click_1">
+                <materialDesign:PackIcon Kind="At" Height="20" Width="20" />
+            </Button>
+            <Button  Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionSecondaryLightButton}" ToolTip="MaterialDesignFloatingActionLightButton" Margin="-640,-900,772,982" Click="Button_Click_2">
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Height="20" Width="20" />
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

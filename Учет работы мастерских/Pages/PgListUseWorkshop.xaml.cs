@@ -55,11 +55,17 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
             await Task.Delay(15);
+            if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+            {
+
+
+                new WinOtchet((DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate, ComboSelectWork.Text, ListUseWorkShop.Items.Count).ShowDialog();
+            }
 
 
 
-        }
-        private void BtnAddRating_Click(object sender, RoutedEventArgs e)
+            }
+            private void BtnAddRating_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             int id = Convert.ToInt32(button.Uid);
@@ -72,20 +78,26 @@ namespace Учет_работы_мастерских
             if (users.id_role == 1)
             {
 
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
                 {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments((DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                    ListUseWorkShop.Items.Refresh();
+                }
+                else if (ComboSelectWork.SelectedItem != null)
+                {
+                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
                     ListUseWorkShop.Items.Refresh();
                 }
 
             }
             else
             {
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null )
                 {
                     ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
                     ListUseWorkShop.Items.Refresh();
                 }
+                
             }
         }
 
@@ -108,16 +120,12 @@ namespace Учет_работы_мастерских
             }
             else
             {
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
+                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
                 {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
                     ListUseWorkShop.Items.Refresh();
                 }
-                else if (ComboSelectWork.SelectedItem != null)
-                {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
-                    ListUseWorkShop.Items.Refresh();
-                }
+              
             }
         }
 
@@ -136,6 +144,16 @@ namespace Учет_работы_мастерских
             }
 
 
+        }
+
+        private void BtnBuildResult_Click(object sender, RoutedEventArgs e)
+        {
+            Zagruzka();
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(users));
         }
     }
 }

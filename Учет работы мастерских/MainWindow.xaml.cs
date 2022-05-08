@@ -44,6 +44,10 @@ namespace Учет_работы_мастерских
             MainFrame.Navigate(new PgSelectWork(CurrentUser));
             LoadPages.SwitchPages = MainFrame;
             StartClock();
+            if (CurrentUser.id_role == 1)
+            {
+                Button2.Visibility = Visibility.Visible;
+            }
             // ShowMarksClockFace();
 
         }
@@ -62,7 +66,7 @@ namespace Учет_работы_мастерских
         {
             Button2.Style = (Style)this.Resources["menuButtonActive"];
             Button1.Style = (Style)this.Resources["menuButton"];
-          
+            Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
             LoadPages.SwitchPages.Navigate(new PgSelectChart());
         }
@@ -73,7 +77,7 @@ namespace Учет_работы_мастерских
         {
             Button4.Style = (Style)this.Resources["menuButtonActive"];
             Button2.Style = (Style)this.Resources["menuButton"];
-         
+            Button3.Style = (Style)this.Resources["menuButton"];
             Button1.Style = (Style)this.Resources["menuButton"];
             LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
         }
@@ -84,13 +88,21 @@ namespace Учет_работы_мастерских
         {
             Button1.Style = (Style)this.Resources["menuButtonActive"];
             Button2.Style = (Style)this.Resources["menuButton"];
-           
+            Button3.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
 
             LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
         }
 
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            Button3.Style = (Style)this.Resources["menuButtonActive"];
+            Button2.Style = (Style)this.Resources["menuButton"];
+            Button1.Style = (Style)this.Resources["menuButton"];
+            Button4.Style = (Style)this.Resources["menuButton"];
 
+            LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
+        }
         #region Вычисление текущего времени
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -293,6 +305,8 @@ namespace Учет_работы_мастерских
         {
             new WinSettings().ShowDialog();
         }
+
+      
     }
 }
 
