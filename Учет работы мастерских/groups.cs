@@ -12,16 +12,18 @@ namespace Учет_работы_мастерских
     using System;
     using System.Collections.Generic;
     
-    public partial class criteria_in_event
+    public partial class groups
     {
-        public int id_criteria_in_event { get; set; }
-        public Nullable<int> id_criterion { get; set; }
-        public int id_event { get; set; }
-        public Nullable<int> id_student { get; set; }
-        public Nullable<int> rating { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public groups()
+        {
+            this.students = new HashSet<students>();
+        }
     
-        public virtual criteria criteria { get; set; }
-        public virtual events events { get; set; }
-        public virtual students students { get; set; }
+        public int id_group { get; set; }
+        public string title_group { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<students> students { get; set; }
     }
 }

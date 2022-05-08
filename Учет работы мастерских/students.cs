@@ -24,8 +24,10 @@ namespace Учет_работы_мастерских
         public string name { get; set; }
         public string surname { get; set; }
         public string patronymic { get; set; }
+        public Nullable<int> id_group { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<criteria_in_event> criteria_in_event { get; set; }
+        public virtual groups groups { get; set; }
     }
 }

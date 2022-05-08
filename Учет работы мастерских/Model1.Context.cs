@@ -30,6 +30,7 @@ namespace Учет_работы_мастерских
         public virtual DbSet<equipments> equipments { get; set; }
         public virtual DbSet<Equipments_In_Workshop> Equipments_In_Workshop { get; set; }
         public virtual DbSet<events> events { get; set; }
+        public virtual DbSet<groups> groups { get; set; }
         public virtual DbSet<journal_use_workshop> journal_use_workshop { get; set; }
         public virtual DbSet<roles> roles { get; set; }
         public virtual DbSet<students> students { get; set; }

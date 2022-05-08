@@ -17,9 +17,9 @@
             <PropertyRef Name="id_criteria_in_event" />
           </Key>
           <Property Name="id_criteria_in_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_criterion" Type="int" Nullable="false" />
+          <Property Name="id_criterion" Type="int" />
           <Property Name="id_event" Type="int" Nullable="false" />
-          <Property Name="id_student" Type="int" Nullable="false" />
+          <Property Name="id_student" Type="int" />
           <Property Name="rating" Type="int" />
         </EntityType>
         <EntityType Name="equipments">
@@ -47,6 +47,13 @@
           <Property Name="title_event" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="topic_of_the_lesson" Type="nvarchar(max)" />
           <Property Name="exercise" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title_group" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="journal_use_workshop">
           <Key>
@@ -76,6 +83,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="surname" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_group" Type="int" />
         </EntityType>
         <EntityType Name="types_equipment">
           <Key>
@@ -111,7 +119,7 @@
           <Property Name="title_workshop" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_criteria_in_event_criteria">
-          <End Role="criteria" Type="Self.criteria" Multiplicity="1" />
+          <End Role="criteria" Type="Self.criteria" Multiplicity="0..1" />
           <End Role="criteria_in_event" Type="Self.criteria_in_event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="criteria">
@@ -135,7 +143,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_criteria_in_event_students">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="students" Type="Self.students" Multiplicity="0..1" />
           <End Role="criteria_in_event" Type="Self.criteria_in_event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="students">
@@ -242,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_students_groups">
+          <End Role="groups" Type="Self.groups" Multiplicity="0..1" />
+          <End Role="students" Type="Self.students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_users_roles">
           <End Role="roles" Type="Self.roles" Multiplicity="1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
@@ -272,6 +292,7 @@
           <EntitySet Name="equipments" EntityType="Self.equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="Self.Equipments_In_Workshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groups" EntityType="Self.groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="journal_use_workshop" EntityType="Self.journal_use_workshop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
@@ -323,6 +344,10 @@
             <End Role="workshops" EntitySet="workshops" />
             <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
           </AssociationSet>
+          <AssociationSet Name="FK_students_groups" Association="Self.FK_students_groups">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
           <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
             <End Role="roles" EntitySet="roles" />
             <End Role="users" EntitySet="users" />
@@ -342,6 +367,7 @@
           <EntitySet Name="equipments" EntityType="P_DiplomProject_MasterskieModel.equipments" />
           <EntitySet Name="Equipments_In_Workshop" EntityType="P_DiplomProject_MasterskieModel.Equipments_In_Workshop" />
           <EntitySet Name="events" EntityType="P_DiplomProject_MasterskieModel.events" />
+          <EntitySet Name="groups" EntityType="P_DiplomProject_MasterskieModel.groups" />
           <EntitySet Name="journal_use_workshop" EntityType="P_DiplomProject_MasterskieModel.journal_use_workshop" />
           <EntitySet Name="roles" EntityType="P_DiplomProject_MasterskieModel.roles" />
           <EntitySet Name="students" EntityType="P_DiplomProject_MasterskieModel.students" />
@@ -385,6 +411,10 @@
             <End Role="events" EntitySet="events" />
             <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
           </AssociationSet>
+          <AssociationSet Name="FK_students_groups" Association="P_DiplomProject_MasterskieModel.FK_students_groups">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="students" EntitySet="students" />
+          </AssociationSet>
           <AssociationSet Name="FK_journal_use_workshop_users" Association="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_users">
             <End Role="users" EntitySet="users" />
             <End Role="journal_use_workshop" EntitySet="journal_use_workshop" />
@@ -415,9 +445,9 @@
             <PropertyRef Name="id_criteria_in_event" />
           </Key>
           <Property Name="id_criteria_in_event" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_criterion" Type="Int32" Nullable="false" />
+          <Property Name="id_criterion" Type="Int32" />
           <Property Name="id_event" Type="Int32" Nullable="false" />
-          <Property Name="id_student" Type="Int32" Nullable="false" />
+          <Property Name="id_student" Type="Int32" />
           <Property Name="rating" Type="Int32" />
           <NavigationProperty Name="criteria" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_criteria" FromRole="criteria_in_event" ToRole="criteria" />
           <NavigationProperty Name="events" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_events" FromRole="criteria_in_event" ToRole="events" />
@@ -457,6 +487,14 @@
           <NavigationProperty Name="types_event" Relationship="P_DiplomProject_MasterskieModel.FK_events_types_event" FromRole="events" ToRole="types_event" />
           <NavigationProperty Name="journal_use_workshop" Relationship="P_DiplomProject_MasterskieModel.FK_journal_use_workshop_events" FromRole="events" ToRole="journal_use_workshop" />
         </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title_group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="students" Relationship="P_DiplomProject_MasterskieModel.FK_students_groups" FromRole="groups" ToRole="students" />
+        </EntityType>
         <EntityType Name="journal_use_workshop">
           <Key>
             <PropertyRef Name="id_journal_use_workshop" />
@@ -490,7 +528,9 @@
           <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="patronymic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_group" Type="Int32" />
           <NavigationProperty Name="criteria_in_event" Relationship="P_DiplomProject_MasterskieModel.FK_criteria_in_event_students" FromRole="students" ToRole="criteria_in_event" />
+          <NavigationProperty Name="groups" Relationship="P_DiplomProject_MasterskieModel.FK_students_groups" FromRole="students" ToRole="groups" />
         </EntityType>
         <EntityType Name="types_equipment">
           <Key>
@@ -534,7 +574,7 @@
           <NavigationProperty Name="users" Relationship="P_DiplomProject_MasterskieModel.FK_workshops_users" FromRole="workshops" ToRole="users" />
         </EntityType>
         <Association Name="FK_criteria_in_event_criteria">
-          <End Type="P_DiplomProject_MasterskieModel.criteria" Role="criteria" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.criteria" Role="criteria" Multiplicity="0..1" />
           <End Type="P_DiplomProject_MasterskieModel.criteria_in_event" Role="criteria_in_event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="criteria">
@@ -558,7 +598,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_criteria_in_event_students">
-          <End Type="P_DiplomProject_MasterskieModel.students" Role="students" Multiplicity="1" />
+          <End Type="P_DiplomProject_MasterskieModel.students" Role="students" Multiplicity="0..1" />
           <End Type="P_DiplomProject_MasterskieModel.criteria_in_event" Role="criteria_in_event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="students">
@@ -638,6 +678,18 @@
             </Principal>
             <Dependent Role="journal_use_workshop">
               <PropertyRef Name="id_event" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_students_groups">
+          <End Type="P_DiplomProject_MasterskieModel.groups" Role="groups" Multiplicity="0..1" />
+          <End Type="P_DiplomProject_MasterskieModel.students" Role="students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="students">
+              <PropertyRef Name="id_group" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -743,6 +795,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.groups">
+              <MappingFragment StoreEntitySet="groups">
+                <ScalarProperty Name="title_group" ColumnName="title_group" />
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="journal_use_workshop">
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.journal_use_workshop">
               <MappingFragment StoreEntitySet="journal_use_workshop">
@@ -768,6 +828,7 @@
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="P_DiplomProject_MasterskieModel.students">
               <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
                 <ScalarProperty Name="patronymic" ColumnName="patronymic" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="name" ColumnName="name" />

@@ -47,6 +47,8 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.ItemsSource = BaseModel.BaseConnect.types_event.ToList();
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
+                ListAddGroup.ItemsSource = BaseModel.BaseConnect.groups.ToList();
+                ComboBoxCompetisionSelect.DisplayMemberPath = "title_group";
                 studentsBufForAdd = students;
 
                 //ListPickedStudent.ItemsSource = studentsBufForResiult;
@@ -115,7 +117,7 @@ namespace Учет_работы_мастерских
                 }
 
                 BaseModel.BaseConnect.SaveChanges();
-                BtnSaveData.IsEnabled = false;
+                //BtnSaveData.IsEnabled = false;
                 SaveNotComplete = false;
                 PropertyChanged(this, new PropertyChangedEventArgs("SaveNotComplete"));
                 IsSaveComplete = true;
@@ -179,8 +181,10 @@ namespace Учет_работы_мастерских
             int id = Convert.ToInt32(button.Uid);
             studentsBufForResiult.Add(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
             studentsBufForAdd2.Remove(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
-            ListPickedStudent.ItemsSource = studentsBufForResiult;
-            ListAddStudent.ItemsSource = studentsBufForAdd2;
+            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+            studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
+            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
+            ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
             ListAddStudent.Items.Refresh();
             ListPickedStudent.Items.Refresh();
             FindStudent();
@@ -217,10 +221,75 @@ namespace Учет_работы_мастерских
             int id = Convert.ToInt32(button.Uid);
             studentsBufForAdd2.Add(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
             studentsBufForResiult.Remove(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
-            ListAddStudent.ItemsSource = studentsBufForAdd2;
-            ListPickedStudent.ItemsSource = studentsBufForResiult;
+            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+            studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
+            ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
+            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
             ListPickedStudent.Items.Refresh();
             ListAddStudent.Items.Refresh();
+            FindStudent();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            int id = Convert.ToInt32(checkBox.Uid);
+            studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
+            List<students> s = new List<students>();
+            foreach (students student in studentsBufForAdd2)
+            {
+                s.Add(student);
+            }
+
+            foreach (students student in s)
+            {
+                if (student.id_group == id)
+                {
+                    studentsBufForAdd2.Remove(student);
+                }
+            }
+            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct().ToList();
+            ListPickedStudent.Items.Refresh();
+            FindStudent();
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            int id = Convert.ToInt32(checkBox.Uid);
+            List<students> s = new List<students>();
+            studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
+            List<students> s1 = new List<students>();
+            foreach (students student in studentsBufForResiult)
+            {
+                s1.Add(student);
+            }
+
+            foreach (students student in s1)
+            {
+                if (student.id_group == id)
+                {
+                    studentsBufForAdd2.Add(student);
+                }
+            }
+            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+
+            foreach (students student in studentsBufForResiult)
+            {
+                if (student.id_group == id)
+                {
+                    s.Add(student);
+                }
+
+            }
+            foreach (students student in s)
+            {
+
+                studentsBufForResiult.Remove(student);
+            }
+            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
+            ListPickedStudent.Items.Refresh();
             FindStudent();
         }
     }

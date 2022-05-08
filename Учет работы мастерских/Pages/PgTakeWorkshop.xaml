@@ -18,10 +18,19 @@
             </StackPanel>
         </DataTemplate>
 
-
+        <DataTemplate x:Key="ListGroup">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Uid="{Binding id_group}"></CheckBox>
+                <TextBlock Text="{Binding title_group}"></TextBlock>
+               
+            </StackPanel>
+        </DataTemplate>
+        
         <DataTemplate x:Key="ListAddStudent">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding FullName}"></TextBlock>
+                <TextBlock Text="   "></TextBlock>
+                <TextBlock Text="{Binding groups.title_group}"></TextBlock>
 
                 <TextBlock Text="        "></TextBlock>
                 <Button Content="Добавить студента" Name="BtnAddStudent" Click="BtnAddStudent_Click" Uid="{Binding id_student}"></Button>
@@ -32,23 +41,28 @@
     <Grid>
         <ScrollViewer>
             <StackPanel>
-                <StackPanel   HorizontalAlignment="Center">
-                    <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
 
-                    </ComboBox >
-                    <TextBlock Text="Введите тему занятия"></TextBlock>
-                    <TextBox Width="360" x:Name="TxtTopic"></TextBox>
-                    <TextBlock Text="Введите задание"></TextBlock>
-                    <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Multiline text" Height="80" Text=""/>
-                    <TextBlock Text="Введите критерий"></TextBlock>
+                <StackPanel   HorizontalAlignment="Center" Margin="20">
+
+                    <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged"/>
+                    <TextBlock Text="Введите тему занятия"/>
+                    <TextBox Width="360" x:Name="TxtTopic" materialDesign:HintAssist.Hint="Введите тему задания"/>
+                    <TextBlock Text="Введите задание"/>
+                    <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Введите задание" Height="80" Text=""/>
+                    <TextBlock Text="Введите критерий"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="360" x:Name="TxtCriterion"></TextBox>
-                        <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click">Добавить критерий</Button>
+                        <TextBox Width="360" x:Name="TxtCriterion" materialDesign:HintAssist.Hint="Введите критерий"/>
+                        <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click" Content="Добавить критерий"/>
                     </StackPanel>
-                    <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"></ListBox>
-                    <TextBlock Text="Добавить студента"></TextBlock>
-                    <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
-                    <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"></ListBox>
+                    <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Text="Добавить студента"/>
+                            <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
+                            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"/>
+                        </StackPanel>
+                        <ListBox x:Name="ListAddGroup" ItemTemplate="{StaticResource ListGroup}"></ListBox>
+                    </StackPanel>
                     <ListView x:Name="ListPickedStudent"  Height="231">
                         <ListView.Resources>
                             <DataTemplate x:Key="ColumnDataTemplate">
@@ -68,10 +82,11 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Студент"   />
+                                <GridViewColumn DisplayMemberBinding="{Binding groups.title_group}" Header="Группа"   />
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+                    <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
 
                         <materialDesign:PackIcon Height="24" Width="24">
                             <materialDesign:PackIcon.Style>
@@ -92,7 +107,7 @@
                                 </Style>
                             </materialDesign:PackIcon.Style>
                         </materialDesign:PackIcon>
-                    </Button>
+                    </Button>-->
                 </StackPanel>
 
                 <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">
