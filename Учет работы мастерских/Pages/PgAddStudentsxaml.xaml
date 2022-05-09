@@ -23,8 +23,8 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <ComboBox x:Name="Groups" ></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" >
-            <ListView x:Name="ListAddStudent">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" MouseDown="StackPanel_MouseDown" >
+            <ListView x:Name="ListAddStudent" SelectionMode="Extended">
                 <ListView.Resources>
                     <DataTemplate x:Key="ColumnDataTemplate">
                         <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource ResourceKey=PositionConverter}}" HorizontalAlignment="Center" />
@@ -32,16 +32,8 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
-                        <GridViewColumn Header="Поле для удаления" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_equipment}" x:Name="BtnDelete">
-                                        <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
-                                    </Button>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" x:Name="rrr" />
+                        
                         <GridViewColumn Header="Фамилия" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -77,7 +69,9 @@
                 </ListView.View>
             </ListView>
             <Button Content="+" VerticalAlignment="Top" x:Name="BtnAddRow" Click="BtnAddRow_Click"></Button>
+            <Button Grid.Row="2" Content="Удалить выделенное"  Click="Button_Click_1" ></Button>
         </StackPanel>
         <Button Grid.Row="2" Content="Добавить студентов"  Click="Button_Click" Margin="0,23,0,22"></Button>
+      
     </Grid>
 </Page>

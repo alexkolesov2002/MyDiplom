@@ -51,6 +51,32 @@ namespace Учет_работы_мастерских
             BaseModel.BaseConnect.SaveChanges();
         }
 
-    
+        private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //Button button = (Button) sender;
+            //int id = Convert.ToInt32(button.Uid);
+            //foreach (students student in (List<students>)ListAddStudent.ItemsSource)
+            //{
+            //    student.id_student = List;
+
+            //}
+        }
+
+        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        {
+            List<students> students = new List<students>();
+            students = (List<students>)ListAddStudent.ItemsSource;
+            foreach (students student in ListAddStudent.SelectedItems)
+            {
+                students.Remove(student);
+            }
+            ListAddStudent.ItemsSource = students;
+            ListAddStudent.Items.Refresh();
+        }
+
+        private void StackPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ListAddStudent.Items.Refresh();
+        }
     }
 }
