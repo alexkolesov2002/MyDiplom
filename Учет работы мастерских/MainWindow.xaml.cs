@@ -47,6 +47,7 @@ namespace Учет_работы_мастерских
             if (CurrentUser.id_role == 1)
             {
                 Button2.Visibility = Visibility.Visible;
+                Button3.Visibility = Visibility.Visible;
             }
             // ShowMarksClockFace();
 
@@ -101,7 +102,7 @@ namespace Учет_работы_мастерских
             Button1.Style = (Style)this.Resources["menuButton"];
             Button4.Style = (Style)this.Resources["menuButton"];
 
-            LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
+            LoadPages.SwitchPages.Navigate(new PgAddStudentsxaml());
         }
         #region Вычисление текущего времени
 

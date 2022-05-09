@@ -1,4 +1,7 @@
-﻿namespace Учет_работы_мастерских
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Учет_работы_мастерских
 {
     public partial class students
     {
@@ -9,6 +12,8 @@
             get { return surname + " " + name + " " + patronymic; }
             set { fullName = value; }
         }
+
+       // public List<groups> listgroup { get; set; } = BaseModel.BaseConnect.groups.ToList();
 
     }
 }

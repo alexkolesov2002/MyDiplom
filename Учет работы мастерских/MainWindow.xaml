@@ -77,7 +77,7 @@
                 <Button Style="{StaticResource menuButton}" x:Name="Button3" Click="Button3_Click" Visibility="Hidden">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                        <TextBlock Text="Диаграммы" Style="{StaticResource menuButtonText}"></TextBlock>
+                        <TextBlock Text="Добавить студентов" Style="{StaticResource menuButtonText}"></TextBlock>
                     </StackPanel>
 
                 </Button>

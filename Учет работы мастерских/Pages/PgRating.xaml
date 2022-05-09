@@ -56,6 +56,6 @@
             </ListBox.ItemsPanel>
         </ListBox>
         </StackPanel>
-        <Button x:Name="BtnSaveRating" Click="BtnSaveRating_Click" Grid.Row="1" Margin="0,13,0,13"></Button>
+        <Button x:Name="BtnSaveRating" Content="Сохранить изменения"  Click="BtnSaveRating_Click" Grid.Row="1" Margin="0,13,0,13"></Button>
     </Grid>
 </Page>

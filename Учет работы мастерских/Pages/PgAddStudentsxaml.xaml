@@ -1,0 +1,83 @@
+﻿<Page x:Class="Учет_работы_мастерских.PgAddStudentsxaml"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Учет_работы_мастерских"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="PgAddStudentsxaml">
+    <Page.Resources>
+        <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
+        <DataTemplate x:Key="ListGroup">
+            <TextBlock Text="{Binding title_group}" Uid="{Binding id_group}"></TextBlock>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="334*"/>
+            <RowDefinition Height="77*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <ComboBox x:Name="Groups" ></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <ListView x:Name="ListAddStudent">
+                <ListView.Resources>
+                    <DataTemplate x:Key="ColumnDataTemplate">
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource ResourceKey=PositionConverter}}" HorizontalAlignment="Center" />
+                    </DataTemplate>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" />
+                        <GridViewColumn Header="Поле для удаления" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_equipment}" x:Name="BtnDelete">
+                                        <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Фамилия" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding surname}" MinWidth="40"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Имя" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding name}" MinWidth="40"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Отчество" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding patronymic}" MinWidth="40"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Header="Группа" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ComboBox Loaded="ComboBox_Loaded"  SelectionChanged="ComboBox_SelectionChanged" ></ComboBox>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Content="+" VerticalAlignment="Top" x:Name="BtnAddRow" Click="BtnAddRow_Click"></Button>
+        </StackPanel>
+        <Button Grid.Row="2" Content="Добавить студентов"  Click="Button_Click" Margin="0,23,0,22"></Button>
+    </Grid>
+</Page>
