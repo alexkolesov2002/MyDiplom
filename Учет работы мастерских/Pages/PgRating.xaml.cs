@@ -84,13 +84,6 @@ namespace Учет_работы_мастерских
         }
 
 
-        private void ListCriterionName_Loaded(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Controls.ListBox listBox = (System.Windows.Controls.ListBox)sender;
-            foreach(var i in ListCriterionName.Items)
-            {
-                i.
-            }
-        }
+        
     }
 }
