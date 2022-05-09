@@ -13,6 +13,7 @@ namespace Учет_работы_мастерских
             set { fullName = value; }
         }
 
+
        // public List<groups> listgroup { get; set; } = BaseModel.BaseConnect.groups.ToList();
 
     }

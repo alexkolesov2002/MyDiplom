@@ -13,19 +13,23 @@
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="listCriteria">
-
+            <Border BorderBrush="Black" BorderThickness="1">
             <StackPanel >
-             
-                <TextBox Text="{Binding rating}"></TextBox>
-
+                <TextBox Text="{Binding rating}" Margin="40"></TextBox>
             </StackPanel>
+            </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="listStudentNew">
-            <StackPanel Orientation="Horizontal">
-
-                <TextBlock Text="{Binding FullName}" x:Name="TxtName" ></TextBlock>
-                <ListBox  ItemTemplate="{StaticResource listCriteria}"  x:Name="Lenin" Uid="{Binding id_student}" Loaded="Lenin_Loaded"   >
+            <Border BorderBrush="Black" BorderThickness="0 1 0 1">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="Black" BorderThickness="0 0 1 0">
+                        <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FullName}" VerticalAlignment="Center" x:Name="TxtName" Margin="60 0 2 0" ></TextBlock>
+                        <TextBlock Text="    " Margin="40"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <ListBox  ItemTemplate="{StaticResource listCriteria}"   x:Name="Lenin" Uid="{Binding id_student}" Loaded="Lenin_Loaded"   >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -33,6 +37,7 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
             </StackPanel>
+            </Border>
         </DataTemplate>
     </Page.Resources>
     <Grid x:Name="Griddd">
@@ -41,20 +46,21 @@
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-        <ListBox x:Name="ListCriterionName"  Margin="20">
+        <ListBox x:Name="ListCriterionName" Loaded="ListCriterionName_Loaded"  Margin="300 0 0 40 ">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <ListBox x:Name="ListRating"  ItemTemplate="{StaticResource listStudentNew}"  >
+        <ListBox x:Name="ListRating"    ItemTemplate="{StaticResource listStudentNew}"  >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-        </ListBox>
+               
+        </ListBox> 
         </StackPanel>
         <Button x:Name="BtnSaveRating" Content="Сохранить изменения"  Click="BtnSaveRating_Click" Grid.Row="1" Margin="0,13,0,13"></Button>
     </Grid>

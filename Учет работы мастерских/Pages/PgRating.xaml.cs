@@ -35,6 +35,7 @@ namespace Учет_работы_мастерских
                 criteria_name.Add(student.criteria.title_criterion);
             }
             ListRating.ItemsSource = students.Distinct();
+
             ListCriterionName.ItemsSource = criteria_name.Distinct();
 
         }
@@ -83,5 +84,13 @@ namespace Учет_работы_мастерских
         }
 
 
+        private void ListCriterionName_Loaded(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.ListBox listBox = (System.Windows.Controls.ListBox)sender;
+            foreach(var i in ListCriterionName.Items)
+            {
+                i.
+            }
+        }
     }
 }

@@ -153,6 +153,7 @@
     <Compile Include="groups.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyString.cs" />
     <Compile Include="PartialClasses\PartCriteria.cs" />
     <Compile Include="PartialClasses\PartCriteria_In_Event.cs" />
     <Compile Include="PartialClasses\PartialJournalUseWorkshop.cs" />
