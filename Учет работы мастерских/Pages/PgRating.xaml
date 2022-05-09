@@ -15,15 +15,15 @@
         <DataTemplate x:Key="listCriteria">
             <Border BorderBrush="Black" BorderThickness="1">
                 <StackPanel >
-                    <TextBox Text="{Binding rating}" Margin="40"></TextBox>
+                    <TextBox Text="{Binding rating}" Width="35" Margin="40"></TextBox>
                 </StackPanel>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="listStudentNew">
-            <Border BorderBrush="Black" BorderThickness="0 1 0 1">
+            <Border BorderBrush="Black" BorderThickness="0 0.1 0 1" Margin="-8">
                 <StackPanel Orientation="Horizontal">
-                    <Border BorderBrush="Black" BorderThickness="0 0 1 0">
+                    <Border BorderBrush="Black" BorderThickness="0 0 1 0" Width="250">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding FullName}" VerticalAlignment="Center" x:Name="TxtName" Margin="60 0 2 0" ></TextBlock>
                             <TextBlock Text="    " Margin="40"></TextBlock>
@@ -46,7 +46,7 @@
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <ListView x:Name="ListCriterionName"   Margin="300 0 0 40 ">
+            <ListView x:Name="ListCriterionName"  SelectionMode="Single"  Margin="280 100 200 40 ">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -55,7 +55,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="Margin" Value="2, 2, 50, 2"/>
+                        <Setter Property="Margin" Value="0, 2, 55, 2"/>
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>

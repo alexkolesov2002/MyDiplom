@@ -37,6 +37,7 @@ namespace Учет_работы_мастерских
             ListRating.ItemsSource = students.Distinct();
 
             ListCriterionName.ItemsSource = criteria_name.Distinct();
+            ListCriterionName.IsEnabled = false;
 
         }
 
