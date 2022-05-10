@@ -7,10 +7,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Title="Настройки" Height="700" Width="600" Icon="Res/Logo_masterskie.ico">
+        Title="Настройки" Height="350" Width="500"   Icon="/Res/Logo_masterskie.ico">
     <Grid>
-        <Border CornerRadius="10" Background="Black">
-           
+        <Border CornerRadius="10,10,10,10" Background="White" MouseDown="Border_MouseDown">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Margin="0 30 0 0">
+                <Image Source="/Res/Logo_masterskie.png" Width="150" Height="128" Margin="100,0"></Image>
+                <StackPanel Orientation="Horizontal" Width="400" >
+                    <materialDesign:PackIcon Kind="EmailFast" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10"/>
+                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" Text="boldin_0202@mail.ru" VerticalAlignment="Top" FontSize="20" x:Name="TxtMail" materialDesign:HintAssist.Hint=" Почтовый адрес отправки " Width="300"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="300" />
+                <Button x:Name="BtnGoPost" HorizontalAlignment="Center"  Click="BtnGoPost_Click" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Content="Отправить на почту" Height="50" materialDesign:ButtonAssist.CornerRadius="25" Width="170"   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
+
+                </Button>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

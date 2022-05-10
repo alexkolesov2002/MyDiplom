@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Учет_работы_мастерских"
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1000"
+      d:DesignHeight="650" d:DesignWidth="1000"
       Title="PgAddStudentsxaml">
     <Page.Resources>
         <local:ItemPositionToIndexConverter x:Key="PositionConverter" />
@@ -16,15 +16,16 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="39*"/>
-            <RowDefinition Height="334*"/>
-            <RowDefinition Height="77*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="104*"/>
+            <RowDefinition Height="56*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <ComboBox x:Name="Groups" ></ComboBox>
+            <TextBlock Margin="20" >Выберите необходимую группу</TextBlock>
+            <ComboBox x:Name="Groups"  Width="100"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" MouseDown="StackPanel_MouseDown" >
-            <ListView x:Name="ListAddStudent" SelectionMode="Extended">
+        <StackPanel Grid.Row="1" MouseDown="StackPanel_MouseDown" >
+            <ListView HorizontalAlignment="Center" x:Name="ListAddStudent" Height="330" Width="500" SelectionMode="Extended">
                 <ListView.Resources>
                     <DataTemplate x:Key="ColumnDataTemplate">
                         <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Converter={StaticResource ResourceKey=PositionConverter}}" HorizontalAlignment="Center" />
@@ -33,25 +34,25 @@
                 <ListView.View>
                     <GridView >
                         <GridViewColumn Header="Номер" CellTemplate="{StaticResource ResourceKey=ColumnDataTemplate}" x:Name="rrr" />
-                        
+
                         <GridViewColumn Header="Фамилия" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding surname}" MinWidth="40"></TextBox>
+                                    <TextBox  Margin="10 0 0 0 " MinWidth="70" Text="{Binding surname}" ></TextBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Имя" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding name}" MinWidth="40"></TextBox>
+                                    <TextBox Text="{Binding name}" Margin="8 0 0 0 " MinWidth="70"></TextBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Отчество" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding patronymic}" MinWidth="40"></TextBox>
+                                    <TextBox Text="{Binding patronymic}" Margin="10 0 0 0 " MinWidth="70" ></TextBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -68,10 +69,13 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="+" VerticalAlignment="Top" x:Name="BtnAddRow" Click="BtnAddRow_Click"></Button>
-            <Button Grid.Row="2" Content="Удалить выделенное"  Click="Button_Click_1" ></Button>
+
+
         </StackPanel>
-        <Button Grid.Row="2" Content="Добавить студентов"  Click="Button_Click" Margin="0,23,0,22"></Button>
-      
+        <StackPanel Grid.Row="2">
+            <Button    Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300"   Content="Добавить строку"   VerticalAlignment="Top" x:Name="BtnAddRow" Click="BtnAddRow_Click" Margin="15" Cursor="Hand"></Button>
+            <Button  Content="Удалить выделенное"  Click="Button_Click_1" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300"   Margin="15" Cursor="Hand" ></Button>
+            <Button  Content="Добавить студентов"  Click="Button_Click" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300"   Margin="15" Cursor="Hand"></Button>
+        </StackPanel>
     </Grid>
 </Page>

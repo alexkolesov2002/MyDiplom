@@ -25,6 +25,10 @@ namespace Учет_работы_мастерских
         int index;
         public PgRating(int index)
         {
+            try
+            {
+
+          
             this.index = index;
             InitializeComponent();
             criteria_in_events = BaseModel.BaseConnect.criteria_in_event.Where(x => x.id_event == index).ToList();
@@ -38,6 +42,11 @@ namespace Учет_работы_мастерских
 
             ListCriterionName.ItemsSource = criteria_name.Distinct();
             ListCriterionName.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
 
         }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Учет_работы_мастерских
 {
-    internal class MyString
+    public static  class MyString
     {
-        public string ww { get; set; }
+        public static string Email;
     }
 }

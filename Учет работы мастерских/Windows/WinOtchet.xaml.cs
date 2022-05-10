@@ -13,6 +13,7 @@ namespace Учет_работы_мастерских
     /// </summary>
     public partial class WinOtchet : Window, INotifyPropertyChanged
     {
+
         public string StringDate { get; set; } = DateTime.Now.ToShortDateString();
         public string StringTime { get; set; } = DateTime.Now.ToShortTimeString();
         public string StringTimeS { get; set; }
@@ -21,15 +22,22 @@ namespace Учет_работы_мастерских
         public int MyCount { get; set; }
         public WinOtchet(DateTime s, DateTime po, string workshop, int Count)
         {
-            InitializeComponent();
-            StringTimeS = s.ToShortDateString();
-            StringTimePo = po.ToShortDateString();
-            WorkShop = "\"" + workshop + "\"";
-            MyCount = Count;
-            PropertyChanged(this, new PropertyChangedEventArgs("StringTimeS"));
-            PropertyChanged(this, new PropertyChangedEventArgs("StringTimePo"));
-            PropertyChanged(this, new PropertyChangedEventArgs("WorkShop"));
-            PropertyChanged(this, new PropertyChangedEventArgs("MyCount"));
+            try
+            {
+                InitializeComponent();
+                StringTimeS = s.ToShortDateString();
+                StringTimePo = po.ToShortDateString();
+                WorkShop = "\"" + workshop + "\"";
+                MyCount = Count;
+                PropertyChanged(this, new PropertyChangedEventArgs("StringTimeS"));
+                PropertyChanged(this, new PropertyChangedEventArgs("StringTimePo"));
+                PropertyChanged(this, new PropertyChangedEventArgs("WorkShop"));
+                PropertyChanged(this, new PropertyChangedEventArgs("MyCount"));
+            }
+            catch
+            {
+
+            }
 
         }
 
@@ -48,28 +56,35 @@ namespace Учет_работы_мастерских
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string FilePath = "";
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                FilePath = openFileDialog.FileName;
-            };
-
-            MailAddress mailAddress = new MailAddress("prof-probi-prog@ngknn.ru", "Мася");
-            MailAddress toAdress = new MailAddress("boldin_0202@mail.ru", "Try");
-            MailMessage message = new MailMessage(mailAddress, toAdress);
-            message.Body = "Спокойной ночи";
-            message.Subject = "Люблю";
-            message.Attachments.Add(new Attachment(FilePath));
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Host = "smtp.mail.ru";
-            smtpClient.Port = 587;
-            smtpClient.EnableSsl = true;
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(mailAddress.Address, "GBHJU6032w");
-            smtpClient.SendMailAsync(message);
-            MessageBox.Show("Отчет успешно доставлен", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                string FilePath = "";
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    FilePath = openFileDialog.FileName;
+                };
+                new WinSettings().ShowDialog();
+                MailAddress mailAddress = new MailAddress("prof-probi-prog@ngknn.ru", "ГБПОУ НГК");
+                MailAddress toAdress = new MailAddress(MyString.Email, "Try");
+                MailMessage message = new MailMessage(mailAddress, toAdress);
+                message.Body = "Актуальный отчет о работе мастерских";
+                message.Subject = "Отправка отчета";
+                message.Attachments.Add(new Attachment(FilePath));
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = "smtp.mail.ru";
+                smtpClient.Port = 587;
+                smtpClient.EnableSsl = true;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(mailAddress.Address, "GBHJU6032w");
+                smtpClient.SendMailAsync(message);
+                MessageBox.Show("Письмо успешно доставлено", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка отправки, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

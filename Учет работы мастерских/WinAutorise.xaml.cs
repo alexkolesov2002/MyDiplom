@@ -44,10 +44,18 @@ namespace Учет_работы_мастерских
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-            if (e.ChangedButton == MouseButton.Left)
+            try
             {
-                this.DragMove();
+
+
+                if (e.ChangedButton == MouseButton.Left)
+                {
+                    this.DragMove();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Возникла непредвиденная ошибка", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
 
         }

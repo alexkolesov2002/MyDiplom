@@ -32,22 +32,29 @@ namespace Учет_работы_мастерских
 
         public MainWindow(users CurrentUser)
         {
-            InitializeComponent();
-            this.CurrentUser = CurrentUser;
-            NameUs = CurrentUser.name + " ";
-            PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
-            SurNameUs = CurrentUser.surname;
-            PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
-            RoleUs = CurrentUser.roles.role_title;
-            PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
-            // shop = new PgTakeWorkShop();
-            MainFrame.Navigate(new PgSelectWork(CurrentUser));
-            LoadPages.SwitchPages = MainFrame;
-            StartClock();
-            if (CurrentUser.id_role == 1)
+            try
             {
-                Button2.Visibility = Visibility.Visible;
-                Button3.Visibility = Visibility.Visible;
+                InitializeComponent();
+                this.CurrentUser = CurrentUser;
+                NameUs = CurrentUser.name + " ";
+                PropertyChanged(this, new PropertyChangedEventArgs("NameUs"));
+                SurNameUs = CurrentUser.surname;
+                PropertyChanged(this, new PropertyChangedEventArgs("SurNameUs"));
+                RoleUs = CurrentUser.roles.role_title;
+                PropertyChanged(this, new PropertyChangedEventArgs("RoleUs"));
+                // shop = new PgTakeWorkShop();
+                MainFrame.Navigate(new PgSelectWork(CurrentUser));
+                LoadPages.SwitchPages = MainFrame;
+                StartClock();
+                if (CurrentUser.id_role == 1)
+                {
+                    Button2.Visibility = Visibility.Visible;
+                    Button3.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
             // ShowMarksClockFace();
 
@@ -65,34 +72,55 @@ namespace Учет_работы_мастерских
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            Button2.Style = (Style)this.Resources["menuButtonActive"];
-            Button1.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
-            Button4.Style = (Style)this.Resources["menuButton"];
-            LoadPages.SwitchPages.Navigate(new PgSelectChart());
+            try
+            {
+                Button2.Style = (Style)this.Resources["menuButtonActive"];
+                Button1.Style = (Style)this.Resources["menuButton"];
+                Button3.Style = (Style)this.Resources["menuButton"];
+                Button4.Style = (Style)this.Resources["menuButton"];
+                LoadPages.SwitchPages.Navigate(new PgSelectChart());
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Данный раздел сейчас недоступен", "Предупреждение", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error, System.Windows.Forms.MessageBoxDefaultButton.Button1);
+            }
         }
 
 
 
         private void Button4_Click(object sender, RoutedEventArgs e)
         {
-            Button4.Style = (Style)this.Resources["menuButtonActive"];
-            Button2.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
-            Button1.Style = (Style)this.Resources["menuButton"];
-            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
+            try
+            {
+                Button4.Style = (Style)this.Resources["menuButtonActive"];
+                Button2.Style = (Style)this.Resources["menuButton"];
+                Button3.Style = (Style)this.Resources["menuButton"];
+                Button1.Style = (Style)this.Resources["menuButton"];
+                LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Данный раздел сейчас недоступен", "Предупреждение", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error, System.Windows.Forms.MessageBoxDefaultButton.Button1);
+
+            }
         }
 
 
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            Button1.Style = (Style)this.Resources["menuButtonActive"];
-            Button2.Style = (Style)this.Resources["menuButton"];
-            Button3.Style = (Style)this.Resources["menuButton"];
-            Button4.Style = (Style)this.Resources["menuButton"];
-
-            LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
+            try
+            {
+                Button1.Style = (Style)this.Resources["menuButtonActive"];
+                Button2.Style = (Style)this.Resources["menuButton"];
+                Button3.Style = (Style)this.Resources["menuButton"];
+                Button4.Style = (Style)this.Resources["menuButton"];
+                LoadPages.SwitchPages.Navigate(new PgSelectWork(CurrentUser));
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Данный раздел сейчас недоступен", "Предупреждение", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error, System.Windows.Forms.MessageBoxDefaultButton.Button1);
+            }
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
@@ -108,50 +136,57 @@ namespace Учет_работы_мастерских
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            var rotateSecondArrow = new RotateTransform();
-            var rotateMinuteArrow = new RotateTransform();
-            var rotateHourArrow = new RotateTransform();
+            try
+            {
+                var rotateSecondArrow = new RotateTransform();
+                var rotateMinuteArrow = new RotateTransform();
+                var rotateHourArrow = new RotateTransform();
 
 
-            // Данные текущего времени.
-            int sec = DateTime.Now.Second;
-            int min = DateTime.Now.Minute;
-            int hour = DateTime.Now.Hour;
-            MyDate = DateTime.Now.ToLongDateString();
-            PropertyChanged(this, new PropertyChangedEventArgs("MyDate"));
-            MyTime = DateTime.Now.ToShortTimeString();
-            PropertyChanged(this, new PropertyChangedEventArgs("MyTime"));
-
-
-
-            // Вычисленный угол для секундной стрелки.
-            rotateSecondArrow.Angle = baseAngleNumberSystem * sec;
-
-            // Вращение стрелки на вычисленный угол.
+                // Данные текущего времени.
+                int sec = DateTime.Now.Second;
+                int min = DateTime.Now.Minute;
+                int hour = DateTime.Now.Hour;
+                MyDate = DateTime.Now.ToLongDateString();
+                PropertyChanged(this, new PropertyChangedEventArgs("MyDate"));
+                MyTime = DateTime.Now.ToShortTimeString();
+                PropertyChanged(this, new PropertyChangedEventArgs("MyTime"));
 
 
 
+                // Вычисленный угол для секундной стрелки.
+                rotateSecondArrow.Angle = baseAngleNumberSystem * sec;
 
-            // Угол минутной стрелки от количества полных минут плюс
-            // угол секунд приведенный к долям текущей минуты.
-            rotateMinuteArrow.Angle = (min * baseAngleNumberSystem) + (rotateSecondArrow.Angle / 60.0);
-
-            MinuteArrow.RenderTransform = rotateMinuteArrow;
+                // Вращение стрелки на вычисленный угол.
 
 
 
-            // Данные часа конвертируем в 12-часовой вид,
-            // вычисляем угол полных часов плюс
-            // угол минут приведенный к долям текущего часа.
-            rotateHourArrow.Angle = (hour - 12) * baseAngleHour + rotateMinuteArrow.Angle / 12;
 
-            HourArrow.RenderTransform = rotateHourArrow;
+                // Угол минутной стрелки от количества полных минут плюс
+                // угол секунд приведенный к долям текущей минуты.
+                rotateMinuteArrow.Angle = (min * baseAngleNumberSystem) + (rotateSecondArrow.Angle / 60.0);
+
+                MinuteArrow.RenderTransform = rotateMinuteArrow;
 
 
 
-            // После вычисления всех углов и поворотов стрелок,
-            // включаем видимость формы.
-            this.Show();
+                // Данные часа конвертируем в 12-часовой вид,
+                // вычисляем угол полных часов плюс
+                // угол минут приведенный к долям текущего часа.
+                rotateHourArrow.Angle = (hour - 12) * baseAngleHour + rotateMinuteArrow.Angle / 12;
+
+                HourArrow.RenderTransform = rotateHourArrow;
+
+
+
+                // После вычисления всех углов и поворотов стрелок,
+                // включаем видимость формы.
+                this.Show();
+            }
+            catch
+            {
+
+            }
         }
 
 
@@ -168,16 +203,21 @@ namespace Учет_работы_мастерских
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            try
+            {
+                // Зафиксируем неизменяемую позицию.
+                constPosition = e.GetPosition(this);
 
-            // Зафиксируем неизменяемую позицию.
-            constPosition = e.GetPosition(this);
+                // Разрешаем движение.
+                move = true;
 
-            // Разрешаем движение.
-            move = true;
+                // Чтобы мышь не теряла окно, даже если окно скрывается под тормост окнами.
+                this.CaptureMouse();
+            }
+            catch
+            {
 
-            // Чтобы мышь не теряла окно, даже если окно скрывается под тормост окнами.
-            this.CaptureMouse();
-
+            }
         }
 
 
@@ -219,25 +259,41 @@ namespace Учет_работы_мастерских
         // Запуск часов.
         void StartClock()
         {
-            // Скрываем форму пока не заработали часы.
-            // После первого события Timer_Tick,
-            // когда стрелки скорректируют своё положение,
-            // сделаем форму видимой.
-            this.Hide();
+            try
+            {
 
-            var timer = new DispatcherTimer();
 
-            timer.Tick += Timer_Tick;
-            timer.Start();
+                // Скрываем форму пока не заработали часы.
+                // После первого события Timer_Tick,
+                // когда стрелки скорректируют своё положение,
+                // сделаем форму видимой.
+                this.Hide();
+
+                var timer = new DispatcherTimer();
+
+                timer.Tick += Timer_Tick;
+                timer.Start();
+            }
+            catch
+            {
+
+            }
         }
 
 
         // Показываем или скрываем метки циферблата
         void ShowMarksClockFace(bool show = true)
         {
-            //MinuteMarks();
+            try
+            {
+                //MinuteMarks();
 
-            HourMarks();
+                HourMarks();
+            }
+            catch
+            {
+
+            }
         }
 
 
@@ -248,42 +304,49 @@ namespace Учет_работы_мастерских
         // Часовая маркировка циферблата
         void HourMarks()
         {
-
-            for (int i = 0; i < 12; i++)
+            try
             {
-                var b = new Border()
+
+
+                for (int i = 0; i < 12; i++)
                 {
-                    // Определяет толщину метки.
-                    Height = 2,
+                    var b = new Border()
+                    {
+                        // Определяет толщину метки.
+                        Height = 2,
 
-                    RenderTransformOrigin = new Point(0.5, 0.5),
-                    HorizontalAlignment = HorizontalAlignment.Stretch,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-
-
-                var b1 = new Border()
-                {
-                    // Определяет длину метки.
-                    Width = 10,
-
-                    Background = Brushes.Black,
-                    HorizontalAlignment = HorizontalAlignment.Right,
-                    BorderBrush = Brushes.Black
-                };
+                        RenderTransformOrigin = new Point(0.5, 0.5),
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
 
 
-                b.Child = b1;
+                    var b1 = new Border()
+                    {
+                        // Определяет длину метки.
+                        Width = 10,
 
-                // Часовые метки через 30 градусов.
-                // Вращаем только контейнер.
-                var rotate = new RotateTransform(i * 30);
-                b.RenderTransform = rotate;
+                        Background = Brushes.Black,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        BorderBrush = Brushes.Black
+                    };
 
 
-                ClockFace.Children.Add(b);
+                    b.Child = b1;
+
+                    // Часовые метки через 30 градусов.
+                    // Вращаем только контейнер.
+                    var rotate = new RotateTransform(i * 30);
+                    b.RenderTransform = rotate;
+
+
+                    ClockFace.Children.Add(b);
+                }
             }
+            catch
+            {
 
+            }
         }
 
 
@@ -302,12 +365,15 @@ namespace Учет_работы_мастерских
             this.Close();
         }
 
-        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+
+
+        private void LeftBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new WinSettings().ShowDialog();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
-
-
     }
 }
 

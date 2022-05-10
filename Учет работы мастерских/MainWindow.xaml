@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Левое меню-->
-        <Border CornerRadius="10 0 0 10" x:Name="LeftBorder" Grid.RowSpan="2">
+        <Border CornerRadius="10 0 0 10" x:Name="LeftBorder" Grid.RowSpan="2" MouseDown="LeftBorder_MouseDown">
             <Border.Background >
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,3.5">
                     <GradientStop Color="#956cff" Offset="0"></GradientStop>
@@ -267,12 +267,6 @@
 
                     </Button>
 
-                    <Button Style="{StaticResource menuButtonStatic}" Width="66" x:Name="BtnSettings" Click="BtnSettings_Click">
-                        <StackPanel Orientation="Horizontal" >
-                            <fa:IconImage HorizontalAlignment="Center" Icon="cog" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock  Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </Button>
 
 
                 </StackPanel>

@@ -10,17 +10,24 @@ namespace Учет_работы_мастерских
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ListViewItem lvItem = value as ListViewItem;
-            int index = 0;
-
-            if (lvItem != null)
+            try
             {
-                ListView listView = ItemsControl.ItemsControlFromItemContainer(lvItem) as ListView;
-                //нумерацию будем вести с единицы
-                index = listView.ItemContainerGenerator.IndexFromContainer(lvItem) + 1;
-            }
+                ListViewItem lvItem = value as ListViewItem;
+                int index = 0;
 
-            return index;
+                if (lvItem != null)
+                {
+                    ListView listView = ItemsControl.ItemsControlFromItemContainer(lvItem) as ListView;
+                    //нумерацию будем вести с единицы
+                    index = listView.ItemContainerGenerator.IndexFromContainer(lvItem) + 1;
+                }
+
+                return index;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
