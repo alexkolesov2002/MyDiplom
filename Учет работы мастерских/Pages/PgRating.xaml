@@ -16,7 +16,7 @@
         <DataTemplate x:Key="listCriteria">
             <Border BorderBrush="Black" BorderThickness="1">
                 <StackPanel >
-                    <TextBox Text="{Binding rating}" Width="35" Margin="40" PreviewTextInput="TextBox_PreviewTextInput" ></TextBox>
+                    <TextBox Text="{Binding Rating}" Width="35" Margin="40" PreviewTextInput="TextBox_PreviewTextInput" ></TextBox>
                 </StackPanel>
             </Border>
         </DataTemplate>

@@ -83,9 +83,9 @@ namespace Учет_работы_мастерских
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
-                System.Windows.MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             //var doc = new Document();
             //RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(300, 300, 0, 0, PixelFormats.Pbgra32);
