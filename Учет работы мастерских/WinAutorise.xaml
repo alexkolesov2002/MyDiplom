@@ -55,7 +55,7 @@
                 <Image Source="/Res/Logo_masterskie.png" Width="150" Height="128" Margin="100,0"/>
                 <StackPanel Orientation="Horizontal" Width="417" >
                     <materialDesign:PackIcon Kind="Account" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10"/>
-                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" x:Name="TxtLogin2" materialDesign:HintAssist.Hint="Ваш логин" Width="300"/>
+                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" x:Name="TxtLogin2" materialDesign:HintAssist.Hint="Ваш логин" Width="300" Cursor="Arrow"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Width="417" >

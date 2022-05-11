@@ -83,7 +83,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  Uid="{Binding id_equipment}" x:Name="BtnDelete" Click="BtnDelete_Click">
-                                                    <materialDesign:PackIcon Kind="DeleteForever" Height="20" Width="20" />
+                                                    <materialDesign:PackIcon Kind="CloseCircleOutline   " Height="20" Width="20" />
                                                 </Button>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
