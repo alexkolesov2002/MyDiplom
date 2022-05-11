@@ -86,7 +86,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <!--<Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+                    <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
 
                         <materialDesign:PackIcon Height="24" Width="24">
                             <materialDesign:PackIcon.Style>
@@ -107,7 +107,7 @@
                                 </Style>
                             </materialDesign:PackIcon.Style>
                         </materialDesign:PackIcon>
-                    </Button>-->
+                    </Button>
                 </StackPanel>
 
                 <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">

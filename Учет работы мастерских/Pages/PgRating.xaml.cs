@@ -50,11 +50,7 @@ namespace Учет_работы_мастерских
 
         }
 
-        private void TxtName_Loaded(object sender, RoutedEventArgs e)
-        {
 
-
-        }
 
         private void Lenin_Loaded(object sender, RoutedEventArgs e)
         {
@@ -83,43 +79,33 @@ namespace Учет_работы_мастерских
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            //var doc = new Document();
-            //RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap(300, 300, 0, 0, PixelFormats.Pbgra32);
-            //renderTargetBitmap.Render(Griddd);
-            //PngBitmapEncoder pngImage = new PngBitmapEncoder();
-            //pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            //System.Windows.Forms.FolderBrowserDialog saveFileDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            //if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-            //    return;
-            //// получаем выбранный файл
-            //string filename = saveFileDialog1.SelectedPath;
-            //// сохраняем текст в файл  
-            //System.Windows.MessageBox.Show(filename);
-            //byte[] myBytes;
-            //using (var memoryStream = new System.IO.MemoryStream())
-            //{
-            //    pngImage.Save(memoryStream);
-            //    myBytes = memoryStream.ToArray();
-            //}
-            //PdfWriter.GetInstance(doc, new FileStream(filename + @"\Document.pdf", System.IO.FileMode.Create));
 
-            //doc.Open();
-            //iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(myBytes);
-            //jpg.Alignment = Element.ALIGN_CENTER;
-            //doc.Add(jpg);
-            //doc.Close();
         }
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
+            try
+            {
                 e.Handled = "0123456789 ,".IndexOf(e.Text) < 0;
-           
+
+
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+
         }
 
-       
+        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.SwitchPages.GoBack();
+        }
     }
 }

@@ -41,13 +41,15 @@
             </Border>
         </DataTemplate>
     </Page.Resources>
-    <Grid x:Name="Griddd">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="196*"/>
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <ListView x:Name="ListCriterionName"  SelectionMode="Single"  Margin="280 100 200 40 ">
+        
+        <ScrollViewer  Grid.Row="0"   >
+            <StackPanel CanVerticallyScroll="True">
+                <ListView x:Name="ListCriterionName"  SelectionMode="Single"  Margin="280 100 200 40 ">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -68,7 +70,13 @@
                 </ListBox.ItemsPanel>
 
             </ListBox>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Row="1">
+            <Button x:Name="BtnGoBack" Content="Назад"  Click="BtnGoBack_Click" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300" Margin="10"></Button>
+            <Button x:Name="BtnSaveRating" Content="Сохранить изменения"  Click="BtnSaveRating_Click"  Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300" Margin="10" Cursor="Hand" ></Button>
+     
         </StackPanel>
-        <Button x:Name="BtnSaveRating" Content="Сохранить изменения"  Click="BtnSaveRating_Click" Grid.Row="1" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="300"   Margin="0,13,0,13"></Button>
     </Grid>
 </Page>
