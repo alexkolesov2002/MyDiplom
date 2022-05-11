@@ -15,28 +15,42 @@ namespace Учет_работы_мастерских
         public int Loading { get; set; } = 0;
         public PgSelectWork(users CurrentUser)
         {
-            this.CurrentUser = CurrentUser;
-            InitializeComponent();
-            ComboBoxWorkShops.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
-            ComboBoxWorkShops.DisplayMemberPath = "title_workshop";
+            try
+            {
+                this.CurrentUser = CurrentUser;
+                InitializeComponent();
+                ComboBoxWorkShops.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
+                ComboBoxWorkShops.DisplayMemberPath = "title_workshop";
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-        }
+            }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         async void Zagruzka()
         {
-            while (Loading != 100)
+            try
             {
-                Loading += 4;
-                await Task.Delay(4);
-                PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+                while (Loading != 100)
+                {
+                    Loading += 4;
+                    await Task.Delay(4);
+                    PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+                }
+                await Task.Delay(15);
+                LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem, CurrentUser));
             }
-            await Task.Delay(15);
-            LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem, CurrentUser));
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
-        }
+            }
 
         private void BtnGoTakeWorkShop_Click(object sender, RoutedEventArgs e)
         {
