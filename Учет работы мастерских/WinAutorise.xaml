@@ -14,7 +14,7 @@
 
     <Grid>
         <Border CornerRadius="10,10,10,10" Background="White" MouseDown="Border_MouseDown">
-           
+
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Margin="0 30 0 0">
                 <Image Source="Res/Logo_masterskie.png" Width="150" Height="128" Margin="100,0"></Image>
                 <StackPanel Orientation="Horizontal" Width="300" >
@@ -24,12 +24,51 @@
 
                 <StackPanel Orientation="Horizontal" Width="300" >
                     <materialDesign:PackIcon Kind="KeyVariant" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
-                    <PasswordBox    Margin="10 10 10 10" FontSize="20" x:Name="TxtPass" materialDesign:HintAssist.Hint="Ваш пароль" materialDesign:TextFieldAssist.HasClearButton="True" Height="40" VerticalAlignment="Top" Width="300"/>
+                    <PasswordBox    Margin="10 10 10 10" FontSize="20" x:Name="TxtPass" materialDesign:HintAssist.Hint="Ваш пароль" materialDesign:TextFieldAssist.HasClearButton="True" Height="40" VerticalAlignment="Top" Width="300" Cursor="Arrow"/>
+                    <materialDesign:PackIcon Kind="EyeOutline" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
                 </StackPanel>
                 <Button x:Name="BtnAutorise" HorizontalAlignment="Center"  Click="BtnAutorise_Click" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Content="Авторизироваться" Height="50" materialDesign:ButtonAssist.CornerRadius="25" Width="170"   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
 
                 </Button>
             </StackPanel>
         </Border>
+        <Border CornerRadius="10,10,10,10" Background="White" MouseDown="Border_MouseDown">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Margin="0 30 0 0">
+                <Image Source="/Res/Logo_masterskie.png" Width="150" Height="128" Margin="100,0"/>
+                <StackPanel Orientation="Horizontal" Width="300" >
+                    <materialDesign:PackIcon Kind="Account" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10"/>
+                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" x:Name="TxtLogin1" materialDesign:HintAssist.Hint="Ваш логин" Width="300"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="300" >
+                    <materialDesign:PackIcon Kind="KeyVariant" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
+                    <PasswordBox    Margin="10 10 10 10" FontSize="20" x:Name="TxtPass1" materialDesign:HintAssist.Hint="Ваш пароль" materialDesign:TextFieldAssist.HasClearButton="True" Height="40" VerticalAlignment="Top" Width="300" Cursor="Arrow"/>
+                    <materialDesign:PackIcon Kind="EyeOutline" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
+                </StackPanel>
+                <Button x:Name="BtnAutorise1" HorizontalAlignment="Center"  Click="BtnAutorise_Click" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Content="Авторизироваться" Height="50" materialDesign:ButtonAssist.CornerRadius="25" Width="170"   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="10,10,10,10" Background="White" MouseDown="Border_MouseDown">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0 30 0 0">
+                <Image Source="/Res/Logo_masterskie.png" Width="150" Height="128" Margin="100,0"/>
+                <StackPanel Orientation="Horizontal" Width="417" >
+                    <materialDesign:PackIcon Kind="Account" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10"/>
+                    <TextBox   Margin="10 10 10 10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" x:Name="TxtLogin2" materialDesign:HintAssist.Hint="Ваш логин" Width="300"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="417" >
+                    <materialDesign:PackIcon Kind="KeyVariant" Height="47" Width="37" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10 10 10 10" />
+                    <PasswordBox PasswordChanged="TxtPass2_PasswordChanged"   Margin="10 10 10 10" FontSize="20" x:Name="TxtPass2"   materialDesign:HintAssist.Hint="Ваш пароль" materialDesign:TextFieldAssist.HasClearButton="True" Height="40" VerticalAlignment="Top" Width="300" Cursor="Arrow"/>
+
+
+                </StackPanel>
+                <Button IsDefault="True" x:Name="BtnAutorise2" HorizontalAlignment="Center"  Click="BtnAutorise_Click" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Content="Авторизироваться" Height="50" materialDesign:ButtonAssist.CornerRadius="25" Width="170"   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+            </StackPanel>
+
+        </Border>
+        <materialDesign:PackIcon Kind="EyeOutline" Height="47" Width="37" HorizontalAlignment="Stretch"  Margin="520,290,142,0"  MouseDown="PackIcon_MouseDown" MouseUp="PackIcon_MouseUp" MouseLeave="PackIcon_MouseLeave" RenderTransformOrigin="0.635,0.596"/>
+        <TextBox    FontSize="20" x:Name="TxtBuf" Height="40" Width="300"  Panel.ZIndex="0" Margin="209,294,191,166" Visibility="Collapsed"/>
     </Grid>
 </Window>

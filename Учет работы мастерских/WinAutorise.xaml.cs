@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -58,6 +59,30 @@ namespace Учет_работы_мастерских
                 MessageBox.Show("Возникла непредвиденная ошибка", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
 
+        }
+
+        private void PackIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TxtPass2.Visibility = Visibility.Hidden;
+            TxtBuf.Visibility = Visibility.Visible;
+        }
+
+        private void PackIcon_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            TxtBuf.Visibility = Visibility.Hidden;
+            TxtPass2.Visibility = Visibility.Visible;
+           
+        }
+
+        private void TxtPass2_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            TxtBuf.Text = TxtPass2.Password; 
+        }
+
+        private void PackIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            TxtBuf.Visibility = Visibility.Hidden;
+            TxtPass2.Visibility = Visibility.Visible;
         }
     }
 }
