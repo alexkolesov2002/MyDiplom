@@ -15,28 +15,52 @@ namespace Учет_работы_мастерских
         List<students> students = new List<students>();
         public PgAddStudentsxaml()
         {
-            InitializeComponent();
-            ListAddStudent.ItemsSource = students;
-            Groups.ItemsSource = BaseModel.BaseConnect.groups.ToList();
-            Groups.DisplayMemberPath = "title_group";
-            Groups.SelectedValuePath = "id_group";
+            try
+            {
+                InitializeComponent();
+                ListAddStudent.ItemsSource = students;
+                Groups.ItemsSource = BaseModel.BaseConnect.groups.ToList();
+                Groups.DisplayMemberPath = "title_group";
+                Groups.SelectedValuePath = "id_group";
+            }
+            catch
+            {
+
+                MessageBox.Show("Возникла непредвиденная ошибка, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
 
         }
 
         private void ComboBox_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            System.Windows.Controls.ComboBox comboBox = sender as System.Windows.Controls.ComboBox;
-            comboBox.ItemsSource = BaseModel.BaseConnect.groups.ToList();
-            comboBox.DisplayMemberPath = "title_group";
+            try
+            {
+                System.Windows.Controls.ComboBox comboBox = sender as System.Windows.Controls.ComboBox;
+                comboBox.ItemsSource = BaseModel.BaseConnect.groups.ToList();
+                comboBox.DisplayMemberPath = "title_group";
+            }
+            catch
+            {
+
+                MessageBox.Show("Возникла непредвиденная ошибка, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
 
         }
 
         private void BtnAddRow_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            students student = new students();
-            students.Add(student);
-            ListAddStudent.ItemsSource = students;
-            ListAddStudent.Items.Refresh();
+            try
+            {
+                students student = new students();
+                students.Add(student);
+                ListAddStudent.ItemsSource = students;
+                ListAddStudent.Items.Refresh();
+            }
+            catch
+            {
+
+                MessageBox.Show("Возникла непредвиденная ошибка, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
 
         }
 
@@ -98,19 +122,33 @@ namespace Учет_работы_мастерских
 
         private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
         {
-            List<students> students = new List<students>();
-            students = (List<students>)ListAddStudent.ItemsSource;
-            foreach (students student in ListAddStudent.SelectedItems)
+            try
             {
-                students.Remove(student);
+                List<students> students = new List<students>();
+                students = (List<students>)ListAddStudent.ItemsSource;
+                foreach (students student in ListAddStudent.SelectedItems)
+                {
+                    students.Remove(student);
+                }
+                ListAddStudent.ItemsSource = students;
+                ListAddStudent.Items.Refresh();
             }
-            ListAddStudent.ItemsSource = students;
-            ListAddStudent.Items.Refresh();
+            catch
+            {
+                MessageBox.Show("Возникла ошибка связи с базой данных, проверьте подключение к интернету", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
 
         private void StackPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ListAddStudent.Items.Refresh();
+            try
+            {
+                ListAddStudent.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("Возникла непредвиденная ошибка, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
     }
 }

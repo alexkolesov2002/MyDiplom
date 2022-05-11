@@ -43,7 +43,7 @@ namespace Учет_работы_мастерских
                 MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            }
+        }
         async void Zagruzka()
         {
             try
@@ -68,7 +68,7 @@ namespace Учет_работы_мастерских
                     throw new Exception("Заполните все необходимые параметры");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -78,45 +78,93 @@ namespace Учет_работы_мастерских
         }
         private void BtnAddRating_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            int id = Convert.ToInt32(button.Uid);
+            try
+            {
+                Button button = (Button)sender;
+                int id = Convert.ToInt32(button.Uid);
 
-            LoadPages.SwitchPages.Navigate(new PgRating(id));
+                LoadPages.SwitchPages.Navigate(new PgRating(id));
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CalendarS_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (users.id_role == 1)
+            try
             {
-
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
+                if (users.id_role == 1)
                 {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
-                    ListUseWorkShop.Items.Refresh();
-                }
-                else if (ComboSelectWork.SelectedItem != null)
-                {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
-                    ListUseWorkShop.Items.Refresh();
-                }
 
+                    if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+                    else if (ComboSelectWork.SelectedItem != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+
+                }
+                else
+                {
+                    if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+
+                }
             }
-            else
+            catch
             {
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
-                {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
-                    ListUseWorkShop.Items.Refresh();
-                }
-
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void CalendarPO_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (users.id_role == 1)
+            try
             {
+                if (users.id_role == 1)
+                {
 
+                    if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+                    else if (ComboSelectWork.SelectedItem != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+
+                }
+                else
+                {
+                    if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                    {
+                        ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                        ListUseWorkShop.Items.Refresh();
+                    }
+
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ComboSelectWork_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
                 if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
                 {
                     ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
@@ -127,31 +175,10 @@ namespace Учет_работы_мастерских
                     ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
                     ListUseWorkShop.Items.Refresh();
                 }
-
             }
-            else
+            catch
             {
-                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
-                {
-                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
-                    ListUseWorkShop.Items.Refresh();
-                }
-
-            }
-        }
-
-        private void ComboSelectWork_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null && ComboSelectWork.SelectedItem != null)
-            {
-                ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
-                ListUseWorkShop.Items.Refresh();
-            }
-            else if (ComboSelectWork.SelectedItem != null)
-            {
-                ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
-                ListUseWorkShop.Items.Refresh();
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -159,12 +186,26 @@ namespace Учет_работы_мастерских
 
         private void BtnBuildResult_Click(object sender, RoutedEventArgs e)
         {
-            Zagruzka();
+            try
+            {
+                Zagruzka();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(users));
+            try
+            {
+                LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(users));
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
