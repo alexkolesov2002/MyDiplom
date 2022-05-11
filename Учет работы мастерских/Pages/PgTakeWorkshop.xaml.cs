@@ -48,7 +48,7 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
                 ListAddGroup.ItemsSource = BaseModel.BaseConnect.groups.ToList();
-              
+                CalendarDate.DisplayDateStart = DateTime.Now;
                 studentsBufForAdd = students;
 
                 //ListPickedStudent.ItemsSource = studentsBufForResiult;
@@ -56,7 +56,7 @@ namespace Учет_работы_мастерских
             }
             catch
             {
-
+                System.Windows.MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -72,10 +72,19 @@ namespace Учет_работы_мастерских
                     await Task.Delay(4);
                     PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
                 }
+               
+                if ((List<Criterion>)ListCriterion.ItemsSource == null)
+                {
+                    throw new Exception("Добавьте критерии для мероприятия");
+                }
                 foreach (Criterion criteria in (List<Criterion>)ListCriterion.ItemsSource)
                 {
                     criteria criterion = new criteria() { title_criterion = criteria.title_criterion };
                     CriterionList.Add(criterion);
+                }
+                if (ComboBoxCompetisionSelect.SelectedValue == null)
+                {
+                    throw new Exception("Необходимо выбрать тип мероптиятия");
                 }
                 BaseModel.BaseConnect.criteria.AddRange(CriterionList);
 
@@ -96,6 +105,7 @@ namespace Учет_работы_мастерских
                 }
                 BaseModel.BaseConnect.criteria_in_event.AddRange(criteria_In_Events);
                 BaseModel.BaseConnect.SaveChanges();
+                
                 string Date = CalendarDate.SelectedDate.Value.ToShortDateString();
                 string Time = ClockTime.Time.ToLongTimeString();
 
@@ -124,9 +134,9 @@ namespace Учет_работы_мастерских
                 PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
                 //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
             }
-            catch
+            catch (Exception ex)
             {
-
+                System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -153,10 +163,17 @@ namespace Учет_работы_мастерских
 
         private void BtnAddCriterion_Click(object sender, RoutedEventArgs e)
         {
-            Criterion criterion = new Criterion() { title_criterion = TxtCriterion.Text, id_Criterion = ListCriterion.Items.Count };
-            CriterionTextList.Add(criterion);
-            ListCriterion.ItemsSource = CriterionTextList;
-            ListCriterion.Items.Refresh();
+            try
+            {
+                Criterion criterion = new Criterion() { title_criterion = TxtCriterion.Text, id_Criterion = ListCriterion.Items.Count };
+                CriterionTextList.Add(criterion);
+                ListCriterion.ItemsSource = CriterionTextList;
+                ListCriterion.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnDeleteFromList_Click(object sender, RoutedEventArgs e)
@@ -171,40 +188,54 @@ namespace Учет_работы_мастерских
             }
             catch
             {
-
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            int id = Convert.ToInt32(button.Uid);
-            studentsBufForResiult.Add(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
-            studentsBufForAdd2.Remove(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
-            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
-            studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
-            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
-            ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
-            ListAddStudent.Items.Refresh();
-            ListPickedStudent.Items.Refresh();
-            FindStudent();
+            try
+            {
+                Button button = (Button)sender;
+                int id = Convert.ToInt32(button.Uid);
+                studentsBufForResiult.Add(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
+                studentsBufForAdd2.Remove(studentsBufForAdd.FirstOrDefault(x => x.id_student == id));
+                studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+                studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
+                ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
+                ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
+                ListAddStudent.Items.Refresh();
+                ListPickedStudent.Items.Refresh();
+                FindStudent();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         async void FindStudent()
         {
-            studentsBufForAdd = students;
-
-            if (TxtFindStudent.Text != "")
+            try
             {
-                studentsBufForAdd = studentsBufForAdd2.FindAll(x => x.FullName.Contains(TxtFindStudent.Text)).ToList();
-                ListAddStudent.ItemsSource = studentsBufForAdd;
-                ListAddStudent.Items.Refresh();
-                ListAddStudent.Visibility = Visibility.Visible;
+                studentsBufForAdd = students;
 
+                if (TxtFindStudent.Text != "")
+                {
+                    studentsBufForAdd = studentsBufForAdd2.FindAll(x => x.FullName.Contains(TxtFindStudent.Text)).ToList();
+                    ListAddStudent.ItemsSource = studentsBufForAdd;
+                    ListAddStudent.Items.Refresh();
+                    ListAddStudent.Visibility = Visibility.Visible;
+
+                }
+                else
+                {
+                    ListAddStudent.Visibility = Visibility.Collapsed;
+                }
             }
-            else
+            catch
             {
-                ListAddStudent.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -217,80 +248,103 @@ namespace Учет_работы_мастерских
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            int id = Convert.ToInt32(button.Uid);
-            studentsBufForAdd2.Add(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
-            studentsBufForResiult.Remove(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
-            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
-            studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
-            ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
-            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
-            ListPickedStudent.Items.Refresh();
-            ListAddStudent.Items.Refresh();
-            FindStudent();
+            try
+            {
+
+
+                Button button = (Button)sender;
+                int id = Convert.ToInt32(button.Uid);
+                studentsBufForAdd2.Add(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
+                studentsBufForResiult.Remove(studentsBufForResiult.FirstOrDefault(x => x.id_student == id));
+                studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+                studentsBufForResiult = (List<students>)studentsBufForResiult.Distinct().ToList();
+                ListAddStudent.ItemsSource = studentsBufForAdd2.Distinct();
+                ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
+                ListPickedStudent.Items.Refresh();
+                ListAddStudent.Items.Refresh();
+                FindStudent();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = (CheckBox)sender;
-            int id = Convert.ToInt32(checkBox.Uid);
-            studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
-            List<students> s = new List<students>();
-            foreach (students student in studentsBufForAdd2)
+            try
             {
-                s.Add(student);
-            }
-
-            foreach (students student in s)
-            {
-                if (student.id_group == id)
-                {
-                    studentsBufForAdd2.Remove(student);
-                }
-            }
-            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct().ToList();
-            ListPickedStudent.Items.Refresh();
-            FindStudent();
-
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            int id = Convert.ToInt32(checkBox.Uid);
-            List<students> s = new List<students>();
-            studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
-            List<students> s1 = new List<students>();
-            foreach (students student in studentsBufForResiult)
-            {
-                s1.Add(student);
-            }
-
-            foreach (students student in s1)
-            {
-                if (student.id_group == id)
-                {
-                    studentsBufForAdd2.Add(student);
-                }
-            }
-            studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
-
-            foreach (students student in studentsBufForResiult)
-            {
-                if (student.id_group == id)
+                CheckBox checkBox = (CheckBox)sender;
+                int id = Convert.ToInt32(checkBox.Uid);
+                studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
+                List<students> s = new List<students>();
+                foreach (students student in studentsBufForAdd2)
                 {
                     s.Add(student);
                 }
 
+                foreach (students student in s)
+                {
+                    if (student.id_group == id)
+                    {
+                        studentsBufForAdd2.Remove(student);
+                    }
+                }
+                ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct().ToList();
+                ListPickedStudent.Items.Refresh();
+                FindStudent();
             }
-            foreach (students student in s)
+            catch
             {
-
-                studentsBufForResiult.Remove(student);
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
-            ListPickedStudent.Items.Refresh();
-            FindStudent();
+
+            }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CheckBox checkBox = (CheckBox)sender;
+                int id = Convert.ToInt32(checkBox.Uid);
+                List<students> s = new List<students>();
+                studentsBufForResiult.AddRange(BaseModel.BaseConnect.students.Where(x => x.id_group == id).ToList());
+                List<students> s1 = new List<students>();
+                foreach (students student in studentsBufForResiult)
+                {
+                    s1.Add(student);
+                }
+
+                foreach (students student in s1)
+                {
+                    if (student.id_group == id)
+                    {
+                        studentsBufForAdd2.Add(student);
+                    }
+                }
+                studentsBufForAdd2 = (List<students>)studentsBufForAdd2.Distinct().ToList();
+
+                foreach (students student in studentsBufForResiult)
+                {
+                    if (student.id_group == id)
+                    {
+                        s.Add(student);
+                    }
+
+                }
+                foreach (students student in s)
+                {
+
+                    studentsBufForResiult.Remove(student);
+                }
+                ListPickedStudent.ItemsSource = studentsBufForResiult.Distinct();
+                ListPickedStudent.Items.Refresh();
+                FindStudent();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

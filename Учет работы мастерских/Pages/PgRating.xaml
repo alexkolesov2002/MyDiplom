@@ -47,8 +47,8 @@
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
         
-        <ScrollViewer  Grid.Row="0"   >
-            <StackPanel CanVerticallyScroll="True">
+        <ScrollViewer  Grid.Row="0" x:Name="ScrolView" Loaded="ScrolView_Loaded"  >
+            <StackPanel CanVerticallyScroll="True" x:Name="MainStack" Loaded="MainStack_Loaded" MinHeight="1500">
                 <ListView x:Name="ListCriterionName"  SelectionMode="Single"  Margin="280 100 200 40 ">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>

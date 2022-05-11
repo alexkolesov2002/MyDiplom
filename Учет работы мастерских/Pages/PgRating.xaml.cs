@@ -42,6 +42,8 @@ namespace Учет_работы_мастерских
 
                 ListCriterionName.ItemsSource = criteria_name.Distinct();
                 ListCriterionName.IsEnabled = false;
+                ScrolView.Height += 1000;
+                MainStack.Height += 1000;
             }
             catch (Exception ex)
             {
@@ -106,6 +108,18 @@ namespace Учет_работы_мастерских
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
             LoadPages.SwitchPages.GoBack();
+        }
+
+        private void MainStack_Loaded(object sender, RoutedEventArgs e)
+        {
+            StackPanel stackPanel = (StackPanel)sender;
+            stackPanel.Height += 300;
+        }
+
+        private void ScrolView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            scroll.Height += 300;
         }
     }
 }
