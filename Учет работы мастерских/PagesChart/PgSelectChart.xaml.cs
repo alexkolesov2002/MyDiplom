@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Учет_работы_мастерских
 {
@@ -9,22 +10,36 @@ namespace Учет_работы_мастерских
     {
         public PgSelectChart()
         {
-            InitializeComponent();
-            LoadPages.SwitchChart = FrameChart;
-            ComboBoxSelectChart.SelectedIndex = 0;
+            try
+            {
+                InitializeComponent();
+                LoadPages.SwitchChart = FrameChart;
+                ComboBoxSelectChart.SelectedIndex = 0;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ComboBoxSelectChart_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (ComboBoxSelectChart.SelectedIndex)
+            try
             {
-                case 0:
-                    LoadPages.SwitchChart.Navigate(new PgChartViewEquip());
-                    break;
+                switch (ComboBoxSelectChart.SelectedIndex)
+                {
+                    case 0:
+                        LoadPages.SwitchChart.Navigate(new PgChartViewEquip());
+                        break;
 
-                case 1:
-                    LoadPages.SwitchChart.Navigate(new PgChartViewCountTaked());
-                    break;
+                    case 1:
+                        LoadPages.SwitchChart.Navigate(new PgChartViewCountTaked());
+                        break;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

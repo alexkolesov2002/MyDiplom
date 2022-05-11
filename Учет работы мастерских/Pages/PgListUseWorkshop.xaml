@@ -12,21 +12,21 @@
     <Page.Resources>
 
         <DataTemplate x:Key="EquipTemplate">
-            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+            <Border BorderBrush="Black" BorderThickness=" 0 0 0 1" Width="200" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Тип оборудования "></TextBlock>
-                        <TextBlock Text="{Binding types_equipment.title_type_equipment }"></TextBlock>
+                        <TextBlock Text="{Binding types_equipment.title_type_equipment }"  FontWeight="Bold" Foreground="Black"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Оборудование"></TextBlock>
-                        <TextBlock Text="{Binding title_equipment}"></TextBlock>
+                        <TextBlock Text="Оборудование "></TextBlock>
+                        <TextBlock Text="{Binding title_equipment}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Используемое количество"></TextBlock>
-                        <TextBlock Text="{Binding CountInEvent}"></TextBlock>
+                        <TextBlock Text="Используемое количество " ></TextBlock>
+                        <TextBlock Text="{Binding CountInEvent}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                     </StackPanel>
-                    
+
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -35,68 +35,69 @@
 
 
         <DataTemplate x:Key="ListUse">
-            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+            <Border BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness=" 0 0 0 1"   Width="500">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Преподаватель:</TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding users.name}"></TextBlock>
+                            <TextBlock Text="{Binding users.name}" FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding users.surname}"></TextBlock>
+                            <TextBlock Text="{Binding users.surname}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Мероприятие:</TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding events.title_event}"></TextBlock>
+                            <TextBlock Text="{Binding events.title_event}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Мастерская:</TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding workshops.title_workshop}"></TextBlock>
+                            <TextBlock Text="{Binding workshops.title_workshop}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Дата проведения:</TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding date_use, StringFormat='dd MMMM yyyy',  ConverterCulture='ru-RU'}"></TextBlock>
+                            <TextBlock Text="{Binding date_use, StringFormat='dd MMMM yyyy',  ConverterCulture='ru-RU'}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding date_use, StringFormat='HH:mm',  ConverterCulture='ru-RU'}"></TextBlock>
-                            <TextBlock Text=" "></TextBlock> 
-                            <Button x:Name="BtnAddRating" Uid="{Binding id_event}" Click="BtnAddRating_Click" Content="Выставить оценки"></Button>
+                            <TextBlock Text="{Binding date_use, StringFormat='HH:mm',  ConverterCulture='ru-RU'}"  FontWeight="Bold" Foreground="Black"></TextBlock>
+                            <TextBlock Text=" "></TextBlock>
+                            
                         </StackPanel>
-
+                        <Border BorderBrush="Black" BorderThickness="0 0 0 1" Margin="5"></Border>
                         <ListView ItemTemplate="{StaticResource EquipTemplate}" ItemsSource="{Binding listEquipmentsInEvents}" ></ListView>
+                        <Button x:Name="BtnAddRating" Uid="{Binding id_event}"  Click="BtnAddRating_Click" Content="Выставить оценки" Margin="10" materialDesign:ButtonAssist.CornerRadius="20" Width="210"    Cursor="Hand" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" ></Button>
                     </StackPanel>
+                    
                 </StackPanel>
+                
             </Border>
         </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="181*"/>
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="309*"/>
+            <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Выберите временной период " HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             <DatePicker  materialDesign:HintAssist.Hint="С такого то числа " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU"  Margin="20" x:Name="CalendarS" SelectedDateChanged="CalendarS_SelectedDateChanged" />
             <DatePicker  materialDesign:HintAssist.Hint="По такое-то число " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU" Margin="20" x:Name="CalendarPO"  SelectedDateChanged="CalendarPO_SelectedDateChanged"/>
             <ComboBox  SelectionChanged="ComboSelectWork_SelectionChanged"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите Мастерскую" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" x:Name="ComboSelectWork" Visibility="Collapsed">
-               
+
             </ComboBox >
-            <StackPanel Orientation="Vertical"> 
-            <Button Content="Составить отчет" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnBuildResult_Click" x:Name="BtnBuildResult" Cursor="Hand" Margin="30" Visibility="Collapsed" >
-
-            </Button>
-            <Button Content="Сбросить фильтры" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center"  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnClear_Click" x:Name="BtnClear" Cursor="Hand" Margin="5" Visibility="Visible" >
-
-            </Button>
-            </StackPanel>
         </StackPanel>
-       
-        <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop" Grid.Row ="1" ></ListView>
+
+        <ListView ItemTemplate="{StaticResource ListUse}" x:Name="ListUseWorkShop" Grid.Row ="1"  HorizontalAlignment="Center" VerticalAlignment="Center"></ListView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   Grid.Row="2">
+            <Button Content="Составить отчет"  Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="170"   Margin="15" Cursor="Hand" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnBuildResult_Click" x:Name="BtnBuildResult"  Visibility="Collapsed" />
+            <Button Content="Сбросить фильтры" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="170"  HorizontalAlignment="Center" VerticalAlignment="Center"  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"  Click="BtnClear_Click" x:Name="BtnClear" Cursor="Hand" Margin="15" Visibility="Visible" />
+        </StackPanel>
 
     </Grid>
 </Page>

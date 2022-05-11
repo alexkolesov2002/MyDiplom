@@ -20,37 +20,57 @@ namespace Учет_работы_мастерских
         public users users = new users();
         public PgListUseWorkshop(users users)
         {
-            InitializeComponent();
-            this.users = users;
-            if (users.id_role == 1)
+            try
             {
-                ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments();
-                ComboSelectWork.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
-                ComboSelectWork.DisplayMemberPath = "title_workshop";
-                ComboSelectWork.Visibility = Visibility.Visible;
-                BtnBuildResult.Visibility = Visibility.Visible;
+                InitializeComponent();
+                this.users = users;
+                if (users.id_role == 1)
+                {
+                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments();
+                    ComboSelectWork.ItemsSource = BaseModel.BaseConnect.workshops.ToList();
+                    ComboSelectWork.DisplayMemberPath = "title_workshop";
+                    ComboSelectWork.Visibility = Visibility.Visible;
+                    BtnBuildResult.Visibility = Visibility.Visible;
+
+                }
+                else
+                {
+                    ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             }
-            else
-            {
-                ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user);
-            }
-
-        }
         async void Zagruzka()
         {
-            while (Loading != 100)
+            try
             {
-                Loading += 4;
-                await Task.Delay(4);
-                PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+                while (Loading != 100)
+                {
+                    Loading += 4;
+                    await Task.Delay(4);
+                    PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+                }
+                await Task.Delay(15);
+                if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                {
+
+
+                    new WinOtchet((DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate, ComboSelectWork.Text, ListUseWorkShop.Items.Count).ShowDialog();
+                }
+                else
+                {
+                    Loading = 0;
+                    PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
+                    throw new Exception("Заполните все необходимые параметры");
+                }
             }
-            await Task.Delay(15);
-            if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+            catch(Exception ex)
             {
-
-
-                new WinOtchet((DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate, ComboSelectWork.Text, ListUseWorkShop.Items.Count).ShowDialog();
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 

@@ -7,18 +7,22 @@
       xmlns:local="clr-namespace:Учет_работы_мастерских"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PgSelectChart">
+      Title="PgSelectChart" Background="Transparent">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="77*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="369*"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="ComboBoxSelectChart" Grid.Row="0"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300"  SelectionChanged="ComboBoxSelectChart_SelectionChanged">
+
+        <ComboBox x:Name="ComboBoxSelectChart"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию" HorizontalAlignment="Center"  Width="300"  SelectionChanged="ComboBoxSelectChart_SelectionChanged">
             <ComboBoxItem>Используемое оборудование</ComboBoxItem>
             <ComboBoxItem>Количество использования мастерских</ComboBoxItem>
         </ComboBox >
-        <Frame x:Name="FrameChart" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
+        <Border Grid.Row="1" CornerRadius="10">
+            <Frame x:Name="FrameChart" NavigationUIVisibility="Hidden" ></Frame>
+        </Border>
     </Grid>
 </Page>

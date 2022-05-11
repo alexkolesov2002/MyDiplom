@@ -28,15 +28,22 @@ namespace Учет_работы_мастерских
         #endregion
         public PgChartViewCountTaked()
         {
-            InitializeComponent();
-            ComboBoxDate.SelectedIndex = 0;
-            if (CheckComboBox == false)
+            try
             {
+                InitializeComponent();
+                ComboBoxDate.SelectedIndex = 0;
+                if (CheckComboBox == false)
+                {
 
+                }
+                else
+                {
+                    BuildChart();
+                }
             }
-            else
+            catch
             {
-                BuildChart();
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -44,49 +51,58 @@ namespace Учет_работы_мастерских
         }
         private void ComboBoxDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckComboBox = true;
-            switch (ComboBoxDate.SelectedIndex)
+            try
             {
-                case 0:
-                    journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.ToList();
-                    if (Chart.Series != null)
-                    {
+
+
+                CheckComboBox = true;
+                switch (ComboBoxDate.SelectedIndex)
+                {
+                    case 0:
+                        journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.ToList();
+                        if (Chart.Series != null)
+                        {
+                            Chart.Series.Clear();
+                            BuildChart();
+                            PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
+                            Chart.Update(true, true);
+                        }
+                        else
+                        {
+                            BuildChart();
+                            Chart.Update(true, true);
+                        }
+
+                        break;
+                    case 1:
+                        var dateTimeLastMonth = DateTime.Now.AddMonths(-1);
+                        journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeLastMonth).ToList();
                         Chart.Series.Clear();
                         BuildChart();
                         PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
                         Chart.Update(true, true);
-                    }
-                    else
-                    {
+                        break;
+                    case 2:
+                        var dateTimeHalfYear = DateTime.Now.AddMonths(-6);
+                        journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeHalfYear).ToList();
+                        Chart.Series.Clear();
                         BuildChart();
+                        PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
                         Chart.Update(true, true);
-                    }
-
-                    break;
-                case 1:
-                    var dateTimeLastMonth = DateTime.Now.AddMonths(-1);
-                    journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeLastMonth).ToList();
-                    Chart.Series.Clear();
-                    BuildChart();
-                    PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
-                    Chart.Update(true, true);
-                    break;
-                case 2:
-                    var dateTimeHalfYear = DateTime.Now.AddMonths(-6);
-                    journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeHalfYear).ToList();
-                    Chart.Series.Clear();
-                    BuildChart();
-                    PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
-                    Chart.Update(true, true);
-                    break;
-                case 3:
-                    var dateTimeYear = DateTime.Now.AddYears(-1);
-                    journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeYear).ToList();
-                    Chart.Series.Clear();
-                    BuildChart();
-                    PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
-                    Chart.Update(true, true);
-                    break;
+                        break;
+                    case 3:
+                        var dateTimeYear = DateTime.Now.AddYears(-1);
+                        journal_Use_Workshops = BaseModel.BaseConnect.journal_use_workshop.Where(x => x.date_use > dateTimeYear).ToList();
+                        Chart.Series.Clear();
+                        BuildChart();
+                        PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
+                        Chart.Update(true, true);
+                        break;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -95,30 +111,37 @@ namespace Учет_работы_мастерских
 
         void BuildChart()
         {
-            SeriesCollection = new SeriesCollection();
-            BaseModel.BaseConnect = new Entities();
-
-            var result = journal_Use_Workshops.GroupBy(n => n.id_workshop).Select(m => new { m.Key, Count = m.Count() });
-            SeriesCollection = new SeriesCollection { };
-            foreach (workshops workshops in BaseModel.BaseConnect.workshops.ToList())
+            try
             {
-                var workShop = result.FirstOrDefault(x => x.Key == workshops.id_workshop);
-                if (workShop != null)
+                SeriesCollection = new SeriesCollection();
+                BaseModel.BaseConnect = new Entities();
+
+                var result = journal_Use_Workshops.GroupBy(n => n.id_workshop).Select(m => new { m.Key, Count = m.Count() });
+                SeriesCollection = new SeriesCollection { };
+                foreach (workshops workshops in BaseModel.BaseConnect.workshops.ToList())
                 {
-                    SeriesCollection.Add(new PieSeries { Title = workshops.title_workshop, Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToInt32(workShop.Count)) }, DataLabels = true, FontSize = 20 });
-                }
-                else
-                {
+                    var workShop = result.FirstOrDefault(x => x.Key == workshops.id_workshop);
+                    if (workShop != null)
+                    {
+                        SeriesCollection.Add(new PieSeries { Title = workshops.title_workshop, Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToInt32(workShop.Count)) }, DataLabels = true, FontSize = 20 });
+                    }
+                    else
+                    {
+
+                    }
 
                 }
 
+                //adding values or series will update and animate the chart automatically
+                //SeriesCollection.Add(new PieSeries());
+                //SeriesCollection[0].Values.Add(5);
+
+                DataContext = this;
             }
-
-            //adding values or series will update and animate the chart automatically
-            //SeriesCollection.Add(new PieSeries());
-            //SeriesCollection[0].Values.Add(5);
-
-            DataContext = this;
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -130,43 +153,64 @@ namespace Учет_работы_мастерских
 
         private void UpdateAllOnClick(object sender, RoutedEventArgs e)
         {
-            var r = new Random();
-
-            foreach (var series in SeriesCollection)
+            try
             {
-                foreach (var observable in series.Values.Cast<ObservableValue>())
+                var r = new Random();
+
+                foreach (var series in SeriesCollection)
                 {
-                    observable.Value = r.Next(0, 10);
+                    foreach (var observable in series.Values.Cast<ObservableValue>())
+                    {
+                        observable.Value = r.Next(0, 10);
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void AddSeriesOnClick(object sender, RoutedEventArgs e)
         {
-            var r = new Random();
-            var c = SeriesCollection.Count > 0 ? SeriesCollection[0].Values.Count : 5;
-
-            var vals = new ChartValues<ObservableValue>();
-
-            for (var i = 0; i < c; i++)
+            try
             {
-                vals.Add(new ObservableValue(r.Next(0, 10)));
+                var r = new Random();
+                var c = SeriesCollection.Count > 0 ? SeriesCollection[0].Values.Count : 5;
+
+                var vals = new ChartValues<ObservableValue>();
+
+                for (var i = 0; i < c; i++)
+                {
+                    vals.Add(new ObservableValue(r.Next(0, 10)));
+                }
+
+                SeriesCollection.Add(new PieSeries
+                {
+                    Values = vals
+                });
             }
-
-            SeriesCollection.Add(new PieSeries
+            catch
             {
-                Values = vals
-            });
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 
 
         private void RestartOnClick(object sender, RoutedEventArgs e)
         {
-            Chart.Series.Clear();
-            BuildChart();
-            PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
-            Chart.Update(true, true);
+            try
+            {
+                Chart.Series.Clear();
+                BuildChart();
+                PropertyChanged(this, new PropertyChangedEventArgs("SeriesCollection"));
+                Chart.Update(true, true);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 
