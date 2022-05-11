@@ -11,8 +11,7 @@ namespace Учет_работы_мастерских
 {
     using System;
     using System.Collections.Generic;
-    using System.Windows;
-
+    
     public partial class criteria_in_event
     {
         public int id_criteria_in_event { get; set; }
@@ -20,36 +19,7 @@ namespace Учет_работы_мастерских
         public int id_event { get; set; }
         public Nullable<int> id_student { get; set; }
         public Nullable<int> rating { get; set; }
-
-
-
-        public Nullable<int> Rating
-        { 
-            get { return rating; }
-
-            set
-            {
-                try
-                {
-                    if (value > 100)
-                    {
-                        throw new Exception("Превышено допустипое значение - 100");
-                    }
-                    else
-                    {
-
-                    }
-                    rating = value;
-                }
-                catch(Exception ex)
-                {
-                    System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                }
-        }
-
-
-
+    
         public virtual criteria criteria { get; set; }
         public virtual events events { get; set; }
         public virtual students students { get; set; }

@@ -22,7 +22,7 @@ namespace Учет_работы_мастерских
         {
             try
             {
-                users user = BaseModel.BaseConnect.users.FirstOrDefault(x => x.login == TxtLogin.Text && x.password == TxtPass.Password);
+                users user = BaseModel.BaseConnect.users.FirstOrDefault(x => x.login == TxtLogin2.Text && x.password == TxtPass2.Password);
                 if (user != null)
                 {
 
