@@ -52,7 +52,7 @@
             <RowDefinition Height="620*"/>
             <RowDefinition Height="103*"/>
         </Grid.RowDefinitions>
-        <Image Source="Res\Logo_masterskie.png" Grid.Row="0" Margin="10" Grid.ColumnSpan="2"/>
+        <Image Source="/Res\Logo_masterskie.png" Grid.Row="0" Margin="10" Grid.ColumnSpan="2"/>
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,129,0,93" Grid.RowSpan="5" Grid.ColumnSpan="5">
             <StackPanel Orientation="Horizontal"  Margin="70,0,30,10">
                 <TextBlock Text="Всего за переод с "></TextBlock>
