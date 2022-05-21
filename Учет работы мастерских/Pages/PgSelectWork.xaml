@@ -18,7 +18,7 @@
             </ComboBox >
            
                 <!-- raised button with progress, useful to auto dismiss/accept something -->
-            <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" Click="BtnGoTakeWorkShop_Click" x:Name="BtnGoTakeWorkShop" Cursor="Hand" Margin="20" IsEnabled="False">
+            <Button Content="Заполнение данных" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" Click="BtnGoTakeWorkShop_Click" x:Name="BtnGoTakeWorkShop" Cursor="Hand" Margin="20" IsEnabled="False"  Height="40" materialDesign:ButtonAssist.CornerRadius="20">
                    
                 </Button>
   

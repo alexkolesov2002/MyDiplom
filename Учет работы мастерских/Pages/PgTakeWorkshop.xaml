@@ -11,24 +11,24 @@
       Title="PgTakeWorkShop"
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
-        <DataTemplate x:Key="ListCriterion">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding title_criterion}"></TextBlock>
-                <Button Content="Удалить"  Name="BtnDeleteFromList" Click="BtnDeleteFromList_Click" Uid="{Binding id_Criterion}"></Button>
+        <DataTemplate x:Key="ListCriterion" >
+            <StackPanel Orientation="Horizontal"  MinWidth="600">
+                <TextBlock Text="{Binding title_criterion}" Width="400"></TextBlock>
+                <Button Content="Удалить критерий"  Name="BtnDeleteFromList" Margin="25 0 0 0"  Click="BtnDeleteFromList_Click" Uid="{Binding id_Criterion}"></Button>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="ListGroup">
             <StackPanel Orientation="Horizontal">
-                <CheckBox  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Uid="{Binding id_group}"></CheckBox>
-                <TextBlock Text="{Binding title_group}"></TextBlock>
-               
+                <CheckBox  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="10" Uid="{Binding id_group}"></CheckBox>
+                <TextBlock Text="{Binding title_group}"  Margin="10"></TextBlock>
+
             </StackPanel>
         </DataTemplate>
-        
-        <DataTemplate x:Key="ListAddStudent">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding FullName}"></TextBlock>
+
+        <DataTemplate x:Key="ListAddStudent" >
+            <StackPanel Orientation="Horizontal"  Margin="10" Width="600">
+                <TextBlock Text="{Binding FullName}"  Width="180"></TextBlock>
                 <TextBlock Text="   "></TextBlock>
                 <TextBlock Text="{Binding groups.title_group}"></TextBlock>
 
@@ -42,28 +42,32 @@
         <ScrollViewer>
             <StackPanel>
 
-                <StackPanel   HorizontalAlignment="Center" Margin="20">
+                <StackPanel   HorizontalAlignment="Center" Margin="20" Width="610">
 
-                    <ComboBox x:Name="ComboBoxCompetisionSelect"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged"/>
-                    <TextBlock Text="Введите тему занятия"/>
-                    <TextBox Width="360" x:Name="TxtTopic" materialDesign:HintAssist.Hint="Введите тему задания"/>
-                    <TextBlock Text="Введите задание"/>
-                    <TextBox x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="398" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Введите задание" Height="80" Text=""/>
-                    <TextBlock Text="Введите критерий"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="360" x:Name="TxtCriterion" materialDesign:HintAssist.Hint="Введите критерий"/>
-                        <Button x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click" Content="Добавить критерий"/>
+                    <ComboBox x:Name="ComboBoxCompetisionSelect"  Margin="10"   Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите компетенцию"  Width="500" SelectionChanged="ComboBoxWorkShops_SelectionChanged" />
+                    <TextBlock  Margin="10" Text="Введите название занятия"/>
+                    <TextBox  Margin="10" Width="600" x:Name="TxtName" materialDesign:HintAssist.Hint="Введите название мероприятия"/>
+                    <TextBlock  Margin="10" Text="Введите тему занятия"/>
+                    <TextBox  Margin="10" Width="600" x:Name="TxtTopic" materialDesign:HintAssist.Hint="Введите тему задания" Cursor="Arrow"/>
+
+                    <TextBlock  Margin="10" Text="Введите задание"/>
+                    <TextBox   Margin="10" x:Name="TxtExercise"  TextWrapping="Wrap" MinWidth="150" AcceptsReturn="True" Width="600" VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" materialDesign:HintAssist.Hint="Введите задание" Height="80" Text=""/>
+                    <TextBlock   Margin="10" Text="Введите критерий"/>
+                    <StackPanel  Margin="10" Orientation="Horizontal">
+                        <TextBox  Margin="0 10 60 10"  Width="360" x:Name="TxtCriterion" materialDesign:HintAssist.Hint="Введите критерий"/>
+                        <Button   Margin="0 10 10 10" x:Name="BtnAddCriterion" Click="BtnAddCriterion_Click" Content="Добавить критерий" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20" Width="163"  HorizontalAlignment="Center" Cursor="Hand"/>
                     </StackPanel>
-                    <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}"/>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel>
-                            <TextBlock Text="Добавить студента"/>
+                    <ListBox x:Name="ListCriterion" ItemTemplate="{StaticResource ListCriterion}" MinWidth="600" Margin="0 0 20 0"/>
+                    <StackPanel Orientation="Horizontal" Margin="10 10 10 10" Width="700">
+                        <StackPanel Width="500" >
+                            <TextBlock Text="Добавить студента"  Margin="0 10 40 10"/>
                             <TextBox x:Name="TxtFindStudent" materialDesign:HintAssist.Hint="Введите имя или фамилию студента" Height="50" TextChanged="TxtFindStudent_TextChanged" Text=""/>
-                            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed"/>
+                            <ListBox x:Name="ListAddStudent" ItemTemplate="{StaticResource ListAddStudent}" Visibility="Collapsed" HorizontalAlignment="Center"/>
                         </StackPanel>
-                        <ListBox x:Name="ListAddGroup" ItemTemplate="{StaticResource ListGroup}"></ListBox>
+
+                        <ListBox x:Name="ListAddGroup" ItemTemplate="{StaticResource ListGroup}" Width="700" ></ListBox>
                     </StackPanel>
-                    <ListView x:Name="ListPickedStudent"  Height="231">
+                    <ListView x:Name="ListPickedStudent" >
                         <ListView.Resources>
                             <DataTemplate x:Key="ColumnDataTemplate">
                                 <TextBlock Text="{Binding Converter={StaticResource ResourceKey=PositionConverter}, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}, Mode=FindAncestor}}" HorizontalAlignment="Center" />
@@ -86,28 +90,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
 
-                        <materialDesign:PackIcon Height="24" Width="24">
-                            <materialDesign:PackIcon.Style>
-                                <Style TargetType="{x:Type materialDesign:PackIcon}">
-                                    <Setter Property="Kind" Value="CloudSync" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
-                                            <DataTrigger.EnterActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </DataTrigger.EnterActions>
-                                            <Setter Property="Kind" Value="Check" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </materialDesign:PackIcon.Style>
-                        </materialDesign:PackIcon>
-                    </Button>
                 </StackPanel>
 
                 <StackPanel VerticalAlignment="Bottom" Panel.ZIndex="1">
@@ -134,7 +117,31 @@
                             </StackPanel>
                         </materialDesign:DialogHost.DialogContent>
                         <Border MinWidth="256" MinHeight="256" ClipToBounds="True" Height="154">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20"   />
+                                <TextBlock Text="Сохранить данные" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"  Margin="20"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >
+                                    <materialDesign:PackIcon Height="24" Width="24">
+                                        <materialDesign:PackIcon.Style>
+                                            <Style TargetType="{x:Type materialDesign:PackIcon}">
+                                                <Setter Property="Kind" Value="CloudSync" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSaveComplete}" Value="True">
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.EnterActions>
+                                                        <Setter Property="Kind" Value="Check" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </materialDesign:PackIcon.Style>
+                                    </materialDesign:PackIcon>
+                                </Button>
+                            </StackPanel>
                         </Border>
                     </materialDesign:DialogHost>
                 </StackPanel>

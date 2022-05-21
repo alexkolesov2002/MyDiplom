@@ -88,7 +88,7 @@ namespace Учет_работы_мастерских
                 }
                 BaseModel.BaseConnect.criteria.AddRange(CriterionList);
 
-                events events = new events() { exercise = TxtExercise.Text, title_event = TxtExercise.Text, id_type_event = (int)ComboBoxCompetisionSelect.SelectedValue, topic_of_the_lesson = TxtTopic.Text };
+                events events = new events() { exercise = TxtExercise.Text, title_event = TxtName.Text, id_type_event = (int)ComboBoxCompetisionSelect.SelectedValue, topic_of_the_lesson = TxtTopic.Text };
                 BaseModel.BaseConnect.events.Add(events);
                 BaseModel.BaseConnect.SaveChanges();
                 events NewEvent = BaseModel.BaseConnect.events.FirstOrDefault(x => x.id_event == events.id_event);
