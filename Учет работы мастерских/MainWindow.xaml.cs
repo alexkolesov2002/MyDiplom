@@ -374,6 +374,14 @@ namespace Учет_работы_мастерских
                 this.DragMove();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+        
+            new WinAutorise().Show();
+            this.Close();
+
+        }
     }
 }
 

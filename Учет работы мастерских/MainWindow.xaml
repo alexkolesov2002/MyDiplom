@@ -266,6 +266,13 @@
                         </StackPanel>
 
                     </Button>
+                    <Button Style="{StaticResource menuButtonStatic}"  Click="Button_Click" Width="66">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="SignOutAlt" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock  Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+
+                    </Button>
 
 
 
