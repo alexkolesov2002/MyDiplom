@@ -88,7 +88,7 @@ namespace Учет_работы_мастерских
 
 
 
-        private void Button4_Click(object sender, RoutedEventArgs e)
+        public void Button4_Click(object sender, RoutedEventArgs e)
         {
             try
             {
