@@ -64,80 +64,81 @@ namespace Учет_работы_мастерских
 
         async void Zagruzka()
         {
-            try
+            //try
+            //{
+            //    while (Loading != 100)
             {
-                while (Loading != 100)
-                {
-                    Loading += 4;
-                    await Task.Delay(4);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
-                }
-               
-                if ((List<Criterion>)ListCriterion.ItemsSource == null)
-                {
-                    throw new Exception("Добавьте критерии для мероприятия");
-                }
-                foreach (Criterion criteria in (List<Criterion>)ListCriterion.ItemsSource)
-                {
-                    criteria criterion = new criteria() { title_criterion = criteria.title_criterion };
-                    CriterionList.Add(criterion);
-                }
-                if (ComboBoxCompetisionSelect.SelectedValue == null)
-                {
-                    throw new Exception("Необходимо выбрать тип мероптиятия");
-                }
-                BaseModel.BaseConnect.criteria.AddRange(CriterionList);
-
-                events events = new events() { exercise = TxtExercise.Text, title_event = TxtName.Text, id_type_event = (int)ComboBoxCompetisionSelect.SelectedValue, topic_of_the_lesson = TxtTopic.Text };
-                BaseModel.BaseConnect.events.Add(events);
-                BaseModel.BaseConnect.SaveChanges();
-                events NewEvent = BaseModel.BaseConnect.events.FirstOrDefault(x => x.id_event == events.id_event);
-
-                await Task.Delay(15);
-
-                foreach (students students in (List<students>)ListPickedStudent.ItemsSource)
-                {
-                    foreach (criteria criteria in CriterionList)
-                    {
-                        criteria_in_event criterion = new criteria_in_event() { id_criterion = criteria.id_criterion, id_event = NewEvent.id_event, id_student = students.id_student };
-                        criteria_In_Events.Add(criterion);
-                    }
-                }
-                BaseModel.BaseConnect.criteria_in_event.AddRange(criteria_In_Events);
-                BaseModel.BaseConnect.SaveChanges();
-                
-                string Date = CalendarDate.SelectedDate.Value.ToShortDateString();
-                string Time = ClockTime.Time.ToLongTimeString();
-
-
-                DateTime dateTime = Convert.ToDateTime(Date + " " + Time);
-                if (TakedEquipments != null)
-                {
-                    foreach (equipments equipment in TakedEquipments)
-                    {
-                        journal_use_workshop use = new journal_use_workshop() { id_equipment = equipment.id_equipment, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime, count_equipment = equipment.Count, id_event = NewEvent.id_event };
-                        journal_Use_Workshop.Add(use);
-                    }
-                    BaseModel.BaseConnect.journal_use_workshop.AddRange(journal_Use_Workshop);
-                }
-                else
-                {
-                    journal_use_workshop use = new journal_use_workshop() { id_equipment = null, count_equipment = null, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime, id_event = NewEvent.id_event };
-                    BaseModel.BaseConnect.journal_use_workshop.Add(use);
-                }
-
-                BaseModel.BaseConnect.SaveChanges();
-                //BtnSaveData.IsEnabled = false;
-                SaveNotComplete = false;
-                PropertyChanged(this, new PropertyChangedEventArgs("SaveNotComplete"));
-                IsSaveComplete = true;
-                PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
-                //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
+                Loading += 4;
+                await Task.Delay(4);
+                PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
-            catch (Exception ex)
+
+            if ((List<Criterion>)ListCriterion.ItemsSource == null)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw new Exception("Добавьте критерии для мероприятия");
             }
+            foreach (Criterion criteria in (List<Criterion>)ListCriterion.ItemsSource)
+            {
+                criteria criterion = new criteria() { title_criterion = criteria.title_criterion };
+                CriterionList.Add(criterion);
+            }
+            if (ComboBoxCompetisionSelect.SelectedValue == null)
+            {
+                throw new Exception("Необходимо выбрать тип мероптиятия");
+            }
+            BaseModel.BaseConnect.criteria.AddRange(CriterionList);
+
+            events events = new events() { exercise = TxtExercise.Text, title_event = TxtName.Text, id_type_event = (int)ComboBoxCompetisionSelect.SelectedValue, topic_of_the_lesson = TxtTopic.Text };
+            BaseModel.BaseConnect.events.Add(events);
+            BaseModel.BaseConnect.SaveChanges();
+            events NewEvent = BaseModel.BaseConnect.events.FirstOrDefault(x => x.id_event == events.id_event);
+
+            await Task.Delay(15);
+            var st = ListPickedStudent.ItemsSource;
+
+            foreach (students students in st)
+            {
+                foreach (criteria criteria in CriterionList)
+                {
+                    criteria_in_event criterion = new criteria_in_event() { id_criterion = criteria.id_criterion, id_event = NewEvent.id_event, id_student = students.id_student };
+                    criteria_In_Events.Add(criterion);
+                }
+            }
+            BaseModel.BaseConnect.criteria_in_event.AddRange(criteria_In_Events);
+            BaseModel.BaseConnect.SaveChanges();
+
+            string Date = CalendarDate.SelectedDate.Value.ToShortDateString();
+            string Time = ClockTime.Time.ToLongTimeString();
+
+
+            DateTime dateTime = Convert.ToDateTime(Date + " " + Time);
+            if (TakedEquipments != null)
+            {
+                foreach (equipments equipment in TakedEquipments)
+                {
+                    journal_use_workshop use = new journal_use_workshop() { id_equipment = equipment.id_equipment, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime, count_equipment = equipment.Count, id_event = NewEvent.id_event };
+                    journal_Use_Workshop.Add(use);
+                }
+                BaseModel.BaseConnect.journal_use_workshop.AddRange(journal_Use_Workshop);
+            }
+            else
+            {
+                journal_use_workshop use = new journal_use_workshop() { id_equipment = null, count_equipment = null, id_user = CurrentUser.id_user, id_workshop = TakedWorkShop.id_workshop, date_use = dateTime, id_event = NewEvent.id_event };
+                BaseModel.BaseConnect.journal_use_workshop.Add(use);
+            }
+
+            BaseModel.BaseConnect.SaveChanges();
+            //BtnSaveData.IsEnabled = false;
+            SaveNotComplete = false;
+            PropertyChanged(this, new PropertyChangedEventArgs("SaveNotComplete"));
+            IsSaveComplete = true;
+            PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
+            //LoadPages.SwitchPages.Navigate(new PgTakeEquip((workshops)ComboBoxWorkShops.SelectedItem));
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
 
 
 
@@ -299,7 +300,7 @@ namespace Учет_работы_мастерских
                 MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            }
+        }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {

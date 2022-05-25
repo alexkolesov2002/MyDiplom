@@ -108,6 +108,14 @@ namespace Учет_работы_мастерских
                         ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
                         ListUseWorkShop.Items.Refresh();
                     }
+                    else
+                    {
+                        if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                        {
+                            ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                            ListUseWorkShop.Items.Refresh();
+                        }
+                    }
 
                 }
                 else
@@ -142,6 +150,14 @@ namespace Учет_работы_мастерских
                     {
                         ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipmentsAndWork((workshops)ComboSelectWork.SelectedItem);
                         ListUseWorkShop.Items.Refresh();
+                    }
+                    else
+                    {
+                        if (CalendarS.SelectedDate != null && CalendarPO.SelectedDate != null)
+                        {
+                            ListUseWorkShop.ItemsSource = journal_use_workshop.getlistEquipments(users.id_user, (DateTime)CalendarS.SelectedDate, (DateTime)CalendarPO.SelectedDate);
+                            ListUseWorkShop.Items.Refresh();
+                        }
                     }
 
                 }
