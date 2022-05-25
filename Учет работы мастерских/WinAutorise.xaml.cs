@@ -27,7 +27,8 @@ namespace Учет_работы_мастерских
                 {
 
 
-                    new MainWindow(user).Show();
+                  MyString.mw =  new MainWindow(user);
+                    MyString.mw.Show(); 
                     this.Close();
 
                 }

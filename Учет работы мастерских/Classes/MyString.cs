@@ -9,5 +9,6 @@ namespace Учет_работы_мастерских
     public static  class MyString
     {
         public static string Email;
+        public static MainWindow mw;
     }
 }

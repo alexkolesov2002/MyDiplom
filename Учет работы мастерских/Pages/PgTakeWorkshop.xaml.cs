@@ -134,7 +134,9 @@ namespace Учет_работы_мастерских
                 IsSaveComplete = true;
                 PropertyChanged(this, new PropertyChangedEventArgs("IsSaveComplete"));
                 await Task.Delay(1000);
-                LoadPages.SwitchPages.Navigate(new PgListUseWorkshop (CurrentUser));
+                MyString.mw.CheckStyle = true;
+              
+
                 
             }
             catch (Exception ex)

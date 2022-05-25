@@ -26,6 +26,33 @@ namespace Учет_работы_мастерских
         const double baseAngleNumberSystem = 360 / NumberSystem;
         const double baseAngleHour = 30;
         users CurrentUser;
+        private bool checkStyle;
+
+        public bool CheckStyle
+        {
+            get { return checkStyle; }
+            set
+            {
+                if (value == true)
+                {
+                    checkStyle = value;
+                    try
+                    {
+                        Button4.Style = (Style)this.Resources["menuButtonActive"];
+                        Button2.Style = (Style)this.Resources["menuButton"];
+                        Button3.Style = (Style)this.Resources["menuButton"];
+                        Button1.Style = (Style)this.Resources["menuButton"];
+                        LoadPages.SwitchPages.Navigate(new PgListUseWorkshop(CurrentUser));
+                    }
+                    catch
+                    {
+                        System.Windows.Forms.MessageBox.Show("Данный раздел сейчас недоступен", "Предупреждение", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error, System.Windows.Forms.MessageBoxDefaultButton.Button1);
+
+                    }
+                }
+            }
+        }
+
         #endregion
 
 
@@ -377,7 +404,7 @@ namespace Учет_работы_мастерских
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-        
+
             new WinAutorise().Show();
             this.Close();
 
