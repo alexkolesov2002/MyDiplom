@@ -15,6 +15,7 @@ namespace Учет_работы_мастерских
     {
         #region глобальные переменные
         List<equipments> ListEqForDelite;
+        List<CheckBox> CheckBoxList = new List<CheckBox>();
         List<equipments> ListMainEq;
         public int Loading { get; set; } = 0;
         List<Equipments_In_Workshop> firswork;
@@ -35,6 +36,7 @@ namespace Учет_работы_мастерских
                 this.TakedWorkShop = TakedWorkShop;
                 ListMainEq = new List<equipments>();
                 firswork = BaseModel.BaseConnect.Equipments_In_Workshop.Where(x => x.id_workshop == TakedWorkShop.id_workshop).ToList();
+
 
                 foreach (Equipments_In_Workshop q in firswork)
                 {
@@ -245,5 +247,39 @@ namespace Учет_работы_мастерских
         }
 
 
+
+        private void ListEquip_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            equipments f = (equipments)ListEquip.SelectedItem;
+            foreach (CheckBox cb in CheckBoxList)
+            {
+                try
+                {
+                    if (Convert.ToInt32(cb.Uid) == f.id_equipment)
+                    {
+                        if (cb.IsChecked == false)
+                        {
+                            cb.IsChecked = true;
+                        }
+                        else
+                        {
+                            cb.IsChecked = false;
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+
+            }
+
+        }
+
+        private void FindScheckBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            CheckBoxList.Add(checkBox);
+        }
     }
 }

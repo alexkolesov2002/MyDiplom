@@ -12,7 +12,7 @@
     <Page.Resources>
 
         <DataTemplate x:Key="EquipTemplate">
-            <Border BorderBrush="Black" BorderThickness=" 0 0 0 1" Width="200" >
+            <Border BorderBrush="Black" BorderThickness=" 0 0 0 1" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Тип оборудования "></TextBlock>
@@ -35,7 +35,7 @@
 
 
         <DataTemplate x:Key="ListUse">
-            <Border BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness=" 0 0 0 1"   Width="500">
+            <Border BorderBrush="Black" HorizontalAlignment="Center" Width="950" VerticalAlignment="Center" BorderThickness=" 0 0 0 1"  >
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Margin="10">
                         
@@ -66,12 +66,12 @@
                             <TextBlock Text=" "></TextBlock>
                             <TextBlock Text="{Binding date_use, StringFormat='HH:mm',  ConverterCulture='ru-RU'}"  FontWeight="Bold" Foreground="Black"></TextBlock>
                             <TextBlock Text=" "></TextBlock>
-                            
+                            <Button x:Name="BtnAddRating" Uid="{Binding id_event}"  Click="BtnAddRating_Click" Content="Выставить оценки" Margin="400 0 0 0" materialDesign:ButtonAssist.CornerRadius="20" Width="210"    Cursor="Hand" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" ></Button>
                         </StackPanel>
-                        <Border BorderBrush="Black" BorderThickness="0 0 0 1" Margin="5"></Border>
-                        <ListView ItemTemplate="{StaticResource EquipTemplate}" ItemsSource="{Binding listEquipmentsInEvents}" ></ListView>
-                        <Button x:Name="BtnAddRating" Uid="{Binding id_event}"  Click="BtnAddRating_Click" Content="Выставить оценки" Margin="10" materialDesign:ButtonAssist.CornerRadius="20" Width="210"    Cursor="Hand" Command="{Binding DismissCommand}" Style="{StaticResource MaterialDesignRaisedButton}" ></Button>
                     </StackPanel>
+                   
+                        <!--<ListView ItemTemplate="{StaticResource EquipTemplate}" ItemsSource="{Binding listEquipmentsInEvents}" ></ListView>-->
+                      
                     
                 </StackPanel>
                 
@@ -85,7 +85,7 @@
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Выберите временной период " HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Выберите временной период " HorizontalAlignment="Center" Margin="40 0 0 0" VerticalAlignment="Center"></TextBlock>
             <DatePicker  materialDesign:HintAssist.Hint="С такого то числа " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU"  Margin="20" x:Name="CalendarS" SelectedDateChanged="CalendarS_SelectedDateChanged" />
             <DatePicker  materialDesign:HintAssist.Hint="По такое-то число " materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Language="ru-RU" Margin="20" x:Name="CalendarPO"  SelectedDateChanged="CalendarPO_SelectedDateChanged"/>
             <ComboBox  SelectionChanged="ComboSelectWork_SelectionChanged"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите Мастерскую" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" x:Name="ComboSelectWork" Visibility="Collapsed">

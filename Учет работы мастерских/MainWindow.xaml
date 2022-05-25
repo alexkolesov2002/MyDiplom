@@ -14,8 +14,11 @@
         Icon="Res/Logo_masterskie.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Resources>
+        
         <ResourceDictionary Source="XamlRes/MainWinRes.xaml" />
+        
     </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
@@ -43,10 +46,10 @@
                     </Border>
                     <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding NameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
-                            <TextBlock Text="{Binding SurNameUs}" FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                            <TextBlock Text="{Binding NameUs}" FontWeight="SemiBold" FontFamily="Montserrat"  FontSize="17" Margin="0 0 0 5" Foreground="White"></TextBlock>
+                            <TextBlock Text="{Binding SurNameUs}" FontSize="17" FontWeight="SemiBold" FontFamily="Montserrat" Margin="0 0 0 5" Foreground="White"></TextBlock>
                         </StackPanel>
-                        <TextBlock Text="{Binding RoleUs}" FontSize="13" Margin="0 0 0 5" Foreground="Black"></TextBlock>
+                        <TextBlock Text="{Binding RoleUs}" FontSize="13" FontWeight="Medium" FontFamily="Montserrat" Margin="0 0 0 5" Foreground="Black"></TextBlock>
                     </StackPanel>
                 </StackPanel>
 
@@ -255,8 +258,8 @@
                     </Grid>
 
                 </Border>
-                <TextBlock Text="{Binding MyDate}" Foreground="White"   HorizontalAlignment="Center" FontSize="30"/>
-                <TextBlock Text="{Binding MyTime}"  Foreground="White"   HorizontalAlignment="Center" FontSize="30" />
+                <TextBlock Text="{Binding MyDate}" FontWeight="Medium" FontFamily="Montserrat"  Foreground="White"   HorizontalAlignment="Center" FontSize="30"/>
+                <TextBlock Text="{Binding MyTime}"  FontWeight="Medium" FontFamily="Montserrat" Foreground="White"   HorizontalAlignment="Center" FontSize="30" />
                 <StackPanel Orientation="Horizontal">
 
                     <Button Style="{StaticResource menuButtonStatic}"  Click="BtnPowerOff_Click" Width="66">

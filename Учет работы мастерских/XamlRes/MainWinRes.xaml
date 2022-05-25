@@ -11,7 +11,7 @@
         <Setter Property="Height" Value ="45"></Setter>
         <Setter Property="FocusVisualStyle" Value ="{x:Null}"></Setter>
         <Setter Property="Height" Value ="45"></Setter>
-        <Setter Property="Tag" Value="#6673b7"></Setter>
+        <Setter Property="Tag" Value="#ffffff"></Setter>
         <Setter Property="Template">
 
             <Setter.Value>
@@ -26,14 +26,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="Yellow"></Setter>
-                <Setter Property="Tag" Value="#000000"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Tag" Value="#ffffff"></Setter>
                 <Setter Property="Background">
 
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                            <GradientStop Color="Green" Offset="0"></GradientStop>
-                            <GradientStop Color="Yellow" Offset="3"></GradientStop>
+                            <GradientStop Color="#0B3673" Offset="0"></GradientStop>
+                            <GradientStop Color="#0B3673" Offset="3"></GradientStop>
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -41,7 +41,7 @@
 
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Black">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Yellow">
                                 <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"></ContentPresenter>
                             </Border>
                         </ControlTemplate>
@@ -65,6 +65,7 @@
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="FontSize" Value="13"></Setter>
         <Setter Property="FontFamily" Value="Montserrat"></Setter>
+        <Setter Property="FontWeight" Value="SemiBold"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"></Setter>
         <Setter Property="FontFamily" Value="Montserrat"></Setter>
@@ -76,24 +77,24 @@
 
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="Green" Offset="0"></GradientStop>
-                    <GradientStop Color="Yellow" Offset="3"></GradientStop>
+                    <GradientStop Color="#0B3673" Offset="0"></GradientStop>
+                    <GradientStop Color="#0B3673" Offset="3"></GradientStop>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="Black"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="Margin" Value="0 0 0 5"></Setter>
         <Setter Property="Height" Value ="45"></Setter>
         <Setter Property="FocusVisualStyle" Value ="{x:Null}"></Setter>
         <Setter Property="Height" Value ="45"></Setter>
-        <Setter Property="Tag" Value="#7071f0"></Setter>
+        <Setter Property="Tag" Value="#ffffff"></Setter>
 
         <Setter Property="Template">
 
             <Setter.Value>
 
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Red">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="4 0 0 0" BorderBrush="Yellow">
                         <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"></ContentPresenter>
                     </Border>
                 </ControlTemplate>
@@ -105,7 +106,7 @@
 
     <Style x:Key="topMenuButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"></Setter>
-        <Setter Property="Foreground" Value="#9eabe2"></Setter>
+        <Setter Property="Foreground" Value="#8F6FFF"></Setter>
         <Setter Property="Margin" Value=" 5 0 0 0 "></Setter>
         <Setter Property="Height" Value ="30"></Setter>
         <Setter Property="Width" Value ="80"></Setter>
@@ -117,7 +118,7 @@
             <Setter.Value>
 
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="17" BorderBrush="Black" BorderThickness="1">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="17" BorderBrush="#ffffff" BorderThickness="1">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
                     </Border>
                 </ControlTemplate>
@@ -155,7 +156,7 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                
-                <Setter Property="Tag" Value="#000000"></Setter>
+                <Setter Property="Tag" Value="#ffffff"></Setter>
                
                 
             </Trigger>
