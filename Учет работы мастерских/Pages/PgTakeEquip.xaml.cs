@@ -250,29 +250,29 @@ namespace Учет_работы_мастерских
 
         private void ListEquip_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            equipments f = (equipments)ListEquip.SelectedItem;
-            foreach (CheckBox cb in CheckBoxList)
-            {
-                try
-                {
-                    if (Convert.ToInt32(cb.Uid) == f.id_equipment)
-                    {
-                        if (cb.IsChecked == false)
-                        {
-                            cb.IsChecked = true;
-                        }
-                        else
-                        {
-                            cb.IsChecked = false;
-                        }
-                    }
-                }
-                catch
-                {
+            //equipments f = (equipments)ListEquip.SelectedItem;
+            //foreach (CheckBox cb in CheckBoxList)
+            //{
+            //    try
+            //    {
+            //        if (Convert.ToInt32(cb.Uid) == f.id_equipment)
+            //        {
+            //            if (cb.IsChecked == false)
+            //            {
+            //                cb.IsChecked = true;
+            //            }
+            //            else
+            //            {
+            //                cb.IsChecked = false;
+            //            }
+            //        }
+            //    }
+            //    catch
+            //    {
 
-                }
+            //    }
 
-            }
+            //}
 
         }
 

@@ -48,7 +48,7 @@ namespace Учет_работы_мастерских
                 ComboBoxCompetisionSelect.DisplayMemberPath = "title_type_event";
                 ComboBoxCompetisionSelect.SelectedValuePath = "id_type_event";
                 ListAddGroup.ItemsSource = BaseModel.BaseConnect.groups.ToList();
-                CalendarDate.DisplayDateStart = DateTime.Now;
+                //CalendarDate.DisplayDateStart = DateTime.Now;
                 studentsBufForAdd = students;
 
                 //ListPickedStudent.ItemsSource = studentsBufForResiult;

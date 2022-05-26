@@ -36,13 +36,13 @@ namespace Учет_работы_мастерских
                 {
                     MessageBox.Show("Такого пользователя не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
-            }
+        }
             catch
             {
                 MessageBox.Show("Отсутсвует соединение с интернетом, повторите попытку позже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
 
-        }
+}
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
