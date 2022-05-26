@@ -11,32 +11,7 @@
        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Grid>
-        <!--<StackPanel>
-            <Expander HorizontalAlignment="Stretch" Header="Expander Example 1a">
-                <StackPanel   Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                    <TextBlock Text="Your Content" />
-                    <TextBlock  />
-                </StackPanel>
-            </Expander>
-            <Expander HorizontalAlignment="Stretch" Header="Expander Example 1b" ExpandDirection="Up">
-                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                    <TextBlock Text="Your Content" />
-                    <TextBlock  />
-                </StackPanel>
-            </Expander>
-            <Expander HorizontalAlignment="Stretch" Header="Expander Example 1c">
-                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                    <TextBlock Text="Your Content" />
-                    <TextBlock   />
-                </StackPanel>
-            </Expander>
-            <Expander HorizontalAlignment="Stretch" Header="Custom Header Padding"  materialDesign:ExpanderAssist.HorizontalHeaderPadding="35,2,24,2">
-                <StackPanel  Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"  Margin="24,8,24,16">
-                    <TextBlock  Text="Your Content" />
-                    <TextBlock  />
-                </StackPanel>
-            </Expander>
-        </StackPanel>-->
+       
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
 
             <ComboBox x:Name="ComboBoxWorkShops"  Style="{StaticResource MaterialDesignOutlinedComboBox}"  materialDesign:HintAssist.Hint="Выберите необходимую мастерскую"  HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" SelectionChanged="ComboBoxWorkShops_SelectionChanged">
@@ -47,6 +22,23 @@
             <Button Content="Далее" Command="{Binding DismissCommand}" Width="200" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" Click="BtnGoTakeWorkShop_Click" x:Name="BtnGoTakeWorkShop" Cursor="Hand" Margin="20" IsEnabled="False"  Height="40" materialDesign:ButtonAssist.CornerRadius="20">
 
             </Button>
+
+
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="0 0 0 3">
+            <Expander HorizontalAlignment="Stretch" Header="Помощь"  FontWeight="Bold" FontFamily="Montserrat" ExpandDirection="Up">
+                <StackPanel   Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,10,5">
+                    <Expander Foreground="Black" Header="Страница мероприятия"   FontWeight="Medium" FontFamily="Montserrat" ExpandDirection="Down">
+                        <TextBlock FontWeight="Normal" FontFamily="Montserrat"  Width="890" Text="Вам необходимо выбрать тип мероприятия из предложенного списка, далее необходимо заполнить текстовые поля с информацией о мероприятии. После заполнения полей необходимо добавить критерии. Критерии добавляются путем заполнения тектового поля и нажатия кнопки Добавить критерий. После добавления необходимых критериев, необходимо добавить студентов, которые учавствовали в мероприятии, это можно сделать путем ввода имени в тектовом поле, а также добавив группу студентов целиком, нажав на соответсвующую галочку справа. По умолчанию  дата и время проведения мероприятия соответвует текущему, вы в праве изменить его, нажав на кнопку Выбрать дату и время внижу экрана. После заполнения всех необходимых данных, вы можете внести свое мероприятие в базу ведения мероприятий, нажав на кнопку Сохранить изменения" TextWrapping="Wrap" />
+                    </Expander>
+                    <Expander Foreground="Black" Header="Страница выбора оборудования"   FontWeight="Medium" FontFamily="Montserrat" ExpandDirection="Down">
+                        <TextBlock Width="890" FontWeight="Normal" FontFamily="Montserrat"  Text="Для выбора оборудования необходимо нажать на + в правом нижнем углу экрана, затем в открышемся меню поставить галочки у необходимого оборудования. Вы можете изменять количество выбранного оборудования, а также удалять в случае ошибки выбора. Для перехода на страницу для заполнении информации о мероприятии, необходимо нажать на стрелку, в правом нижнем углу." TextWrapping="Wrap" />
+                    </Expander>
+
+                    <TextBlock Foreground="Black" Text="Выберите необходимую из предложенного списка мастерскую и нажмите кнопку Далее"   FontWeight="Medium" FontFamily="Montserrat" Padding="25 20 0 0" />
+                </StackPanel>
+
+            </Expander>
 
 
         </StackPanel>
