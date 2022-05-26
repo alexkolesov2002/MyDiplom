@@ -242,8 +242,8 @@ namespace Учет_работы_мастерских
             await Task.Delay(15);
 
             LoadPages.SwitchPages.Navigate(new PgTakeWorkshop(TakedWorkShop, CurrentUser, (List<equipments>)ListPickedEquip.ItemsSource));
-
-
+            Loading = 0;
+            PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
         }
 
 

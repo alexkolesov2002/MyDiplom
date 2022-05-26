@@ -118,6 +118,7 @@
                         </materialDesign:DialogHost.DialogContent>
                         <Border MinWidth="256" MinHeight="256" ClipToBounds="True" Height="154">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Content="Назад" Cursor="Hand" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20"   />
                                 <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="Выбрать дату и время" Cursor="Hand" Margin="20" Style="{StaticResource MaterialDesignRaisedButton}" Height="40" materialDesign:ButtonAssist.CornerRadius="20"   />
                                 <TextBlock Text="Сохранить данные" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                 <Button  x:Name="BtnSaveData" Click="BtnSaveData_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"  Margin="20"   materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding SaveNotComplete}" materialDesign:ButtonProgressAssist.Value="{Binding Loading}" Cursor="Hand" Height="56" Width="56"  >

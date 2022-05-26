@@ -142,6 +142,8 @@ namespace Учет_работы_мастерских
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Loading = 0;
+                PropertyChanged(this, new PropertyChangedEventArgs("Loading"));
             }
 
 
@@ -350,6 +352,11 @@ namespace Учет_работы_мастерских
             {
                 MessageBox.Show("Ошибка, повторите попытку позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.SwitchPages.GoBack();
         }
     }
 }
