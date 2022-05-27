@@ -1161,7 +1161,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Учет работы мастерских"
         "ProductCode" = "8:{62224553-0F48-4A2D-8C20-8EF67C75A021}"
-        "PackageCode" = "8:{4DADCB63-8CA4-4916-A391-9DDC687B5D9A}"
+        "PackageCode" = "8:{7A00AA78-6BB9-43A3-BF5C-9DB2840F5BB0}"
         "UpgradeCode" = "8:{ACEB5962-4501-4E7B-A200-6C1CC112CE5C}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1283,7 +1283,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_67F2BB0810E84A4297B46FD68CEC2382"
             {
-            "Name" = "8:App Installer"
+            "Name" = "8:Учет работы мастерских"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1297,7 +1297,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_ABBE486215B2433188D028B79499827E"
             {
-            "Name" = "8:App Installer"
+            "Name" = "8:Учет работы мастерских"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
