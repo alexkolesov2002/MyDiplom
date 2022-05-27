@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Учет работы ма�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Тестирование", "Тестирование\Тестирование.csproj", "{884E010C-335E-4E04-BDB1-006BF1E982FD}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWork", "SetupWork\SetupWork.vdproj", "{C2B36ED6-1FF3-4B6F-8E96-1143783A4303}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{884E010C-335E-4E04-BDB1-006BF1E982FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{884E010C-335E-4E04-BDB1-006BF1E982FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{884E010C-335E-4E04-BDB1-006BF1E982FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B36ED6-1FF3-4B6F-8E96-1143783A4303}.Debug|Any CPU.ActiveCfg = Debug
+		{C2B36ED6-1FF3-4B6F-8E96-1143783A4303}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
