@@ -85,7 +85,7 @@ namespace Учет_работы_мастерских
                             {
                                 throw new Exception("Не все данные заполнены корректно");
                             }
-                            if (Regex.IsMatch(student.name, @"^[a-zA-Z]+$") == false || Regex.IsMatch(student.surname, @"^[a-zA-Z]+$") == false || Regex.IsMatch(student.patronymic, @"^[a-zA-Z]+$") == false)
+                            if (Regex.IsMatch(student.name, @"^[а-яА-Я]+$") == false || Regex.IsMatch(student.surname, @"^[а-яА-Я]+$") == false || Regex.IsMatch(student.patronymic, @"^[а-яА-Я]+$") == false)
                             {
                                 throw new Exception("Не все данные заполнены корректно");
                             }
